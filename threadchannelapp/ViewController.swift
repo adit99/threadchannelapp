@@ -55,7 +55,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        self.performSegueWithIdentifier("gotodetails", sender: indexPath)
+        //self.performSegueWithIdentifier("gotodetails", sender: indexPath)
         
     }
     

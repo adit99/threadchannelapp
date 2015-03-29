@@ -7,7 +7,7 @@
         <!--Home-->
         <scene sceneID="y8g-IL-Pwx">
             <objects>
-                <viewController id="bIh-wj-2Qz" customClass="ViewController" customModule="threadchannelapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bIh-wj-2Qz" customClass="ViewController" customModule="threadchannel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bOd-9P-mfj"/>
                         <viewControllerLayoutGuide type="bottom" id="2i6-kp-ORr"/>
@@ -26,7 +26,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="agM-Yl-lgc" customClass="CollectionViewCell" customModule="threadchannelapp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="agM-Yl-lgc" customClass="CollectionViewCell" customModule="threadchannel" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -74,7 +74,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="aE4-vC-GUm"/>
                     <connections>
-                        <segue destination="kLb-iQ-uy9" kind="push" identifier="gotodetails" id="JPv-BS-5ZA"/>
+                        <segue destination="kLb-iQ-uy9" kind="push" identifier="gotodetails" id="fn3-td-GPU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ano-Hi-5uH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -84,7 +84,7 @@
         <!--Today | March 3-->
         <scene sceneID="geU-ot-afQ">
             <objects>
-                <viewController storyboardIdentifier="DetailsViewController" id="kLb-iQ-uy9" customClass="DetailsViewController" customModule="threadchannelapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsViewController" id="kLb-iQ-uy9" customClass="DetailsViewController" customModule="threadchannel" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aRN-9o-2WH"/>
                         <viewControllerLayoutGuide type="bottom" id="ajm-Pk-vG3"/>
