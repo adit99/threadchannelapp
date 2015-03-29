@@ -1,0 +1,42 @@
+{ "results": [
+  {
+    "imageURL" : "http://static1.squarespace.com/static/53698760e4b07b6993bcd67d/t/546e57c9e4b0bb6434eb1b67/1416517579484/?format=1000w",
+  [{"__type":"Pointer","className":"look","objectId":"wXz0ABlniZ"}, {"__type":"Pointer","className":"look","objectId":"b9S3fwEHZX"}]
+  }]
+}
+
+#works
+curl -X PUT \
+  -H "X-Parse-Application-Id: tTMrjreYSpOUgIkMslJHJc1slcbY5g4yZvl9DRyw" \
+  -H "X-Parse-REST-API-Key: Ece7hzKGE9UNLLgqLQ122dVxTxqFdZ0fLYtQ7CZ1" \
+  -H "Content-Type: application/json" \
+  -d '{"looks":{"__op":"Add","objects":[{"__type":"Pointer","className":"look","objectId":"wXz0ABlniZ"}, {"__type":"Pointer","className":"look","objectId":"b9S3fwEHZX"}]}}' https://api.parse.com/1/classes/post/WS7po4VP0x
+
+curl -X PUT \
+  -H "X-Parse-Application-Id: tTMrjreYSpOUgIkMslJHJc1slcbY5g4yZvl9DRyw" \
+  -H "X-Parse-REST-API-Key: Ece7hzKGE9UNLLgqLQ122dVxTxqFdZ0fLYtQ7CZ1" \
+  -H "Content-Type: application/json" \
+  -d '{"looks":{"__op":"AddRelations,"objects":[[{"__type":"Pointer","className":"look","objectId":"wXz0ABlniZ"}],[{"__type":"Pointer","className":"look","objectId":"b9S3fwEHZX"}]]}}' \
+  https://api.parse.com/1/classes/post/WS7po4VP0x
+
+
+#works
+curl -X GET \
+  -H "X-Parse-Application-Id: tTMrjreYSpOUgIkMslJHJc1slcbY5g4yZvl9DRyw" \
+  -H "X-Parse-REST-API-Key: Ece7hzKGE9UNLLgqLQ122dVxTxqFdZ0fLYtQ7CZ1" \
+  -G \
+  --data-urlencode 'where={"post":{"__type":"Pointer","className":"post","objectId":"WS7po4VP0x"}}' \
+  --data-urlencode 'include=post' \
+  https://api.parse.com/1/classes/look
+
+curl -X GET \
+  -H "X-Parse-Application-Id: tTMrjreYSpOUgIkMslJHJc1slcbY5g4yZvl9DRyw" \
+  -H "X-Parse-REST-API-Key: Ece7hzKGE9UNLLgqLQ122dVxTxqFdZ0fLYtQ7CZ1" \
+  https://api.parse.com/1/classes/post/16HMd0B4HQ
+
+curl -X GET \
+  -H "X-Parse-Application-Id: tTMrjreYSpOUgIkMslJHJc1slcbY5g4yZvl9DRyw" \
+  -H "X-Parse-REST-API-Key: Ece7hzKGE9UNLLgqLQ122dVxTxqFdZ0fLYtQ7CZ1" \
+  -G \
+  --data-urlencode 'include=look' \
+  https://api.parse.com/1/classes/post/WS7po4VP0x
