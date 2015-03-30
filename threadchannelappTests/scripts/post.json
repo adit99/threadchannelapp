@@ -32,6 +32,12 @@ curl -X GET \
 curl -X GET \
   -H "X-Parse-Application-Id: tTMrjreYSpOUgIkMslJHJc1slcbY5g4yZvl9DRyw" \
   -H "X-Parse-REST-API-Key: Ece7hzKGE9UNLLgqLQ122dVxTxqFdZ0fLYtQ7CZ1" \
+  --data-urlencode 'where={"name":"iridescent"}' \
+  https://api.parse.com/1/classes/look
+
+curl -X GET \
+  -H "X-Parse-Application-Id: tTMrjreYSpOUgIkMslJHJc1slcbY5g4yZvl9DRyw" \
+  -H "X-Parse-REST-API-Key: Ece7hzKGE9UNLLgqLQ122dVxTxqFdZ0fLYtQ7CZ1" \
   https://api.parse.com/1/classes/post/16HMd0B4HQ
 
 curl -X GET \

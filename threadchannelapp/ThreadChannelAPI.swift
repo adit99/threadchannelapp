@@ -23,12 +23,25 @@ class API {
         configuration.HTTPAdditionalHeaders = defaultHeaders
         
         let manager = Alamofire.Manager(configuration: configuration)
-        
-        let url = baseURL + "classes/look/zVPbUNWl0n"
+        let url = baseURL + "classes/look/"
 
-        manager.request(.GET, url, parameters: [:])
+        var params = [String: AnyObject]()
+        params["name"] = "iridescent"
+        
+        var parameters = [String: AnyObject]()
+        parameters["where"] = params
+        
+        let URL = NSURL(string: url)!
+        var request = NSURLRequest(URL: URL)
+        
+        request = Alamofire.ParameterEncoding.URL.encode(request, parameters: parameters).0
+        
+        manager.request(request)
+        //manager.request(.GET, url, parameters: parameters)
             .responseJSON { (request, response, JSON, error) in
-            println(JSON)
+                println(request)
+                println(error)
+                println(JSON)
         }
     }
     
