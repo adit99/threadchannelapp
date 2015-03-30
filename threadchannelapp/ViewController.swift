@@ -18,7 +18,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println(self.view.frame)
+        API.request()
         navigationItem.title = "Today | March 3"
     }
 

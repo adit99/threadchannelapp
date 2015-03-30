@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9E5C92EDAD08DA2D9BF2A353 /* Pods_threadchannelapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C315CB4796FC53F5CFEE28DA /* Pods_threadchannelapp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */; };
 		BE778D311AA58DF100023077 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D301AA58DF100023077 /* AppDelegate.swift */; };
 		BE778D331AA58DF100023077 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D321AA58DF100023077 /* ViewController.swift */; };
 		BE778D361AA58DF100023077 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE778D341AA58DF100023077 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadChannelAPI.swift; sourceTree = "<group>"; };
 		BE778D2B1AA58DF100023077 /* threadchannelapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = threadchannelapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE778D2F1AA58DF100023077 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE778D301AA58DF100023077 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BE07409C1AC8DA8000596A95 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */,
+			);
+			name = api;
+			sourceTree = "<group>";
+		};
 		BE778D221AA58DF100023077 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +106,7 @@
 		BE778D2D1AA58DF100023077 /* threadchannelapp */ = {
 			isa = PBXGroup;
 			children = (
+				BE07409C1AC8DA8000596A95 /* api */,
 				BE778D511AA592A100023077 /* views */,
 				BE778D501AA58FAD00023077 /* Controllers */,
 				BE778D301AA58DF100023077 /* AppDelegate.swift */,
@@ -313,6 +324,7 @@
 				BE778D311AA58DF100023077 /* AppDelegate.swift in Sources */,
 				BE778D5F1AA6CD0D00023077 /* CollectionViewCell.swift in Sources */,
 				BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */,
+				BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
