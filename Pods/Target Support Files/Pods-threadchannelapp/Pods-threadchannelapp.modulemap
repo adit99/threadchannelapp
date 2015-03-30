@@ -1,0 +1,6 @@
+framework module Pods_threadchannelapp {
+  umbrella header "Pods-threadchannelapp-umbrella.h"
+
+  export *
+  module * { export * }
+}

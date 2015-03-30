@@ -18,6 +18,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        println(self.view.frame)
         navigationItem.title = "Today | March 3"
     }
 
@@ -44,14 +45,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return 2.0
     }
 
-    /*func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        //view dimensions
-        /*if containerView.frame.height == 568.0 && containerView.frame.width == 320.0 {
+        if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
             //iphone 5s
-        }*/
-        //return CGSize(width: 320/2, height: 568/2)
-    }*/
+            println("5s")
+            return CGSize(width: 104, height: 104)
+        } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
+            //iphone 6
+            return CGSize(width: 122, height: 166)
+        } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
+            //iphone 6plus
+            return CGSize(width: 136, height: 166)
+        }
+        //default 5s
+        return CGSize(width: 104, height: 104)
+    }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
