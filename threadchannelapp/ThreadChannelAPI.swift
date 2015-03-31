@@ -9,21 +9,93 @@
 import Foundation
 import Alamofire
 
+
+
+func valueForAPIKey(#keyname:String) -> String {
+    let filePath = NSBundle.mainBundle().pathForResource("threadchannel", ofType:"plist")
+    let plist = NSDictionary(contentsOfFile:filePath!)
+    let value:String = plist?.objectForKey(keyname) as! String
+    return value
+}
+
 class API {
-    static var baseURL = "https://api.parse.com/1/"
+    
+    class var Instance : API {
+        struct Static {
+            static let instance = API()
+        }
+        return Static.instance
+    }
+  
+    private func Manager() -> Alamofire.Manager {
+        var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
+        defaultHeaders["X-Parse-Application-Id"] = valueForAPIKey(keyname: "ParseAppID")
+        defaultHeaders["X-Parse-REST-API-Key"] = valueForAPIKey(keyname: "ParseAPIKey")
+        
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.HTTPAdditionalHeaders = defaultHeaders
+        
+        return Alamofire.Manager(configuration: configuration)
+    }
+  
+    enum Router: URLRequestConvertible {
+        private static let baseURL = valueForAPIKey(keyname: "baseURL")
+        
+        case Posts()
+    
+        var path: String {
+            switch self {
+                case .Posts():
+                    return "/classes/post"
+            }
+        }
+        
+        var method: Alamofire.Method {
+            switch self {
+                case .Posts:
+                    return .GET
+            }
+        }
+    
+        var URLRequest: NSURLRequest {
+            let URL = NSURL(string: Router.baseURL)!
+            let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
+            mutableURLRequest.HTTPMethod = method.rawValue
+            
+            switch self {
+                case .Posts():
+                    return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
+    
+                default:
+                    return mutableURLRequest
+            }
+        }
+    }
+    
+    func posts() {
+        
+        let manager = self.Manager()
+        
+        manager.request(API.Router.Posts())
+            .responseJSON { (request, response, JSON, error) in
+                println(request)
+                println(error)
+                println(JSON)
+        }
+    }
     
     class func request() {
 
         var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
-        defaultHeaders["X-Parse-Application-Id"] = "tTMrjreYSpOUgIkMslJHJc1slcbY5g4yZvl9DRyw"
-        defaultHeaders["X-Parse-REST-API-Key"] = "Ece7hzKGE9UNLLgqLQ122dVxTxqFdZ0fLYtQ7CZ1"
+        defaultHeaders["X-Parse-Application-Id"] = valueForAPIKey(keyname: "ParseAppID")
+        defaultHeaders["X-Parse-REST-API-Key"] = valueForAPIKey(keyname: "ParseAPIKey")
 
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = defaultHeaders
         
         let manager = Alamofire.Manager(configuration: configuration)
-        let url = baseURL + "classes/look/"
+        let url = Router.baseURL + "classes/look/"
 
         var params = [String: AnyObject]()
         params["name"] = "iridescent"
@@ -44,5 +116,7 @@ class API {
                 println(JSON)
         }
     }
+    
+    
     
 }
