@@ -72,15 +72,19 @@ class API {
         }
     }
     
-    func posts() {
-        
+    func postsWithCompletion(completion: (posts: [Post], error: NSError?) -> ()) {
         let manager = self.Manager()
         
         manager.request(API.Router.Posts())
             .responseJSON { (request, response, JSON, error) in
-                println(request)
-                println(error)
-                println(JSON)
+                if error == nil {
+                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    let posts = Post.postsFromArray(results)
+                    completion(posts: posts, error: nil)
+                } else {
+                    println(error)
+                    completion(posts: [Post](), error: error)
+                }
         }
     }
     

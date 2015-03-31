@@ -16,9 +16,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                        "Peplum", "Raglan", "Singlet",
                        "cocooncoat", "doublebreasted", "Iridescent"]
     
+    var posts:[Post]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        API.Instance.posts()
+        API.Instance.postsWithCompletion { (posts, error) -> () in
+            if error == nil {
+                self.posts = posts
+                println("posts")
+            }
+        }
         navigationItem.title = "Today | March 3"
     }
 
