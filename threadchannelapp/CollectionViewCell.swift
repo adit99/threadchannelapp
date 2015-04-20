@@ -10,8 +10,9 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
-
-    func initCell(containerView: UIView, image: UIImage) {
-        imageView.image = image
+    
+    func initCell(containerView: UIView, post: Post) {
+        let url = NSURL(string: post.imageURL)
+        imageView.setImageWithURL(url)
     }
 }

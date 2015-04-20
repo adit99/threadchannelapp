@@ -1,14 +1,11 @@
-platform :ios, '8.0'
+#platform :ios, '8.0'
 
 use_frameworks!
 
 target 'threadchannelapp' do
-  pod 'AFNetworking'
-  pod 'Alamofire', :git => 'git@github.com:Alamofire/Alamofire.git', :branch => 'xcode-6.3'
+  pod 'AFNetworking', '~> 2.5.2'
+  pod 'Alamofire'
   pod 'SwiftyJSON', :git => 'git@github.com:SwiftyJSON/SwiftyJSON.git', :branch => 'xcode6.3'
 end
 
-target 'threadchannelappTests' do
-
-end
 

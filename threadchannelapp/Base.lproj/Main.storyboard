@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7519.1" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bEW-zN-ywq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bEW-zN-ywq">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7513.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
         <!--Home-->
@@ -66,6 +66,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="aE4-vC-GUm"/>
                     <connections>
+                        <outlet property="collectionView" destination="5e4-lL-JiZ" id="k9r-WH-rhV"/>
                         <segue destination="kLb-iQ-uy9" kind="push" identifier="gotodetails" id="fn3-td-GPU"/>
                     </connections>
                 </viewController>

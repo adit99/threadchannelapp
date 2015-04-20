@@ -19,6 +19,7 @@
 		BE778D471AA58DF100023077 /* threadchannelappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D461AA58DF100023077 /* threadchannelappTests.swift */; };
 		BE778D5F1AA6CD0D00023077 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D5E1AA6CD0D00023077 /* CollectionViewCell.swift */; };
 		BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D641AA6E1BD00023077 /* DetailsViewController.swift */; };
+		BEDA2B8F1AE47DAF0011A244 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDA2B8E1AE47DAF0011A244 /* Date.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		BE778D461AA58DF100023077 /* threadchannelappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = threadchannelappTests.swift; sourceTree = "<group>"; };
 		BE778D5E1AA6CD0D00023077 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		BE778D641AA6E1BD00023077 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		BEDA2B8E1AE47DAF0011A244 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		C315CB4796FC53F5CFEE28DA /* Pods_threadchannelapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_threadchannelapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC195EE0CB31B5A84DAFB59 /* Pods-threadchannelapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-threadchannelapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-threadchannelapp/Pods-threadchannelapp.release.xcconfig"; sourceTree = "<group>"; };
 		F68518D9B387665B9436BC28 /* Pods-threadchannelapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-threadchannelapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-threadchannelapp/Pods-threadchannelapp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				BE778D5E1AA6CD0D00023077 /* CollectionViewCell.swift */,
+				BEDA2B8E1AE47DAF0011A244 /* Date.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			files = (
 				BE778D331AA58DF100023077 /* ViewController.swift in Sources */,
 				BE778D311AA58DF100023077 /* AppDelegate.swift in Sources */,
+				BEDA2B8F1AE47DAF0011A244 /* Date.swift in Sources */,
 				BE778D5F1AA6CD0D00023077 /* CollectionViewCell.swift in Sources */,
 				BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */,
 				BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */,
@@ -418,7 +422,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -454,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -490,6 +494,7 @@
 		};
 		BE778D4E1AA58DF100023077 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F68518D9B387665B9436BC28 /* Pods-threadchannelapp.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -509,6 +514,7 @@
 		};
 		BE778D4F1AA58DF100023077 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEC195EE0CB31B5A84DAFB59 /* Pods-threadchannelapp.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

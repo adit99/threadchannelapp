@@ -9,8 +9,8 @@
 import UIKit
 
 class Post {
-    private var name : String!
-    private var imageURL : String!
+    private(set) var name : String!
+    private(set) var imageURL : String!
 
     init(dictionary: NSDictionary) {
         self.name = dictionary["name"] as! String

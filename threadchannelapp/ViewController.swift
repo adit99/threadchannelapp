@@ -6,7 +6,10 @@
 //  Copyright (c) 2015 threadchannel. All rights reserved.
 //
 
+
 import UIKit
+import Alamofire
+
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -18,15 +21,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var posts:[Post]!
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         API.Instance.postsWithCompletion { (posts, error) -> () in
             if error == nil {
                 self.posts = posts
-                println("posts")
+                self.collectionView.reloadData()
             }
         }
-        navigationItem.title = "Today | March 3"
+ 
+        navigationItem.title = "Today | \(Date.today())"
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,12 +40,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imagesArray.count
+        if let posts = self.posts {
+            return posts.count
+        } else {
+            return 0
+        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath) as! CollectionViewCell
-        cell.initCell(self.view, image: UIImage(named: imagesArray[indexPath.row])!)
+        cell.initCell(self.view, post: self.posts![indexPath.row])
         return cell
     }
     
