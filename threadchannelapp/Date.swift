@@ -18,6 +18,6 @@ class Date {
         let month = components.month
         let day = components.day
         
-        return "\(months[month]) \(day)"
+        return "\(months[month-1]) \(day)"
     }
 }
