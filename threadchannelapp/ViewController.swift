@@ -13,12 +13,6 @@ import Alamofire
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-
-    let imagesArray = ["babydoll",  "offshoulder", "otcsocks",
-                       "paperbag", "tutu", "turtleneck",
-                       "Peplum", "Raglan", "Singlet",
-                       "cocooncoat", "doublebreasted", "Iridescent"]
-    
     var posts:[Post]!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -80,15 +74,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-        //self.performSegueWithIdentifier("gotodetails", sender: indexPath)
-        
+        self.performSegueWithIdentifier("gotolook", sender: posts[indexPath.row])
+        self.collectionView.deselectItemAtIndexPath(indexPath, animated: true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-       let detailsViewController = segue.destinationViewController as! DetailsViewController
-        let indexPath = sender as! NSIndexPath
-        detailsViewController.image = UIImage(named: imagesArray[indexPath.row])!
+        let post = sender as? Post
+        let lookVC = segue.destinationViewController as? LookViewController
+        lookVC?.post = post
     }
 }
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9E5C92EDAD08DA2D9BF2A353 /* Pods_threadchannelapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C315CB4796FC53F5CFEE28DA /* Pods_threadchannelapp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BE027BFE1AECA7C700BBEC26 /* LookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE027BFD1AECA7C700BBEC26 /* LookViewController.swift */; };
+		BE027C001AECB0FB00BBEC26 /* Look.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE027BFF1AECB0FB00BBEC26 /* Look.swift */; };
 		BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */; };
 		BE42B38C1ACA535D001DFFFE /* threadchannel.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE42B38B1ACA535D001DFFFE /* threadchannel.plist */; };
 		BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42B38E1ACA63D7001DFFFE /* Post.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE027BFD1AECA7C700BBEC26 /* LookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookViewController.swift; sourceTree = "<group>"; };
+		BE027BFF1AECB0FB00BBEC26 /* Look.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Look.swift; sourceTree = "<group>"; };
 		BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadChannelAPI.swift; sourceTree = "<group>"; };
 		BE42B38B1ACA535D001DFFFE /* threadchannel.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = threadchannel.plist; sourceTree = "<group>"; };
 		BE42B38E1ACA63D7001DFFFE /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				BE42B38E1ACA63D7001DFFFE /* Post.swift */,
+				BE027BFF1AECB0FB00BBEC26 /* Look.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -166,6 +171,7 @@
 			children = (
 				BE778D321AA58DF100023077 /* ViewController.swift */,
 				BE778D641AA6E1BD00023077 /* DetailsViewController.swift */,
+				BE027BFD1AECA7C700BBEC26 /* LookViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -346,7 +352,9 @@
 				BE778D5F1AA6CD0D00023077 /* CollectionViewCell.swift in Sources */,
 				BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */,
 				BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */,
+				BE027C001AECB0FB00BBEC26 /* Look.swift in Sources */,
 				BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */,
+				BE027BFE1AECA7C700BBEC26 /* LookViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

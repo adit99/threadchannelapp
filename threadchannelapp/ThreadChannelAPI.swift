@@ -42,17 +42,22 @@ class API {
         private static let baseURL = valueForAPIKey(keyname: "baseURL")
         
         case Posts()
+        case Looks([String: AnyObject])
     
         var path: String {
             switch self {
                 case .Posts():
                     return "/classes/post"
+                case .Looks(_):
+                    return "classes/look"
             }
         }
         
         var method: Alamofire.Method {
             switch self {
                 case .Posts:
+                    return .GET
+                case .Looks:
                     return .GET
             }
         }
@@ -66,6 +71,9 @@ class API {
                 case .Posts():
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
     
+                case .Looks(let params):
+                    return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+                
                 default:
                     return mutableURLRequest
             }
@@ -88,6 +96,36 @@ class API {
         }
     }
     
+    func looksWithCompletion(postObjectId: String, completion: (looks: [Look], error: NSError?) -> ()) {
+        let manager = self.Manager()
+        
+        var p1 = [String: AnyObject]()
+        p1["__type"] = "Pointer"
+        p1["className"] = "post"
+        p1["objectId"] = postObjectId
+
+        var p2 = [String: AnyObject]()
+        p2["post"] = p1
+        
+        var p3 = [String: AnyObject]()
+        p3["where"] = p2
+        p3["include"] = "post"
+
+        manager.request(API.Router.Looks(p3))
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    println(results)
+                    let looks = Look.looksFromArray(results)
+                    completion(looks: looks, error: nil)
+                } else {
+                    println(error)
+                    completion(looks: [Look](), error: error)
+                }
+        }
+    }
+    
+    //unused
     class func request() {
 
         var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]

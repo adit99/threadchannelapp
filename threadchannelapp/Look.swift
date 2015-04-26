@@ -1,5 +1,5 @@
 //
-//  Post.swift
+//  Look.swift
 //  threadchannelapp
 //
 //  Created by Aditya Jayaraman on 3/30/15.
@@ -8,25 +8,25 @@
 
 import UIKit
 
-public class Post : Printable {
-    private(set) var objectId : String!
-    private(set) var name : String!
+public class Look : Printable {
+    private(set) var blogURL : String!
     private(set) var imageURL : String!
+    private(set) var name : String!
 
     public var description: String { get {return "name: \(name)";} }
-
+    
     init(dictionary: NSDictionary) {
-        self.objectId = dictionary["objectId"] as! String
         self.name = dictionary["name"] as! String
+        self.blogURL = dictionary["blogURL"] as? String
         self.imageURL = dictionary["imageURL"] as! String
     }
     
-    class func postsFromArray(array: [NSDictionary]) -> [Post] {
-        var posts = [Post]()
+    class func looksFromArray(array: [NSDictionary]) -> [Look] {
+        var looks = [Look]()
         for entry in array {
-            let post = Post(dictionary: entry)
-            posts.append(post)
+            let look = Look(dictionary: entry)
+            looks.append(look)
         }
-        return posts
+        return looks
     }
 }
