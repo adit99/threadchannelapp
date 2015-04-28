@@ -115,7 +115,7 @@ class API {
             .responseJSON { (request, response, JSON, error) in
                 if error == nil {
                     let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
-                    println(results)
+                    //println(results)
                     let looks = Look.looksFromArray(results)
                     completion(looks: looks, error: nil)
                 } else {

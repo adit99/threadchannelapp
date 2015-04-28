@@ -60,7 +60,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
             //iphone 5s
-            println("5s")
             return CGSize(width: 104, height: 104)
         } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
             //iphone 6
