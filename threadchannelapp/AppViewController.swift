@@ -28,7 +28,7 @@ class AppViewController: UITabBarController {
         tabBar.barTintColor = UIColor(CIColor: CIColor(red: 96/255, green: 96/255, blue: 96/255))
         tabBar.tintColor = UIColor.whiteColor()
         
-        mainVC.tabBarItem = UITabBarItem(title: "Main", image: mainTabImage, tag: 1)
+        mainVC.tabBarItem = UITabBarItem(title: "Home", image: mainTabImage, tag: 1)
         mainVC.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: .Normal)
         mainVC.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.greenColor()], forState: .Selected)
         
