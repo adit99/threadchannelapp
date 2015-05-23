@@ -13,6 +13,10 @@
 		BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */; };
 		BE42B38C1ACA535D001DFFFE /* threadchannel.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE42B38B1ACA535D001DFFFE /* threadchannel.plist */; };
 		BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42B38E1ACA63D7001DFFFE /* Post.swift */; };
+		BE4B66971B10CAFD0026C1AC /* app.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE4B66961B10CAFD0026C1AC /* app.storyboard */; };
+		BE4B66991B10CB850026C1AC /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4B66981B10CB850026C1AC /* AppViewController.swift */; };
+		BE4B669B1B10CFA50026C1AC /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE4B669A1B10CFA50026C1AC /* Profile.storyboard */; };
+		BE4B669D1B10D4970026C1AC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4B669C1B10D4970026C1AC /* ProfileViewController.swift */; };
 		BE778D311AA58DF100023077 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D301AA58DF100023077 /* AppDelegate.swift */; };
 		BE778D331AA58DF100023077 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D321AA58DF100023077 /* ViewController.swift */; };
 		BE778D361AA58DF100023077 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE778D341AA58DF100023077 /* Main.storyboard */; };
@@ -41,6 +45,10 @@
 		BE42B38B1ACA535D001DFFFE /* threadchannel.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = threadchannel.plist; sourceTree = "<group>"; };
 		BE42B38E1ACA63D7001DFFFE /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		BE42B3901ACA68EE001DFFFE /* threadchannelapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "threadchannelapp-Bridging-Header.h"; sourceTree = "<group>"; };
+		BE4B66961B10CAFD0026C1AC /* app.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = app.storyboard; sourceTree = "<group>"; };
+		BE4B66981B10CB850026C1AC /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		BE4B669A1B10CFA50026C1AC /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		BE4B669C1B10D4970026C1AC /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BE778D2B1AA58DF100023077 /* threadchannelapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = threadchannelapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE778D2F1AA58DF100023077 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE778D301AA58DF100023077 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +140,8 @@
 				BE778D501AA58FAD00023077 /* Controllers */,
 				BE778D301AA58DF100023077 /* AppDelegate.swift */,
 				BE778D341AA58DF100023077 /* Main.storyboard */,
+				BE4B669A1B10CFA50026C1AC /* Profile.storyboard */,
+				BE4B66961B10CAFD0026C1AC /* app.storyboard */,
 				BE778D371AA58DF100023077 /* Images.xcassets */,
 				BE778D391AA58DF100023077 /* LaunchScreen.xib */,
 				BE778D2E1AA58DF100023077 /* Supporting Files */,
@@ -172,6 +182,8 @@
 				BE778D321AA58DF100023077 /* ViewController.swift */,
 				BE778D641AA6E1BD00023077 /* DetailsViewController.swift */,
 				BE027BFD1AECA7C700BBEC26 /* LookViewController.swift */,
+				BE4B66981B10CB850026C1AC /* AppViewController.swift */,
+				BE4B669C1B10D4970026C1AC /* ProfileViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -277,10 +289,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4B669B1B10CFA50026C1AC /* Profile.storyboard in Resources */,
 				BE778D361AA58DF100023077 /* Main.storyboard in Resources */,
 				BE778D3B1AA58DF100023077 /* LaunchScreen.xib in Resources */,
 				BE42B38C1ACA535D001DFFFE /* threadchannel.plist in Resources */,
 				BE778D381AA58DF100023077 /* Images.xcassets in Resources */,
+				BE4B66971B10CAFD0026C1AC /* app.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,11 +360,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4B66991B10CB850026C1AC /* AppViewController.swift in Sources */,
 				BE778D331AA58DF100023077 /* ViewController.swift in Sources */,
 				BE778D311AA58DF100023077 /* AppDelegate.swift in Sources */,
 				BEDA2B8F1AE47DAF0011A244 /* Date.swift in Sources */,
 				BE778D5F1AA6CD0D00023077 /* CollectionViewCell.swift in Sources */,
 				BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */,
+				BE4B669D1B10D4970026C1AC /* ProfileViewController.swift in Sources */,
 				BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */,
 				BE027C001AECB0FB00BBEC26 /* Look.swift in Sources */,
 				BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */,
