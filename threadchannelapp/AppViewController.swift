@@ -35,7 +35,7 @@ class AppViewController: UITabBarController {
         mainVC.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: .Normal)
         mainVC.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.greenColor()], forState: .Selected)
         
-        threadVC.tabBarItem = UITabBarItem(title: "Thread", image: threadImage, tag: 1)
+        threadVC.tabBarItem = UITabBarItem(title: "Today", image: threadImage, tag: 1)
         threadVC.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: .Normal)
         threadVC.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.greenColor()], forState: .Selected)
         
