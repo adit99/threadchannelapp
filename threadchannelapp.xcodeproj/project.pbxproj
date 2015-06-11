@@ -11,6 +11,8 @@
 		BE027BFE1AECA7C700BBEC26 /* LookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE027BFD1AECA7C700BBEC26 /* LookViewController.swift */; };
 		BE027C001AECB0FB00BBEC26 /* Look.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE027BFF1AECB0FB00BBEC26 /* Look.swift */; };
 		BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */; };
+		BE3D85011B29369D006B24FD /* Thread.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE3D85001B29369D006B24FD /* Thread.storyboard */; };
+		BE3D85031B2937DD006B24FD /* ThreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D85021B2937DD006B24FD /* ThreadViewController.swift */; };
 		BE42B38C1ACA535D001DFFFE /* threadchannel.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE42B38B1ACA535D001DFFFE /* threadchannel.plist */; };
 		BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42B38E1ACA63D7001DFFFE /* Post.swift */; };
 		BE4B66971B10CAFD0026C1AC /* app.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE4B66961B10CAFD0026C1AC /* app.storyboard */; };
@@ -42,6 +44,8 @@
 		BE027BFD1AECA7C700BBEC26 /* LookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookViewController.swift; sourceTree = "<group>"; };
 		BE027BFF1AECB0FB00BBEC26 /* Look.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Look.swift; sourceTree = "<group>"; };
 		BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadChannelAPI.swift; sourceTree = "<group>"; };
+		BE3D85001B29369D006B24FD /* Thread.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Thread.storyboard; sourceTree = "<group>"; };
+		BE3D85021B2937DD006B24FD /* ThreadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadViewController.swift; sourceTree = "<group>"; };
 		BE42B38B1ACA535D001DFFFE /* threadchannel.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = threadchannel.plist; sourceTree = "<group>"; };
 		BE42B38E1ACA63D7001DFFFE /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		BE42B3901ACA68EE001DFFFE /* threadchannelapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "threadchannelapp-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				BE778D501AA58FAD00023077 /* Controllers */,
 				BE778D301AA58DF100023077 /* AppDelegate.swift */,
 				BE778D341AA58DF100023077 /* Main.storyboard */,
+				BE3D85001B29369D006B24FD /* Thread.storyboard */,
 				BE4B669A1B10CFA50026C1AC /* Profile.storyboard */,
 				BE4B66961B10CAFD0026C1AC /* app.storyboard */,
 				BE778D371AA58DF100023077 /* Images.xcassets */,
@@ -184,6 +189,7 @@
 				BE027BFD1AECA7C700BBEC26 /* LookViewController.swift */,
 				BE4B66981B10CB850026C1AC /* AppViewController.swift */,
 				BE4B669C1B10D4970026C1AC /* ProfileViewController.swift */,
+				BE3D85021B2937DD006B24FD /* ThreadViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -289,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE3D85011B29369D006B24FD /* Thread.storyboard in Resources */,
 				BE4B669B1B10CFA50026C1AC /* Profile.storyboard in Resources */,
 				BE778D361AA58DF100023077 /* Main.storyboard in Resources */,
 				BE778D3B1AA58DF100023077 /* LaunchScreen.xib in Resources */,
@@ -368,6 +375,7 @@
 				BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */,
 				BE4B669D1B10D4970026C1AC /* ProfileViewController.swift in Sources */,
 				BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */,
+				BE3D85031B2937DD006B24FD /* ThreadViewController.swift in Sources */,
 				BE027C001AECB0FB00BBEC26 /* Look.swift in Sources */,
 				BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */,
 				BE027BFE1AECA7C700BBEC26 /* LookViewController.swift in Sources */,
