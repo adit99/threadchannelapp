@@ -35,6 +35,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let posts = self.posts {
+            println(posts.count)
             return posts.count
         } else {
             return 0
@@ -63,10 +64,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             return CGSize(width: 104, height: 104)
         } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
             //iphone 6
-            return CGSize(width: 122, height: 166)
+            return CGSize(width: 122, height: 122)
+//            return CGSize(width: 122, height: 166)
+
         } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
             //iphone 6plus
-            return CGSize(width: 136, height: 166)
+            return CGSize(width: 136, height: 136)
+           // return CGSize(width: 136, height: 166)
+
         }
         //default 5s
         return CGSize(width: 104, height: 104)
