@@ -26,7 +26,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
         }
  
-        navigationItem.title = "Today | \(Date.today())"
+        navigationItem.title = "Thread Channel"
+
     }
 
     override func didReceiveMemoryWarning() {

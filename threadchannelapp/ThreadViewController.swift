@@ -14,6 +14,7 @@ class ThreadViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        navigationItem.title = "Today | \(Date.today())"
     }
 
     override func didReceiveMemoryWarning() {
