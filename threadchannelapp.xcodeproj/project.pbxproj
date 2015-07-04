@@ -108,13 +108,14 @@
 			name = api;
 			sourceTree = "<group>";
 		};
-		BE42B38D1ACA63B8001DFFFE /* views */ = {
+		BE42B38D1ACA63B8001DFFFE /* models */ = {
 			isa = PBXGroup;
 			children = (
 				BE42B38E1ACA63D7001DFFFE /* Post.swift */,
+				BEDA2B8E1AE47DAF0011A244 /* Date.swift */,
 				BE027BFF1AECB0FB00BBEC26 /* Look.swift */,
 			);
-			name = views;
+			name = models;
 			sourceTree = "<group>";
 		};
 		BE778D221AA58DF100023077 = {
@@ -141,7 +142,7 @@
 		BE778D2D1AA58DF100023077 /* threadchannelapp */ = {
 			isa = PBXGroup;
 			children = (
-				BE42B38D1ACA63B8001DFFFE /* views */,
+				BE42B38D1ACA63B8001DFFFE /* models */,
 				BE07409C1AC8DA8000596A95 /* api */,
 				BE778D511AA592A100023077 /* views */,
 				BE778D501AA58FAD00023077 /* Controllers */,
@@ -201,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				BE778D5E1AA6CD0D00023077 /* CollectionViewCell.swift */,
-				BEDA2B8E1AE47DAF0011A244 /* Date.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
