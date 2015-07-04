@@ -24,7 +24,7 @@ class AppViewController: UITabBarController {
         
         let profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
         let profileVC = profileStoryboard.instantiateInitialViewController() as! UINavigationController
-        let profileTabImage = UIImage(named: "profile")?.imageWithRenderingMode(.AlwaysOriginal)
+        let profileTabImage = UIImage(named: "profile_grey")?.imageWithRenderingMode(.AlwaysOriginal)
         
         let controllers = [mainVC, threadVC, profileVC]
         viewControllers = controllers
@@ -39,7 +39,8 @@ class AppViewController: UITabBarController {
         threadVC.tabBarItem.selectedImage = UIImage(named: "today_green")?.imageWithRenderingMode(.AlwaysOriginal)
         
 
-        profileVC.tabBarItem = UITabBarItem(title: "Profile", image: profileTabImage, tag: 1)
+        profileVC.tabBarItem = UITabBarItem(title: "", image: profileTabImage, tag: 1)
+        profileVC.tabBarItem.selectedImage = UIImage(named: "profile_green")?.imageWithRenderingMode(.AlwaysOriginal)
 //        profileVC.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: .Normal)
 //        profileVC.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.greenColor()], forState: .Selected)
         
