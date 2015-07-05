@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="bus-8N-97g">
             <objects>
-                <viewController id="dHK-Hk-RTZ" sceneMemberID="viewController">
+                <viewController id="dHK-Hk-RTZ" customClass="LoginViewController" customModule="threadchannelapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XJu-Py-SCF"/>
                         <viewControllerLayoutGuide type="bottom" id="vSm-Jz-1Gd"/>
@@ -234,10 +234,10 @@
             </objects>
             <point key="canvasLocation" x="1362" y="328"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="2ee-Bv-ALU">
             <objects>
-                <viewController id="eGf-eX-l1A" sceneMemberID="viewController">
+                <viewController id="eGf-eX-l1A" customClass="SignUpViewController" customModule="threadchannelapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qfE-vI-QRR"/>
                         <viewControllerLayoutGuide type="bottom" id="lJn-TP-mFd"/>
@@ -317,6 +317,9 @@
                                         <include reference="yg7-z2-xdI"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="onSignUp:" destination="eGf-eX-l1A" eventType="touchUpInside" id="S7W-aL-UxU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXS-9U-8JC">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -429,6 +432,11 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="Aad-OQ-cYf" id="DLm-nm-MzE"/>
+                        <outlet property="password" destination="94b-rb-5OS" id="KmD-EH-VVU"/>
+                        <outlet property="username" destination="hu3-5p-P8h" id="3oZ-4K-dii"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bNH-AL-qWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

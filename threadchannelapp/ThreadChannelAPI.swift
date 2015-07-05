@@ -40,9 +40,11 @@ class API {
   
     enum Router: URLRequestConvertible {
         private static let baseURL = valueForAPIKey(keyname: "baseURL")
+        private static let usersURL = "https://api.parse.com/1/users"
         
         case Posts()
         case Looks([String: AnyObject])
+        case Users()
     
         var path: String {
             switch self {
@@ -50,6 +52,8 @@ class API {
                     return "/classes/post"
                 case .Looks(_):
                     return "classes/look"
+                case .Users():
+                    return ""
             }
         }
         
@@ -59,6 +63,8 @@ class API {
                     return .GET
                 case .Looks:
                     return .GET
+                case .Users:
+                    return .GET
             }
         }
     
@@ -67,12 +73,19 @@ class API {
             let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
             mutableURLRequest.HTTPMethod = method.rawValue
             
+            let userURL = NSURL(string: Router.usersURL)!
+            let userMutableURLRequest = NSMutableURLRequest(URL: userURL.URLByAppendingPathComponent(path))
+            userMutableURLRequest.HTTPMethod = method.rawValue
+            
             switch self {
                 case .Posts():
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
     
                 case .Looks(let params):
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+                
+                case .Users():
+                    return Alamofire.ParameterEncoding.URL.encode(userMutableURLRequest, parameters: nil).0
                 
                 default:
                     return mutableURLRequest
@@ -121,6 +134,21 @@ class API {
                 } else {
                     println(error)
                     completion(looks: [Look](), error: error)
+                }
+        }
+    }
+    
+    func signUpWithCompletion(user: User, completion: (user: User, error: NSError?) -> ()) {
+        let manager = self.Manager()
+
+        
+        manager.request(API.Router.Users())
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    println(results)
+                } else {
+                    println(error)
                 }
         }
     }
