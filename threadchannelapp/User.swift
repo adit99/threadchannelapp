@@ -34,7 +34,7 @@ public class User : Printable {
         self.password = ""
         self.dictionary = dictionary
     }
-    
+        
     public var description: String { get {return "username: \(username)";} }
 
     class var currentUser : User? {

@@ -46,6 +46,7 @@ class API {
         case Looks([String: AnyObject])
         case Login([String: AnyObject])
         case Users()
+        case Signup([String: AnyObject])
     
         var path: String {
             switch self {
@@ -57,6 +58,8 @@ class API {
                     return "login"
                 case .Users():
                     return ""
+                case .Signup(_):
+                    return "users"
             }
         }
         
@@ -70,6 +73,8 @@ class API {
                     return .GET
                 case .Users:
                     return .GET
+                case .Signup:
+                    return .POST
             }
         }
     
@@ -94,6 +99,9 @@ class API {
                 
                 case .Users():
                     return Alamofire.ParameterEncoding.URL.encode(userMutableURLRequest, parameters: nil).0
+                
+                case .Signup(let params):
+                    return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
                 
                 default:
                     return mutableURLRequest
@@ -149,12 +157,26 @@ class API {
     func signUpWithCompletion(user: User, completion: (user: User, error: NSError?) -> ()) {
         let manager = self.Manager()
 
+        var params = [String: AnyObject]()
+        params["username"] = user.username
+        params["password"] = user.password
+        params["email"] = user.email
         
-        manager.request(API.Router.Users())
+        manager.request(API.Router.Signup(params))
             .responseJSON { (request, response, JSON, error) in
                 if error == nil {
-                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    let results = JSON  as! NSDictionary
                     println(results)
+                    if let session = (results["sessionToken"] as? String) {
+                        params["sessionToken"] = results["sessionToken"] as! String
+                        params["objectId"] = results["objectId"] as! String
+                        params["createdAt"] = results["createdAt"] as! String
+                        completion(user: User(dictionary: params), error: nil)
+                    } else {
+                        var error = NSError(domain:
+                            results["error"] as! String, code: results["code"] as! Int, userInfo: nil)
+                        completion(user: user, error: error)
+                    }
                 } else {
                     println(error)
                 }
