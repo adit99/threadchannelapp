@@ -19,6 +19,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        API.Instance.tempWithCompletion { (error) -> () in
+//            if error == nil {
+//            }
+//        }
+
         API.Instance.postsWithCompletion { (posts, error) -> () in
             if error == nil {
                 self.posts = posts

@@ -47,6 +47,7 @@ class API {
         case Login([String: AnyObject])
         case Users()
         case Signup([String: AnyObject])
+        case Temp()
     
         var path: String {
             switch self {
@@ -60,6 +61,8 @@ class API {
                     return ""
                 case .Signup(_):
                     return "users"
+                case .Temp():
+                    return "classes/temp"
             }
         }
         
@@ -75,6 +78,8 @@ class API {
                     return .GET
                 case .Signup:
                     return .POST
+                case .Temp():
+                    return .GET
             }
         }
     
@@ -102,6 +107,9 @@ class API {
                 
                 case .Signup(let params):
                     return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
+                
+                case .Temp():
+                    return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
                 
                 default:
                     return mutableURLRequest
@@ -205,6 +213,22 @@ class API {
                 } else {
                     println(error)
                     completion(user: user, error: error)
+                }
+        }
+    }
+    
+    func tempWithCompletion(completion: (error: NSError?) -> ()) {
+        let manager = self.Manager()
+        
+        manager.request(API.Router.Temp())
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    println(results)
+                    completion(error: nil)
+                } else {
+                    println(error)
+                    completion(error: error)
                 }
         }
     }
