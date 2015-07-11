@@ -44,14 +44,17 @@ class API {
         
         case Posts()
         case Looks([String: AnyObject])
+        case Login([String: AnyObject])
         case Users()
     
         var path: String {
             switch self {
                 case .Posts():
-                    return "/classes/post"
+                    return "classes/post"
                 case .Looks(_):
                     return "classes/look"
+                case .Login(_):
+                    return "login"
                 case .Users():
                     return ""
             }
@@ -62,6 +65,8 @@ class API {
                 case .Posts:
                     return .GET
                 case .Looks:
+                    return .GET
+                case .Login:
                     return .GET
                 case .Users:
                     return .GET
@@ -82,6 +87,9 @@ class API {
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
     
                 case .Looks(let params):
+                    return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+                
+                case .Login(let params):
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
                 
                 case .Users():
@@ -149,6 +157,32 @@ class API {
                     println(results)
                 } else {
                     println(error)
+                }
+        }
+    }
+    
+    func loginWithCompletion(user: User, completion: (user: User, error: NSError?) -> ()) {
+        let manager = self.Manager()
+        
+        var params = [String: AnyObject]()
+        params["username"] = user.username
+        params["password"] = user.password
+        
+        manager.request(API.Router.Login(params))
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = JSON  as! NSDictionary
+                    println(results)
+                    if let session = (results["sessionToken"] as? String) {
+                        completion(user: User(dictionary: results), error: nil)
+                    } else {
+                        var error = NSError(domain:
+                            results["error"] as! String, code: results["code"] as! Int, userInfo: nil)
+                        completion(user: user, error: error)
+                    }
+                } else {
+                    println(error)
+                    completion(user: user, error: error)
                 }
         }
     }

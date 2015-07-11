@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--View Controller-->
         <scene sceneID="y8g-IL-Pwx">
             <objects>
                 <viewController id="bIh-wj-2Qz" customClass="ViewController" customModule="threadchannelapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -64,7 +64,7 @@
                             <constraint firstItem="2i6-kp-ORr" firstAttribute="top" secondItem="5e4-lL-JiZ" secondAttribute="bottom" id="uTe-Ir-zie"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="aE4-vC-GUm"/>
+                    <navigationItem key="navigationItem" id="aE4-vC-GUm"/>
                     <connections>
                         <outlet property="collectionView" destination="5e4-lL-JiZ" id="k9r-WH-rhV"/>
                         <segue destination="XoW-Ff-hYG" kind="push" identifier="gotolook" id="7mm-sh-Tad"/>
@@ -181,7 +181,9 @@
                             <constraint firstAttribute="trailing" secondItem="Kj1-YD-w95" secondAttribute="trailing" id="qU5-Yw-weg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="B8j-If-QRb"/>
+                    <navigationItem key="navigationItem" id="B8j-If-QRb">
+                        <barButtonItem key="backBarButtonItem" title=" " id="suD-ub-Atl"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Kj1-YD-w95" id="FZw-rs-DX9"/>
                         <outlet property="postImageView" destination="icK-Fi-lft" id="kbT-vw-ywT"/>

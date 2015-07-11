@@ -7,7 +7,7 @@
         <!--App View Controller-->
         <scene sceneID="aMv-Rs-dsO">
             <objects>
-                <viewController id="rFC-u9-sfR" customClass="AppViewController" customModule="threadchannelapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AppViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rFC-u9-sfR" customClass="AppViewController" customModule="threadchannelapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AJg-NP-1GC"/>
                         <viewControllerLayoutGuide type="bottom" id="FVM-a2-FWW"/>
