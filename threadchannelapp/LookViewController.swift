@@ -10,16 +10,23 @@ import UIKit
 
 class LookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
+    @IBOutlet weak var threadButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    
     var post:Post!
     var looks:[Look]!
     
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
-    //@IBOutlet weak var lookImageView: UIImageView!
-    //@IBOutlet weak var pageControl: UIPageControl!
+   
  
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    
+        threadButton.setImage(UIImage(named:"thread_grey.png"),forState:UIControlState.Normal)
+        
+        threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Highlighted)
         
         //move to app delagate?
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -82,4 +89,11 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return CGSize(width: 156, height: 198)
     }
     
+    @IBAction func threadTapped(sender: UIButton) {
+        threadButton.enabled = true
+    }
+
+
+    @IBAction func shareTapped(sender: UIButton) {
+    }
 }

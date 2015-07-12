@@ -47,6 +47,7 @@ class API {
         case Login([String: AnyObject])
         case Users()
         case Signup([String: AnyObject])
+        case UserThreads([String: AnyObject])
         case Temp()
     
         var path: String {
@@ -61,8 +62,10 @@ class API {
                     return ""
                 case .Signup(_):
                     return "users"
+                case .UserThreads(_):
+                    return "users"
                 case .Temp():
-                    return "classes/temp"
+                    return "user_threads"
             }
         }
         
@@ -78,6 +81,8 @@ class API {
                     return .GET
                 case .Signup:
                     return .POST
+                case .UserThreads:
+                    return .GET
                 case .Temp():
                     return .GET
             }
@@ -107,6 +112,9 @@ class API {
                 
                 case .Signup(let params):
                     return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
+                
+                case .UserThreads(let params):
+                    return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
                 
                 case .Temp():
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
@@ -202,9 +210,13 @@ class API {
             .responseJSON { (request, response, JSON, error) in
                 if error == nil {
                     let results = JSON  as! NSDictionary
-                    println(results)
+                    //println(results)
                     if let session = (results["sessionToken"] as? String) {
-                        completion(user: User(dictionary: results), error: nil)
+                        let tdict = (results as NSDictionary)["threads"] as! [NSDictionary]
+                        let threads = Post.postsFromArray(tdict)
+                        var user = User(dictionary: results)
+                        user.threads = threads
+                        completion(user: user, error: nil)
                     } else {
                         var error = NSError(domain:
                             results["error"] as! String, code: results["code"] as! Int, userInfo: nil)
@@ -217,6 +229,36 @@ class API {
         }
     }
     
+    func userThreadsWithCompletion(user: User, completion: (threads: [Post], error: NSError?) -> ()) {
+        let manager = self.Manager()
+   
+        var p1 = [String: AnyObject]()
+        p1["objectId"] = user.objectId
+        
+        var p3 = [String: AnyObject]()
+        p3["where"] = p1
+        p3["include"] = "post"
+
+        manager.request(API.Router.UserThreads(p3))
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    //println(results)
+                    let tdict = (results[0] as NSDictionary)["threads"] as! [NSDictionary]
+                    let threads = Post.postsFromArray(tdict)
+                    completion(threads: threads, error: nil)
+                } else {
+                    println(error)
+                    completion(threads: [Post](), error: error)
+                }
+        }
+        
+    }
+
+    
+    
+    
+    //tester function
     func tempWithCompletion(completion: (error: NSError?) -> ()) {
         let manager = self.Manager()
         
@@ -232,6 +274,13 @@ class API {
                 }
         }
     }
+    
+  
+    
+    
+    
+    
+    
     
     //unused
     class func request() {

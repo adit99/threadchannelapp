@@ -17,8 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         var navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.tintColor = UIColor.whiteColor()  // Back buttons and such
-        navigationBarAppearace.barTintColor = UIColor(CIColor: CIColor(red: 119/255, green: 118/255, blue: 118/255))
+        navigationBarAppearace.tintColor = UIColor.greenColor()  // Back buttons and such
+        navigationBarAppearace.barTintColor = UIColor.whiteColor()
+        //navigationBarAppearace.barTintColor = UIColor(CIColor: CIColor(red: 119/255, green: 118/255, blue: 118/255))
         navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.greenColor()]
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         

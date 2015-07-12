@@ -29,8 +29,9 @@ class AppViewController: UITabBarController {
         let controllers = [mainVC, threadVC, profileVC]
         viewControllers = controllers
         
-        tabBar.barTintColor = UIColor(CIColor: CIColor(red: 96/255, green: 96/255, blue: 96/255))
-        tabBar.tintColor = UIColor.whiteColor()
+       // tabBar.barTintColor = UIColor(CIColor: CIColor(red: 96/255, green: 96/255, blue: 96/255))
+        tabBar.barTintColor = UIColor.whiteColor()
+        tabBar.tintColor = UIColor.greenColor()
         
         mainVC.tabBarItem = UITabBarItem(title: "", image: mainTabImage, tag: 1)
         mainVC.tabBarItem.selectedImage = UIImage(named: "home_green")?.imageWithRenderingMode(.AlwaysOriginal)

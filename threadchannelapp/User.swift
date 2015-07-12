@@ -18,6 +18,7 @@ public class User : Printable {
     private(set) var email : String!
     private(set) var password : String!
     private(set) var sessionToken : String!
+    public var threads : [Post]?
     private var dictionary : NSDictionary?
 
     init(username: String, email: String, password: String) {

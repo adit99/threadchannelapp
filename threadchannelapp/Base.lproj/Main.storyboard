@@ -144,12 +144,18 @@
                                 <state key="normal" image="thread_grey">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="threadTapped:" destination="XoW-Ff-hYG" eventType="touchUpInside" id="Jgo-ty-7aX"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0w-Wm-EPd">
                                 <rect key="frame" x="268" y="367" width="30" height="29"/>
                                 <state key="normal" image="share_grey">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="shareTapped:" destination="XoW-Ff-hYG" eventType="touchUpInside" id="xH7-Go-oFs"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="icK-Fi-lft">
                                 <rect key="frame" x="0.0" y="44" width="320" height="320"/>
@@ -187,6 +193,8 @@
                     <connections>
                         <outlet property="collectionView" destination="Kj1-YD-w95" id="FZw-rs-DX9"/>
                         <outlet property="postImageView" destination="icK-Fi-lft" id="kbT-vw-ywT"/>
+                        <outlet property="shareButton" destination="M0w-Wm-EPd" id="zYx-e5-SWU"/>
+                        <outlet property="threadButton" destination="i50-zE-ALz" id="PWh-bq-fQd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nr7-gn-sIp" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -16,11 +16,13 @@ public class Post : Printable {
     public var description: String { get {return "name: \(name)";} }
 
     init(dictionary: NSDictionary) {
-        self.objectId = dictionary["objectId"] as! String
-        self.name = dictionary["name"] as! String
-        self.imageURL = dictionary["imageURL"] as! String
-//        let image = dictionary["image"] as! NSDictionary
-//        self.imageURL = image["url"] as! String
+        self.objectId = dictionary["objectId"] as? String
+        self.name = dictionary["name"] as? String
+       // self.imageURL = dictionary["imageURL"] as! String
+        if let image = dictionary["image"] as? NSDictionary {
+            self.imageURL = image["url"] as! String
+        }
+        self.objectId = dictionary["objectId"] as? String
     }
     
     class func postsFromArray(array: [NSDictionary]) -> [Post] {
