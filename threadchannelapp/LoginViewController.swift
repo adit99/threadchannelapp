@@ -27,12 +27,11 @@ class LoginViewController: UIViewController {
                 API.Instance.userThreadsWithCompletion(User.currentUser!) { (threads, error) -> () in
                     dispatch_async(dispatch_get_main_queue()) {
                         if error == nil {
+                            
                             User.currentUser!.threads = threads
                         }
                     }
                 }
-                
-                
             }
             
             var appStoryboard = UIStoryboard(name: "app", bundle: nil)

@@ -23,9 +23,7 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
         threadButton.setImage(UIImage(named:"thread_grey.png"),forState:UIControlState.Normal)
-        
         threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Highlighted)
         
         //move to app delagate?
@@ -35,9 +33,11 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
         imageView.image = image
         navigationItem.titleView = imageView
         
+        //load the image
         let url = NSURL(string: post.imageURL)
         postImageView.setImageWithURL(url)
 
+        //load the looks
         API.Instance.looksWithCompletion(post.objectId) { (looks, error) -> () in
             if error == nil {
                 self.looks = looks
@@ -46,6 +46,13 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     self.collectionView.reloadData()
                 }
             }
+        }
+        
+
+       let user_likes_post = User.currentUser!.threads!.filter({ ($0.objectId == self.post.objectId) })
+       if user_likes_post.count > 0 {
+            threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Normal)
+            threadButton.setImage(UIImage(named:"thread_grey.png"),forState:UIControlState.Highlighted)
         }
     }
 
@@ -90,7 +97,7 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func threadTapped(sender: UIButton) {
-        threadButton.enabled = true
+        
     }
 
 

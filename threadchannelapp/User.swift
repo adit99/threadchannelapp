@@ -35,7 +35,18 @@ public class User : Printable {
         self.password = ""
         self.dictionary = dictionary
     }
-        
+    
+    class func postsFromArray(array: [NSDictionary]) -> [Post] {
+        var posts = [Post]()
+        for entry in array {
+            let thread = entry["post"] as! NSDictionary
+            let post = Post(dictionary: thread)
+            posts.append(post)
+        }
+        return posts
+    }
+
+    
     public var description: String { get {return "username: \(username)";} }
 
     class var currentUser : User? {
@@ -61,7 +72,8 @@ public class User : Printable {
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
-    
 }
+
+
 
 

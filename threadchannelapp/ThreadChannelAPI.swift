@@ -63,7 +63,7 @@ class API {
                 case .Signup(_):
                     return "users"
                 case .UserThreads(_):
-                    return "users"
+                    return "classes/user_threads"
                 case .Temp():
                     return "user_threads"
             }
@@ -231,32 +231,34 @@ class API {
     
     func userThreadsWithCompletion(user: User, completion: (threads: [Post], error: NSError?) -> ()) {
         let manager = self.Manager()
-   
+        
         var p1 = [String: AnyObject]()
+        p1["__type"] = "Pointer"
+        p1["className"] = "_User"
         p1["objectId"] = user.objectId
         
+        var p2 = [String: AnyObject]()
+        p2["user"] = p1
+        
         var p3 = [String: AnyObject]()
-        p3["where"] = p1
-        p3["include"] = "post"
-
+        p3["where"] = p2
+        p3["include"] = "post,user"
+        p3["order"] = "updatedAt"
+        p3["limit"] = 100
+        
         manager.request(API.Router.UserThreads(p3))
             .responseJSON { (request, response, JSON, error) in
                 if error == nil {
                     let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
                     //println(results)
-                    let tdict = (results[0] as NSDictionary)["threads"] as! [NSDictionary]
-                    let threads = Post.postsFromArray(tdict)
+                    let threads = User.postsFromArray(results)
                     completion(threads: threads, error: nil)
                 } else {
                     println(error)
                     completion(threads: [Post](), error: error)
                 }
         }
-        
     }
-
-    
-    
     
     //tester function
     func tempWithCompletion(completion: (error: NSError?) -> ()) {
@@ -275,14 +277,36 @@ class API {
         }
     }
     
-  
-    
-    
-    
-    
     
     
     //unused
+    
+    func userThreadsWithCompletion2(user: User, completion: (threads: [Post], error: NSError?) -> ()) {
+        let manager = self.Manager()
+        
+        var p1 = [String: AnyObject]()
+        p1["objectId"] = user.objectId
+        
+        var p3 = [String: AnyObject]()
+        p3["where"] = p1
+        p3["include"] = "post"
+        
+        manager.request(API.Router.UserThreads(p3))
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    //println(results)
+                    let tdict = (results[0] as NSDictionary)["threads"] as! [NSDictionary]
+                    let threads = Post.postsFromArray(tdict)
+                    completion(threads: threads, error: nil)
+                } else {
+                    println(error)
+                    completion(threads: [Post](), error: error)
+                }
+        }
+        
+    }
+    
     class func request() {
 
         var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
