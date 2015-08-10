@@ -145,7 +145,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="threadTapped:" destination="XoW-Ff-hYG" eventType="touchUpInside" id="Jgo-ty-7aX"/>
+                                    <action selector="threadTapped:" destination="XoW-Ff-hYG" eventType="touchUpInside" id="0or-Sp-mv8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0w-Wm-EPd">

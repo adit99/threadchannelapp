@@ -23,9 +23,6 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        threadButton.setImage(UIImage(named:"thread_grey.png"),forState:UIControlState.Normal)
-        threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Highlighted)
-        
         //move to app delagate?
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .ScaleAspectFit
@@ -48,12 +45,13 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
         
-
        let user_likes_post = User.currentUser!.threads!.filter({ ($0.objectId == self.post.objectId) })
        if user_likes_post.count > 0 {
-            threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Normal)
-            threadButton.setImage(UIImage(named:"thread_grey.png"),forState:UIControlState.Highlighted)
+            threadButton.selected = true
         }
+        threadButton.setImage(UIImage(named:"thread_grey.png"),forState:UIControlState.Normal)
+        threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Selected)
+        
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -97,9 +95,8 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func threadTapped(sender: UIButton) {
-        
+        sender.selected = !sender.selected
     }
-
 
     @IBAction func shareTapped(sender: UIButton) {
     }

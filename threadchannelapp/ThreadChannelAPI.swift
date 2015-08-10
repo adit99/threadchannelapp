@@ -260,6 +260,11 @@ class API {
         }
     }
     
+    func updateUserThreadsWithCompletion(user: User, thread: Post, completion: (threads: [Post], error: NSError?) -> ()) {
+        
+    }
+
+    
     //tester function
     func tempWithCompletion(completion: (error: NSError?) -> ()) {
         let manager = self.Manager()
@@ -304,7 +309,6 @@ class API {
                     completion(threads: [Post](), error: error)
                 }
         }
-        
     }
     
     class func request() {
@@ -339,7 +343,4 @@ class API {
                 println(JSON)
         }
     }
-    
-    
-    
 }
