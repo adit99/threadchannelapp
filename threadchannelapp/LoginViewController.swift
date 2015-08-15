@@ -27,8 +27,8 @@ class LoginViewController: UIViewController {
                 API.Instance.userThreadsWithCompletion(User.currentUser!) { (threads, error) -> () in
                     dispatch_async(dispatch_get_main_queue()) {
                         if error == nil {
-                            
                             User.currentUser!.threads = threads
+                            User.currentUser!.newThreads = threads
                         }
                     }
                 }

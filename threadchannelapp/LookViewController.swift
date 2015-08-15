@@ -45,7 +45,7 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
         
-        if User.currentUser!.threads!.contains(post) {
+        if User.currentUser!.newThreads!.contains(post) {
             threadButton.selected = true
         }
         
@@ -102,9 +102,9 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBAction func threadTapped(sender: UIButton) {
         sender.selected = !sender.selected
         if (sender.selected) {
-            User.currentUser!.threads!.insert(post)
+            User.currentUser!.newThreads!.insert(post)
         } else {
-            User.currentUser!.threads!.remove(post)
+            User.currentUser!.newThreads!.remove(post)
         }
     }
 

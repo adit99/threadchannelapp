@@ -9,8 +9,6 @@
 import Foundation
 import Alamofire
 
-
-
 func valueForAPIKey(#keyname:String) -> String {
     let filePath = NSBundle.mainBundle().pathForResource("threadchannel", ofType:"plist")
     let plist = NSDictionary(contentsOfFile:filePath!)
@@ -41,6 +39,7 @@ class API {
     enum Router: URLRequestConvertible {
         private static let baseURL = valueForAPIKey(keyname: "baseURL")
         private static let usersURL = "https://api.parse.com/1/users"
+        private static let threadsURL = "/1/classes/user_threads"
         
         case Posts()
         case Looks([String: AnyObject])
@@ -48,6 +47,7 @@ class API {
         case Users()
         case Signup([String: AnyObject])
         case UserThreads([String: AnyObject])
+        case Batch([String: AnyObject])
         case Temp()
     
         var path: String {
@@ -64,6 +64,8 @@ class API {
                     return "users"
                 case .UserThreads(_):
                     return "classes/user_threads"
+                case .Batch(_):
+                    return "batch"
                 case .Temp():
                     return "user_threads"
             }
@@ -83,6 +85,8 @@ class API {
                     return .POST
                 case .UserThreads:
                     return .GET
+                case .Batch:
+                    return .POST
                 case .Temp():
                     return .GET
             }
@@ -115,6 +119,9 @@ class API {
                 
                 case .UserThreads(let params):
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+                
+                case .Batch(let params):
+                    return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
                 
                 case .Temp():
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
@@ -216,6 +223,7 @@ class API {
                         let threads = Post.threadsFromArray(tdict)
                         var user = User(dictionary: results)
                         user.threads = threads
+                        user.newThreads = threads
                         completion(user: user, error: nil)
                     } else {
                         var error = NSError(domain:
@@ -262,6 +270,68 @@ class API {
     
     func updateUserThreadsWithCompletion(user: User, thread: Post, completion: (threads: [Post], error: NSError?) -> ()) {
         
+    }
+
+    func synchronizeUserWithCompletion(data: User.SyncData, completion: (error: NSError?) -> ()) {
+        let manager = self.Manager()
+    
+        var d = [String: AnyObject]()
+        var requests = [NSDictionary]()
+        
+        for addedthread in data.addedThreads {
+            var at = [String: AnyObject]()
+            at["method"] = "POST"
+            at["path"] = API.Router.threadsURL
+            
+            var body = [String: AnyObject]()
+            
+            var post = [String: AnyObject]()
+            post["__type"] = "Pointer"
+            post["className"] = "post"
+            post["objectId"] = addedthread.objectId
+            
+            body["post"] = post
+            
+            var user = [String: AnyObject]()
+            user["__type"] = "Pointer"
+            user["className"] = "_User"
+            user["objectId"] = data.user.objectId
+            
+            body["user"] = user
+            
+            at["body"] = body
+            
+            requests.append(at)
+        }
+        
+        //XXX/AJ: Delete wont work. the path needs to be the objectId of the user_threads object. Will need to implement a UserThreads model that tracks the object Id and contains the Post as a set
+        
+        
+//        for deletedThread in data.deletedThreads {
+//            var rt = [String: AnyObject]()
+//            rt["method"] = "DELETE"
+//            let path = API.Router.threadsURL + "/" + deletedThread.objectId
+//            rt["path"] = path
+//            
+//            var body = [String: AnyObject]()
+       // }
+        
+        d["requests"] = requests
+
+        manager.request(API.Router.Batch(d))
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = (JSON) as! [NSDictionary]
+                    for result in results {
+                        println(results)
+                    }
+                    completion(error: nil)
+                } else {
+                    println(error)
+                    completion(error: error)
+                }
+        }
+
     }
 
     

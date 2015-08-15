@@ -19,7 +19,14 @@ public class User : Printable {
     private(set) var password : String!
     private(set) var sessionToken : String!
     public var threads : Set<Post>?
+    public var newThreads : Set<Post>?
     private var dictionary : NSDictionary?
+    
+    struct SyncData {
+        var user: User
+        var addedThreads : Set<Post>
+        var deletedThreads : Set<Post>
+    }
 
     init(username: String, email: String, password: String) {
         self.username = username
@@ -82,6 +89,25 @@ public class User : Printable {
             }
             NSUserDefaults.standardUserDefaults().synchronize()
         }
+    }
+    
+    public func synchronize() {
+        
+        //synchronize the threads
+        //added threads
+        var addedThreads = newThreads!.subtract(threads!)
+        println(addedThreads)
+        //deleted theads
+        var deletedThreads = threads!.subtract(newThreads!)
+        println(deletedThreads)
+    
+        var data = User.SyncData(user:self, addedThreads: addedThreads, deletedThreads: deletedThreads)
+        API.Instance.synchronizeUserWithCompletion(data) { (error) -> () in
+            if error == nil {
+                "sync worked"
+            }
+        }
+
     }
 }
 
