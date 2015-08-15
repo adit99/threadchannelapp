@@ -18,7 +18,7 @@ public class User : Printable {
     private(set) var email : String!
     private(set) var password : String!
     private(set) var sessionToken : String!
-    public var threads : [Post]?
+    public var threads : Set<Post>?
     private var dictionary : NSDictionary?
 
     init(username: String, email: String, password: String) {
@@ -46,6 +46,17 @@ public class User : Printable {
         return posts
     }
 
+    class func threadsFromArray(array: [NSDictionary]) -> Set<Post> {
+        var threads = Set<Post>()
+        for entry in array {
+            let t = entry["post"] as! NSDictionary
+            let thread = Post(dictionary: t)
+            if threads.contains(thread) == false {
+                threads.insert(thread)
+            }
+        }
+        return threads
+    }
     
     public var description: String { get {return "username: \(username)";} }
 

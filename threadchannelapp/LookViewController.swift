@@ -45,10 +45,15 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
         
-       let user_likes_post = User.currentUser!.threads!.filter({ ($0.objectId == self.post.objectId) })
-       if user_likes_post.count > 0 {
+        if User.currentUser!.threads!.contains(post) {
             threadButton.selected = true
         }
+        
+//       let user_likes_post = User.currentUser!.threads!.filter({ ($0.objectId == self.post.objectId) })
+//       if user_likes_post.count > 0 {
+//            threadButton.selected = true
+//        }
+        
         threadButton.setImage(UIImage(named:"thread_grey.png"),forState:UIControlState.Normal)
         threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Selected)
         
@@ -96,6 +101,11 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBAction func threadTapped(sender: UIButton) {
         sender.selected = !sender.selected
+        if (sender.selected) {
+            User.currentUser!.threads!.insert(post)
+        } else {
+            User.currentUser!.threads!.remove(post)
+        }
     }
 
     @IBAction func shareTapped(sender: UIButton) {

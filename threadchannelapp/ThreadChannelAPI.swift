@@ -213,7 +213,7 @@ class API {
                     //println(results)
                     if let session = (results["sessionToken"] as? String) {
                         let tdict = (results as NSDictionary)["threads"] as! [NSDictionary]
-                        let threads = Post.postsFromArray(tdict)
+                        let threads = Post.threadsFromArray(tdict)
                         var user = User(dictionary: results)
                         user.threads = threads
                         completion(user: user, error: nil)
@@ -229,7 +229,7 @@ class API {
         }
     }
     
-    func userThreadsWithCompletion(user: User, completion: (threads: [Post], error: NSError?) -> ()) {
+    func userThreadsWithCompletion(user: User, completion: (threads: Set<Post>, error: NSError?) -> ()) {
         let manager = self.Manager()
         
         var p1 = [String: AnyObject]()
@@ -251,11 +251,11 @@ class API {
                 if error == nil {
                     let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
                     //println(results)
-                    let threads = User.postsFromArray(results)
+                    let threads = User.threadsFromArray(results)
                     completion(threads: threads, error: nil)
                 } else {
                     println(error)
-                    completion(threads: [Post](), error: error)
+                    completion(threads: Set<Post>(), error: error)
                 }
         }
     }
