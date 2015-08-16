@@ -219,11 +219,7 @@ class API {
                     let results = JSON  as! NSDictionary
                     //println(results)
                     if let session = (results["sessionToken"] as? String) {
-                        let tdict = (results as NSDictionary)["threads"] as! [NSDictionary]
-                        let threads = Post.threadsFromArray(tdict)
                         var user = User(dictionary: results)
-                        user.threads = threads
-                        user.newThreads = threads
                         completion(user: user, error: nil)
                     } else {
                         var error = NSError(domain:
@@ -237,7 +233,7 @@ class API {
         }
     }
     
-    func userThreadsWithCompletion(user: User, completion: (threads: Set<Post>, error: NSError?) -> ()) {
+    func userThreadsWithCompletion(user: User, completion: (threads: UserThreads, error: NSError?) -> ()) {
         let manager = self.Manager()
         
         var p1 = [String: AnyObject]()
@@ -259,20 +255,17 @@ class API {
                 if error == nil {
                     let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
                     //println(results)
-                    let threads = User.threadsFromArray(results)
+                    let threads = UserThread.threadsFromArray(results)
                     completion(threads: threads, error: nil)
                 } else {
                     println(error)
-                    completion(threads: Set<Post>(), error: error)
+                    completion(threads: UserThreads(), error: error)
                 }
         }
     }
-    
-    func updateUserThreadsWithCompletion(user: User, thread: Post, completion: (threads: [Post], error: NSError?) -> ()) {
-        
-    }
 
-    func synchronizeUserWithCompletion(data: User.SyncData, completion: (error: NSError?) -> ()) {
+    func synchronizeUser(data: User.SyncData) {
+
         let manager = self.Manager()
     
         var d = [String: AnyObject]()
@@ -288,7 +281,7 @@ class API {
             var post = [String: AnyObject]()
             post["__type"] = "Pointer"
             post["className"] = "post"
-            post["objectId"] = addedthread.objectId
+            post["objectId"] = addedthread.post!.objectId
             
             body["post"] = post
             
@@ -304,17 +297,13 @@ class API {
             requests.append(at)
         }
         
-        //XXX/AJ: Delete wont work. the path needs to be the objectId of the user_threads object. Will need to implement a UserThreads model that tracks the object Id and contains the Post as a set
-        
-        
-//        for deletedThread in data.deletedThreads {
-//            var rt = [String: AnyObject]()
-//            rt["method"] = "DELETE"
-//            let path = API.Router.threadsURL + "/" + deletedThread.objectId
-//            rt["path"] = path
-//            
-//            var body = [String: AnyObject]()
-       // }
+        for deletedThread in data.deletedThreads {
+            var rt = [String: AnyObject]()
+            rt["method"] = "DELETE"
+            let path = API.Router.threadsURL + "/" + deletedThread.objectId
+            rt["path"] = path
+            requests.append(rt)
+        }
         
         d["requests"] = requests
 
@@ -323,12 +312,22 @@ class API {
                 if error == nil {
                     let results = (JSON) as! [NSDictionary]
                     for result in results {
-                        println(results)
+                        //println(result)
+                        if let success = result["success"] as? NSDictionary {
+                            println(success)
+                        } else if let err = result["error"] as? NSDictionary {
+                            println(err)
+                        }
                     }
-                    completion(error: nil)
+                    API.Instance.userThreadsWithCompletion(User.currentUser!) { (threads, error) -> () in
+                        if error == nil {
+                            println("updating threads")
+                            User.currentUser!.threads = threads
+                            User.currentUser!.newThreads = threads
+                        }
+                    }
                 } else {
                     println(error)
-                    completion(error: error)
                 }
         }
 

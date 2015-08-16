@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "threadchannelapp/ThreadChannelAPI.swift"
-            timestampString = "461367434.025529"
+            timestampString = "461443587.841656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "request()"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "threadchannelapp/ThreadChannelAPI.swift"
-            timestampString = "461367095.38358"
+            timestampString = "461439425.218653"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "userThreadsWithCompletion(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -329,13 +329,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "threadchannelapp/LoginViewController.swift"
-            timestampString = "458626334.767676"
+            filePath = "threadchannelapp/ThreadChannelAPI.swift"
+            timestampString = "461443587.841656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
+            landmarkName = "synchronizeUser(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "threadchannelapp/ThreadChannelAPI.swift"
+            timestampString = "461439087.331638"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "loginWithCompletion(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -345,13 +361,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "threadchannelapp/LoginViewController.swift"
-            timestampString = "461358814.133387"
+            filePath = "threadchannelapp/User.swift"
+            timestampString = "461440599.95077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "synchronize()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "threadchannelapp/AppDelegate.swift"
+            timestampString = "461441667.12493"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "applicationWillResignActive(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -362,12 +394,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "threadchannelapp/ThreadChannelAPI.swift"
-            timestampString = "461367434.025529"
+            timestampString = "461443587.841656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
-            landmarkName = "synchronizeUserWithCompletion(_:completion:)"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
+            landmarkName = "synchronizeUser(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

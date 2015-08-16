@@ -26,6 +26,7 @@
 		BE778D471AA58DF100023077 /* threadchannelappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D461AA58DF100023077 /* threadchannelappTests.swift */; };
 		BE778D5F1AA6CD0D00023077 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D5E1AA6CD0D00023077 /* CollectionViewCell.swift */; };
 		BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D641AA6E1BD00023077 /* DetailsViewController.swift */; };
+		BEA313211B80FAB700840B2A /* UserThreads.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA313201B80FAB700840B2A /* UserThreads.swift */; };
 		BED285591B460556003889FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BED285581B460556003889FE /* Images.xcassets */; };
 		BED2855B1B4655AC003889FE /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED2855A1B4655AC003889FE /* Login.storyboard */; };
 		BED2855D1B4885F1003889FE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED2855C1B4885F1003889FE /* LoginViewController.swift */; };
@@ -68,6 +69,7 @@
 		BE778D461AA58DF100023077 /* threadchannelappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = threadchannelappTests.swift; sourceTree = "<group>"; };
 		BE778D5E1AA6CD0D00023077 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		BE778D641AA6E1BD00023077 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		BEA313201B80FAB700840B2A /* UserThreads.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserThreads.swift; sourceTree = "<group>"; };
 		BED285581B460556003889FE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = threadchannelapp/Images.xcassets; sourceTree = "<group>"; };
 		BED2855A1B4655AC003889FE /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		BED2855C1B4885F1003889FE /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				BEDA2B8E1AE47DAF0011A244 /* Date.swift */,
 				BE027BFF1AECB0FB00BBEC26 /* Look.swift */,
 				BED285601B48886E003889FE /* User.swift */,
+				BEA313201B80FAB700840B2A /* UserThreads.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				BEDA2B8F1AE47DAF0011A244 /* Date.swift in Sources */,
 				BE778D5F1AA6CD0D00023077 /* CollectionViewCell.swift in Sources */,
 				BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */,
+				BEA313211B80FAB700840B2A /* UserThreads.swift in Sources */,
 				BE4B669D1B10D4970026C1AC /* ProfileViewController.swift in Sources */,
 				BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */,
 				BED285611B48886E003889FE /* User.swift in Sources */,

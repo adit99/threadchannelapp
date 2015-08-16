@@ -18,14 +18,14 @@ public class User : Printable {
     private(set) var email : String!
     private(set) var password : String!
     private(set) var sessionToken : String!
-    public var threads : Set<Post>?
-    public var newThreads : Set<Post>?
+    public var threads : UserThreads?
+    public var newThreads : UserThreads?
     private var dictionary : NSDictionary?
     
     struct SyncData {
         var user: User
-        var addedThreads : Set<Post>
-        var deletedThreads : Set<Post>
+        var addedThreads : UserThreads
+        var deletedThreads : UserThreads
     }
 
     init(username: String, email: String, password: String) {
@@ -38,31 +38,9 @@ public class User : Printable {
         self.objectId = dictionary["objectId"] as! String
         self.username = dictionary["username"] as! String
         self.email = dictionary["email"] as! String
-        self.sessionToken = dictionary["sessionToken"] as! String
+        self.sessionToken = dictionary["sessionToken"] as? String
         self.password = ""
         self.dictionary = dictionary
-    }
-    
-    class func postsFromArray(array: [NSDictionary]) -> [Post] {
-        var posts = [Post]()
-        for entry in array {
-            let thread = entry["post"] as! NSDictionary
-            let post = Post(dictionary: thread)
-            posts.append(post)
-        }
-        return posts
-    }
-
-    class func threadsFromArray(array: [NSDictionary]) -> Set<Post> {
-        var threads = Set<Post>()
-        for entry in array {
-            let t = entry["post"] as! NSDictionary
-            let thread = Post(dictionary: t)
-            if threads.contains(thread) == false {
-                threads.insert(thread)
-            }
-        }
-        return threads
     }
     
     public var description: String { get {return "username: \(username)";} }
@@ -102,12 +80,7 @@ public class User : Printable {
         println(deletedThreads)
     
         var data = User.SyncData(user:self, addedThreads: addedThreads, deletedThreads: deletedThreads)
-        API.Instance.synchronizeUserWithCompletion(data) { (error) -> () in
-            if error == nil {
-                "sync worked"
-            }
-        }
-
+        API.Instance.synchronizeUser(data)
     }
 }
 

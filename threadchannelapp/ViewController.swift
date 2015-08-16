@@ -27,8 +27,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
         API.Instance.postsWithCompletion { (posts, error) -> () in
             if error == nil {
+                println("getting new posts")
                 self.posts = posts
                 self.collectionView.reloadData()
+            }
+        }
+        
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                
+            API.Instance.userThreadsWithCompletion(User.currentUser!) { (threads, error) -> () in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if error == nil {
+                        User.currentUser!.threads = threads
+                        User.currentUser!.newThreads = threads
+                    }
+                }
             }
         }
         

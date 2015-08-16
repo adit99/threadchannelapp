@@ -21,19 +21,6 @@ class LoginViewController: UIViewController {
         //hack, this need to move to app delegate
         if User.currentUser != nil {
             
-            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-            dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                
-                API.Instance.userThreadsWithCompletion(User.currentUser!) { (threads, error) -> () in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        if error == nil {
-                            User.currentUser!.threads = threads
-                            User.currentUser!.newThreads = threads
-                        }
-                    }
-                }
-            }
-            
             var appStoryboard = UIStoryboard(name: "app", bundle: nil)
             let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
             self.presentViewController(vc, animated: true, completion: nil)
