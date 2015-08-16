@@ -74,10 +74,10 @@ public class User : Printable {
         //synchronize the threads
         //added threads
         var addedThreads = newThreads!.subtract(threads!)
-        println(addedThreads)
+        println("added Threads: \(addedThreads)")
         //deleted theads
         var deletedThreads = threads!.subtract(newThreads!)
-        println(deletedThreads)
+        println("deleted threads: \(deletedThreads)")
     
         var data = User.SyncData(user:self, addedThreads: addedThreads, deletedThreads: deletedThreads)
         API.Instance.synchronizeUser(data)

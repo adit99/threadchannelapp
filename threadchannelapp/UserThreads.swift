@@ -32,8 +32,8 @@ public class UserThread : Printable, Hashable {
     
     public var description: String { get {return "name: \(self.post.name)";} }
 
-    class func threadsFromArray(array: [NSDictionary]) -> Set<UserThread> {
-        var threads = Set<UserThread>()
+    class func threadsFromArray(array: [NSDictionary]) -> UserThreads {
+        var threads = UserThreads()
         for entry in array {
             let user_thread = UserThread(dictionary: entry)
             if threads.contains(user_thread) == false {
