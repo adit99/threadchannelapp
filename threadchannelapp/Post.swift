@@ -13,7 +13,7 @@ public class Post : Printable  {
     private(set) var name : String!
     private(set) var imageURL : String!
     
-    public var description: String { get {return "name: \(name)";} }
+    public var description: String { get {return "name: \(name)\nimageURL: \(imageURL)";} }
 
     init(dictionary: NSDictionary) {
         self.objectId = dictionary["objectId"] as? String

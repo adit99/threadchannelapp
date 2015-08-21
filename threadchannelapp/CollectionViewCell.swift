@@ -25,3 +25,12 @@ class LookViewCell: UICollectionViewCell {
         imageView.setImageWithURL(url)
     }
 }
+
+class ThreadViewCell: UICollectionViewCell {
+    @IBOutlet weak var imageView: UIImageView!
+    
+    func initCell(containerView: UIView, post: Post) {
+        let url = NSURL(string: post.imageURL)
+        imageView.setImageWithURL(url)
+    }
+}
