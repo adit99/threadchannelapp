@@ -69,7 +69,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-                
+        
         if self.view.frame.width == 320.0 {
             //iphone 5s
             return CGSize(width: 104, height: 104)
@@ -88,7 +88,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-            }
+        let storyboard = UIStoryboard(name: "Look", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LookViewController") as! LookViewController
+         let post = User.currentUser!.newThreads![advance(User.currentUser!.newThreads!.startIndex, indexPath.row)].post
+        vc.post = post
+        self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
 
 
 }

@@ -106,14 +106,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("gotolook", sender: posts[indexPath.row])
-        self.collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+        let storyboard = UIStoryboard(name: "Look", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LookViewController") as! LookViewController
+        vc.post = posts[indexPath.row]
+        self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
+        self.navigationController!.pushViewController(vc, animated: true)
+        
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let post = sender as? Post
-        let lookVC = segue.destinationViewController as? LookViewController
-        lookVC?.post = post
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        let post = sender as? Post
+//        let lookVC = segue.destinationViewController as? LookViewController
+//        lookVC?.post = post
+//    }
 }
 

@@ -33,6 +33,7 @@
 		BED2855F1B488602003889FE /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED2855E1B488602003889FE /* SignUpViewController.swift */; };
 		BED285611B48886E003889FE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED285601B48886E003889FE /* User.swift */; };
 		BEDA2B8F1AE47DAF0011A244 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDA2B8E1AE47DAF0011A244 /* Date.swift */; };
+		BEF5D8C31B86CAF9006F6770 /* Look.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEF5D8C11B86CAF9006F6770 /* Look.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		BED2855E1B488602003889FE /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BED285601B48886E003889FE /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BEDA2B8E1AE47DAF0011A244 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		BEF5D8C21B86CAF9006F6770 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Look.storyboard; sourceTree = "<group>"; };
 		C315CB4796FC53F5CFEE28DA /* Pods_threadchannelapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_threadchannelapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC195EE0CB31B5A84DAFB59 /* Pods-threadchannelapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-threadchannelapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-threadchannelapp/Pods-threadchannelapp.release.xcconfig"; sourceTree = "<group>"; };
 		F68518D9B387665B9436BC28 /* Pods-threadchannelapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-threadchannelapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-threadchannelapp/Pods-threadchannelapp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				BE778D501AA58FAD00023077 /* Controllers */,
 				BE778D301AA58DF100023077 /* AppDelegate.swift */,
 				BE778D341AA58DF100023077 /* Main.storyboard */,
+				BEF5D8C11B86CAF9006F6770 /* Look.storyboard */,
 				BED2855A1B4655AC003889FE /* Login.storyboard */,
 				BE3D85001B29369D006B24FD /* Thread.storyboard */,
 				BE4B669A1B10CFA50026C1AC /* Profile.storyboard */,
@@ -312,6 +315,7 @@
 			files = (
 				BED2855B1B4655AC003889FE /* Login.storyboard in Resources */,
 				BE3D85011B29369D006B24FD /* Thread.storyboard in Resources */,
+				BEF5D8C31B86CAF9006F6770 /* Look.storyboard in Resources */,
 				BE4B669B1B10CFA50026C1AC /* Profile.storyboard in Resources */,
 				BED285591B460556003889FE /* Images.xcassets in Resources */,
 				BE778D361AA58DF100023077 /* Main.storyboard in Resources */,
@@ -435,6 +439,14 @@
 				BE778D3A1AA58DF100023077 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		BEF5D8C11B86CAF9006F6770 /* Look.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEF5D8C21B86CAF9006F6770 /* Base */,
+			);
+			name = Look.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
