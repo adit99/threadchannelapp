@@ -11,8 +11,6 @@
 		BE027BFE1AECA7C700BBEC26 /* LookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE027BFD1AECA7C700BBEC26 /* LookViewController.swift */; };
 		BE027C001AECB0FB00BBEC26 /* Look.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE027BFF1AECB0FB00BBEC26 /* Look.swift */; };
 		BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */; };
-		BE3D85011B29369D006B24FD /* Thread.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE3D85001B29369D006B24FD /* Thread.storyboard */; };
-		BE3D85031B2937DD006B24FD /* ThreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D85021B2937DD006B24FD /* ThreadViewController.swift */; };
 		BE42B38C1ACA535D001DFFFE /* threadchannel.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE42B38B1ACA535D001DFFFE /* threadchannel.plist */; };
 		BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42B38E1ACA63D7001DFFFE /* Post.swift */; };
 		BE4B66971B10CAFD0026C1AC /* app.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE4B66961B10CAFD0026C1AC /* app.storyboard */; };
@@ -34,6 +32,7 @@
 		BED285611B48886E003889FE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED285601B48886E003889FE /* User.swift */; };
 		BEDA2B8F1AE47DAF0011A244 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDA2B8E1AE47DAF0011A244 /* Date.swift */; };
 		BEF5D8C31B86CAF9006F6770 /* Look.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEF5D8C11B86CAF9006F6770 /* Look.storyboard */; };
+		BEF5D8CE1B86DB0F006F6770 /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF5D8CD1B86DB0F006F6770 /* Trending.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +49,6 @@
 		BE027BFD1AECA7C700BBEC26 /* LookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookViewController.swift; sourceTree = "<group>"; };
 		BE027BFF1AECB0FB00BBEC26 /* Look.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Look.swift; sourceTree = "<group>"; };
 		BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadChannelAPI.swift; sourceTree = "<group>"; };
-		BE3D85001B29369D006B24FD /* Thread.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Thread.storyboard; sourceTree = "<group>"; };
-		BE3D85021B2937DD006B24FD /* ThreadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadViewController.swift; sourceTree = "<group>"; };
 		BE42B38B1ACA535D001DFFFE /* threadchannel.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = threadchannel.plist; sourceTree = "<group>"; };
 		BE42B38E1ACA63D7001DFFFE /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		BE42B3901ACA68EE001DFFFE /* threadchannelapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "threadchannelapp-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -78,6 +75,7 @@
 		BED285601B48886E003889FE /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BEDA2B8E1AE47DAF0011A244 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		BEF5D8C21B86CAF9006F6770 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Look.storyboard; sourceTree = "<group>"; };
+		BEF5D8CD1B86DB0F006F6770 /* Trending.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trending.swift; sourceTree = "<group>"; };
 		C315CB4796FC53F5CFEE28DA /* Pods_threadchannelapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_threadchannelapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC195EE0CB31B5A84DAFB59 /* Pods-threadchannelapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-threadchannelapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-threadchannelapp/Pods-threadchannelapp.release.xcconfig"; sourceTree = "<group>"; };
 		F68518D9B387665B9436BC28 /* Pods-threadchannelapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-threadchannelapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-threadchannelapp/Pods-threadchannelapp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				BE42B38E1ACA63D7001DFFFE /* Post.swift */,
+				BEF5D8CD1B86DB0F006F6770 /* Trending.swift */,
 				BEDA2B8E1AE47DAF0011A244 /* Date.swift */,
 				BE027BFF1AECB0FB00BBEC26 /* Look.swift */,
 				BED285601B48886E003889FE /* User.swift */,
@@ -162,7 +161,6 @@
 				BE778D341AA58DF100023077 /* Main.storyboard */,
 				BEF5D8C11B86CAF9006F6770 /* Look.storyboard */,
 				BED2855A1B4655AC003889FE /* Login.storyboard */,
-				BE3D85001B29369D006B24FD /* Thread.storyboard */,
 				BE4B669A1B10CFA50026C1AC /* Profile.storyboard */,
 				BE4B66961B10CAFD0026C1AC /* app.storyboard */,
 				BE778D391AA58DF100023077 /* LaunchScreen.xib */,
@@ -206,7 +204,6 @@
 				BE027BFD1AECA7C700BBEC26 /* LookViewController.swift */,
 				BE4B66981B10CB850026C1AC /* AppViewController.swift */,
 				BE4B669C1B10D4970026C1AC /* ProfileViewController.swift */,
-				BE3D85021B2937DD006B24FD /* ThreadViewController.swift */,
 				BED2855C1B4885F1003889FE /* LoginViewController.swift */,
 				BED2855E1B488602003889FE /* SignUpViewController.swift */,
 			);
@@ -314,7 +311,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BED2855B1B4655AC003889FE /* Login.storyboard in Resources */,
-				BE3D85011B29369D006B24FD /* Thread.storyboard in Resources */,
 				BEF5D8C31B86CAF9006F6770 /* Look.storyboard in Resources */,
 				BE4B669B1B10CFA50026C1AC /* Profile.storyboard in Resources */,
 				BED285591B460556003889FE /* Images.xcassets in Resources */,
@@ -391,6 +387,7 @@
 				BE778D331AA58DF100023077 /* ViewController.swift in Sources */,
 				BE778D311AA58DF100023077 /* AppDelegate.swift in Sources */,
 				BEDA2B8F1AE47DAF0011A244 /* Date.swift in Sources */,
+				BEF5D8CE1B86DB0F006F6770 /* Trending.swift in Sources */,
 				BE778D5F1AA6CD0D00023077 /* CollectionViewCell.swift in Sources */,
 				BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */,
 				BEA313211B80FAB700840B2A /* UserThreads.swift in Sources */,
@@ -398,7 +395,6 @@
 				BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */,
 				BED285611B48886E003889FE /* User.swift in Sources */,
 				BED2855F1B488602003889FE /* SignUpViewController.swift in Sources */,
-				BE3D85031B2937DD006B24FD /* ThreadViewController.swift in Sources */,
 				BE027C001AECB0FB00BBEC26 /* Look.swift in Sources */,
 				BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */,
 				BED2855D1B4885F1003889FE /* LoginViewController.swift in Sources */,

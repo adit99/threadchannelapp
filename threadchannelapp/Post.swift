@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class Post : Printable  {
+public class Post : Printable, NilLiteralConvertible {
     private(set) var objectId : String!
     private(set) var name : String!
     private(set) var imageURL : String!
@@ -34,4 +34,9 @@ public class Post : Printable  {
         return posts
     }
     
+    public required init(nilLiteral: ()) {
+        objectId = nil
+        name = nil
+        imageURL = nil
+    }
 }

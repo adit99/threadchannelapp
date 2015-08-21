@@ -48,6 +48,7 @@ class API {
         case Signup([String: AnyObject])
         case UserThreads([String: AnyObject])
         case Batch([String: AnyObject])
+        case Trending([String: AnyObject])
         case Temp()
     
         var path: String {
@@ -66,6 +67,8 @@ class API {
                     return "classes/user_threads"
                 case .Batch(_):
                     return "batch"
+                case .Trending(_):
+                    return "classes/trending"
                 case .Temp():
                     return "user_threads"
             }
@@ -87,6 +90,8 @@ class API {
                     return .GET
                 case .Batch:
                     return .POST
+                case .Trending:
+                    return .GET
                 case .Temp():
                     return .GET
             }
@@ -122,6 +127,9 @@ class API {
                 
                 case .Batch(let params):
                     return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
+                
+                case .Trending(let params):
+                    return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
                 
                 case .Temp():
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
@@ -334,9 +342,30 @@ class API {
     }
 
     
+    func trendingPostWithCompletion(completion: (trending: Trending, error: NSError?) -> ()) {
+        let manager = self.Manager()
+        
+        var param = [String: AnyObject]()
+        param["include"] = "post"
+        
+        manager.request(API.Router.Trending(param))
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    let trending = Trending(dictionary: results[0])
+                    completion(trending: trending, error: nil)
+                } else {
+                    println(error)
+                    completion(trending: nil, error: error)
+                }
+        }
+    }
+    
     //tester function
     func tempWithCompletion(completion: (error: NSError?) -> ()) {
         let manager = self.Manager()
+        
+      
         
         manager.request(API.Router.Temp())
             .responseJSON { (request, response, JSON, error) in

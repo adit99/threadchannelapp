@@ -27,7 +27,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
         API.Instance.postsWithCompletion { (posts, error) -> () in
             if error == nil {
-                println("getting new posts")
                 self.posts = posts
                 self.collectionView.reloadData()
             }

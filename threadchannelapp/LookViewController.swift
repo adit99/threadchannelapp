@@ -18,18 +18,35 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
-   
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //move to app delagate?
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        imageView.contentMode = .ScaleAspectFit
-        let image = UIImage(named: "logo")
-        imageView.image = image
-        navigationItem.titleView = imageView
-        
+        let post = self.post
+        if post == nil {
+            navigationItem.title = "Today | \(Date.today())"
+            API.Instance.trendingPostWithCompletion { (trending, error) -> () in
+                if error == nil {
+                    self.post = trending.post
+                    println(trending)
+                    self.load()
+                } else {
+                    //need some error
+                    println("couldnt get trending post")
+                }
+            }
+        } else {
+            //move to app delagate?
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+            imageView.contentMode = .ScaleAspectFit
+            let image = UIImage(named: "logo")
+            imageView.image = image
+            navigationItem.titleView = imageView
+            load()
+        }
+    }
+    
+    func load() {
         //load the image
         let url = NSURL(string: post.imageURL)
         postImageView.setImageWithURL(url)
@@ -48,12 +65,6 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if User.currentUser!.newThreads!.contains(UserThread(post: post)) {
             threadButton.selected = true
         }
-        
-        
-//       let user_likes_post = User.currentUser!.threads!.filter({ ($0.objectId == self.post.objectId) })
-//       if user_likes_post.count > 0 {
-//            threadButton.selected = true
-//        }
         
         threadButton.setImage(UIImage(named:"thread_grey.png"),forState:UIControlState.Normal)
         threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Selected)
