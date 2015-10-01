@@ -14,6 +14,26 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-threadchannelapp-Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-threadchannelapp-FBSDKCoreKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-threadchannelapp-FBSDKLoginKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-threadchannelapp-FBSDKShareKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-threadchannelapp-SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>48C1F085546665800383910D</key>
+		<key>44AD9808FC5D7B8DC6D7B7BC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>54DBAE4A9CD8A24141F6B49A</key>
+		<key>639A73CDE2E562CB2D6E55D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>60CFC9FC4A0D1A0B38FDAC5F</key>
+		<key>6C5B909965025F13E8FA9D26</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8731FB683A5B61357DE66F16</key>
+		<key>B1E6FA78F306E113B7112A8A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DB66FCDE996D13413B1A51B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E7D03364E0B2C4089F7F8E26</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EEE4258D382885424D988D96</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F7671978627A38AFF1DA6218</key>
 		<dict>
 			<key>primary</key>
 			<true/>

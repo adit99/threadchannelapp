@@ -37,6 +37,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         self.userName.text = User.currentUser!.username
         self.threadCount.text = User.currentUser!.newThreads!.count.description
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userThreadsChanged", name: valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,6 +96,17 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         vc.post = post
         self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
         self.navigationController!.pushViewController(vc, animated: true)
+    }
+
+    func userThreadsChanged() {
+        self.reloadView()
+    }
+    
+    //this is bad, should only reload whats changed, also if adding a thread show it in the begining
+    func reloadView() {
+        self.userName.text = User.currentUser!.username
+        self.threadCount.text = User.currentUser!.newThreads!.count.description
+        self.collectionView.reloadData()
     }
 
 

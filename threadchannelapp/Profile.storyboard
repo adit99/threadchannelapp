@@ -38,7 +38,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lucy K" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ty4-tx-PxI">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thread_green" translatesAutoresizingMaskIntoConstraints="NO" id="Jab-v8-3yh">
@@ -47,7 +47,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYg-4d-2At">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -76,8 +76,6 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="nhA-BW-zwb"/>
-                                        <exclude reference="JFM-qY-9n2"/>
-                                        <exclude reference="iwu-Nz-WOb"/>
                                         <exclude reference="Gon-k1-gHp"/>
                                         <exclude reference="Z2d-aw-yaP"/>
                                         <exclude reference="GO0-bO-stI"/>
@@ -86,6 +84,8 @@
                                         <exclude reference="yzj-UW-1u7"/>
                                         <exclude reference="V2c-V8-Zta"/>
                                         <exclude reference="r48-2D-L4d"/>
+                                        <exclude reference="JFM-qY-9n2"/>
+                                        <exclude reference="iwu-Nz-WOb"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -97,8 +97,6 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="nhA-BW-zwb"/>
-                                        <include reference="JFM-qY-9n2"/>
-                                        <include reference="iwu-Nz-WOb"/>
                                         <include reference="Gon-k1-gHp"/>
                                         <include reference="Z2d-aw-yaP"/>
                                         <include reference="GO0-bO-stI"/>
@@ -107,6 +105,8 @@
                                         <include reference="yzj-UW-1u7"/>
                                         <include reference="V2c-V8-Zta"/>
                                         <include reference="r48-2D-L4d"/>
+                                        <include reference="JFM-qY-9n2"/>
+                                        <include reference="iwu-Nz-WOb"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -193,6 +193,7 @@
                                 <exclude reference="s3v-2R-l3B"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2fd-qt-ffM"/>
                                 <exclude reference="6Kq-2X-oM7"/>
                                 <exclude reference="Ggg-1R-GQ9"/>
                                 <exclude reference="S4B-4l-cIh"/>
@@ -203,7 +204,6 @@
                                 <exclude reference="Q9t-9B-9ks"/>
                                 <exclude reference="SDQ-Wj-Gof"/>
                                 <exclude reference="qlm-yo-hq7"/>
-                                <exclude reference="2fd-qt-ffM"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -212,6 +212,7 @@
                                 <include reference="s3v-2R-l3B"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="2fd-qt-ffM"/>
                                 <include reference="6Kq-2X-oM7"/>
                                 <include reference="Ggg-1R-GQ9"/>
                                 <include reference="S4B-4l-cIh"/>
@@ -222,7 +223,6 @@
                                 <include reference="Q9t-9B-9ks"/>
                                 <exclude reference="SDQ-Wj-Gof"/>
                                 <exclude reference="qlm-yo-hq7"/>
-                                <include reference="2fd-qt-ffM"/>
                             </mask>
                         </variation>
                     </view>

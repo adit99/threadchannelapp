@@ -56,6 +56,8 @@
 		BE4B66981B10CB850026C1AC /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
 		BE4B669A1B10CFA50026C1AC /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		BE4B669C1B10D4970026C1AC /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BE66F7681BBCAEDB003C4FE0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		BE66F76A1BBCB002003C4FE0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		BE778D2B1AA58DF100023077 /* threadchannelapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = threadchannelapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE778D2F1AA58DF100023077 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE778D301AA58DF100023077 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,8 @@
 		ACE57D9765EBF014EA2A7730 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE66F76A1BBCB002003C4FE0 /* Accounts.framework */,
+				BE66F7681BBCAEDB003C4FE0 /* Social.framework */,
 				C315CB4796FC53F5CFEE28DA /* Pods_threadchannelapp.framework */,
 			);
 			name = Frameworks;

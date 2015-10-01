@@ -118,6 +118,8 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
         } else {
             User.currentUser!.newThreads!.remove(UserThread(post: post))
         }
+        
+         NSNotificationCenter.defaultCenter().postNotificationName(valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
     }
 
     @IBAction func shareTapped(sender: UIButton) {

@@ -7,16 +7,23 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var activity: UIActivityIndicatorView!
     
+    @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         activity.hidden = true
+        
+        facebookLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
+        facebookLoginButton.delegate = self
         
         //hack, this need to move to app delegate
         if User.currentUser != nil {
@@ -35,6 +42,8 @@ class LoginViewController: UIViewController {
     @IBAction func onTap(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
+    
+    
     @IBAction func onLogin(sender: UIButton) {
         
         var user = User(username: username.text, email: "", password: self.password.text)
@@ -61,4 +70,32 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func onLoginWithFacebook(sender: FBSDKLoginButton) {
+        
+    }
+    
+    
+    //Facebook Login
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        
+        if error == nil {
+            println("facebook login succeeded")
+            
+            //Does the user already exist
+            //if not create i.e. signup the user
+            //if exists login the user
+        
+            println(FBSDKAccessToken.currentAccessToken().userID)
+        
+        }
+        else {
+            println("facebook login failed")
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        println("facebook logout")
+    }
+    
 }
