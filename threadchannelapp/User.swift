@@ -37,7 +37,7 @@ public class User : Printable {
     init(dictionary: NSDictionary) {
         self.objectId = dictionary["objectId"] as! String
         self.username = dictionary["username"] as! String
-        self.email = dictionary["email"] as! String
+        self.email = dictionary["email"] as? String
         self.sessionToken = dictionary["sessionToken"] as? String
         self.password = ""
         self.dictionary = dictionary

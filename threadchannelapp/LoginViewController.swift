@@ -75,22 +75,36 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
     }
     
-    
     //Facebook Login
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
-        if error == nil {
-            println("facebook login succeeded")
+        if error == nil {            
+            //link the user
+            API.Instance.loginWithFacebookWithCompletion(FBSDKAccessToken.currentAccessToken()) { (user, error) -> () in
             
-            //Does the user already exist
-            //if not create i.e. signup the user
-            //if exists login the user
-        
-            println(FBSDKAccessToken.currentAccessToken().userID)
-        
+                if error == nil {
+                    User.currentUser = user!
+                    
+                    //before we move VC's get some user info (name and pic) from FBK API
+                    
+                    var appStoryboard = UIStoryboard(name: "app", bundle: nil)
+                    let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
+                    self.presentViewController(vc, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertView()
+                    alert.title = "Login with Facebook failed"
+                    alert.message = "\(error!.domain)"
+                    alert.addButtonWithTitle("Ok")
+                    alert.show()
+                }
+            }
         }
         else {
-            println("facebook login failed")
+            let alert = UIAlertView()
+            alert.title = "Login with Facebook failed"
+            alert.message = "\(error!.domain)"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
         }
     }
     

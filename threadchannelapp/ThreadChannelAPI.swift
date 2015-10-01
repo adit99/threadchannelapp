@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import FBSDKCoreKit
 
 func valueForAPIKey(#keyname:String) -> String {
     let filePath = NSBundle.mainBundle().pathForResource("threadchannel", ofType:"plist")
@@ -44,6 +45,7 @@ class API {
         case Posts()
         case Looks([String: AnyObject])
         case Login([String: AnyObject])
+        case LoginWithFacebook([String: AnyObject])
         case Users()
         case Signup([String: AnyObject])
         case UserThreads([String: AnyObject])
@@ -59,6 +61,8 @@ class API {
                     return "classes/look"
                 case .Login(_):
                     return "login"
+                case .LoginWithFacebook(_):
+                    return "users"
                 case .Users():
                     return ""
                 case .Signup(_):
@@ -82,6 +86,8 @@ class API {
                     return .GET
                 case .Login:
                     return .GET
+                case .LoginWithFacebook:
+                    return .POST
                 case .Users:
                     return .GET
                 case .Signup:
@@ -115,6 +121,9 @@ class API {
                 
                 case .Login(let params):
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+                
+                case .LoginWithFacebook(let params):
+                    return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
                 
                 case .Users():
                     return Alamofire.ParameterEncoding.URL.encode(userMutableURLRequest, parameters: nil).0
@@ -240,6 +249,41 @@ class API {
                 }
         }
     }
+    
+    func loginWithFacebookWithCompletion(fbAccessToken: FBSDKAccessToken, completion: (user: User?, error: NSError?) -> ()) {
+        let manager = self.Manager()
+        
+        var params = [String: AnyObject]()
+        var authdata = [String: AnyObject]()
+        var facebook = [String: AnyObject]()
+        facebook["id"] = fbAccessToken.userID
+        facebook["access_token"] = fbAccessToken.tokenString
+        var date = Date.formatter(fbAccessToken.expirationDate)
+        facebook["expiration_date"] = date
+        
+        authdata["facebook"] = facebook
+        params["authData"] = authdata
+        
+        manager.request(API.Router.LoginWithFacebook(params))
+            .responseJSON { (request, response, JSON, error) in
+   
+                if error == nil {
+                    let results = JSON  as! NSDictionary
+                    if let session = (results["sessionToken"] as? String) {
+                        var user = User(dictionary: results)
+                        completion(user: user, error: nil)
+                    } else {
+                        var error = NSError(domain:
+                            results["error"] as! String, code: results["code"] as! Int, userInfo: nil)
+                        completion(user: nil, error: error)
+                    }
+                } else {
+                    println(error)
+                    completion(user: nil, error: error)
+                }
+        }
+    }
+    
     
     func userThreadsWithCompletion(user: User, completion: (threads: UserThreads, error: NSError?) -> ()) {
         let manager = self.Manager()
