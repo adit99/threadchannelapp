@@ -86,6 +86,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     User.currentUser = user!
                     
                     //before we move VC's get some user info (name and pic) from FBK API
+                    var params = [String: AnyObject]()
+                    params["fields"] = "first_name, last_name, picture, email"
+                    var fbk = FBSDKGraphRequest(graphPath: "me", parameters: params)
+                    fbk.startWithCompletionHandler{(connection:FBSDKGraphRequestConnection!,result:AnyObject?, error:NSError!) -> Void in
+                        print(error)
+                        print(result)
+                        print(connection)
+                }
+                
                     
                     var appStoryboard = UIStoryboard(name: "app", bundle: nil)
                     let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController

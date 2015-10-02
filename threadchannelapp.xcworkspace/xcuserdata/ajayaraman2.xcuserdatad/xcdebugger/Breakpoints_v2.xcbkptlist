@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "threadchannelapp/ThreadChannelAPI.swift"
-            timestampString = "465426887.947179"
+            timestampString = "465441623.196173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
             landmarkName = "request()"
             landmarkType = "5">
          </BreakpointContent>
@@ -560,6 +560,22 @@
             startingLineNumber = "284"
             endingLineNumber = "284"
             landmarkName = "loginWithFacebookWithCompletion(_:completion:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "threadchannelapp/LoginViewController.swift"
+            timestampString = "465442146.462602"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "loginButton(_:didCompleteWithResult:error:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

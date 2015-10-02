@@ -424,8 +424,6 @@ class API {
         }
     }
     
-    
-    
     //unused
     
     func userThreadsWithCompletion2(user: User, completion: (threads: [Post], error: NSError?) -> ()) {
