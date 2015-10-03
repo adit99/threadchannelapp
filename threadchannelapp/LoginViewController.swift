@@ -83,22 +83,31 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             API.Instance.loginWithFacebookWithCompletion(FBSDKAccessToken.currentAccessToken()) { (user, error) -> () in
             
                 if error == nil {
-                    User.currentUser = user!
                     
                     //before we move VC's get some user info (name and pic) from FBK API
                     var params = [String: AnyObject]()
-                    params["fields"] = "first_name, last_name, picture, email"
+                    params["fields"] = "first_name, last_name, picture.type(large), email"
                     var fbk = FBSDKGraphRequest(graphPath: "me", parameters: params)
-                    fbk.startWithCompletionHandler{(connection:FBSDKGraphRequestConnection!,result:AnyObject?, error:NSError!) -> Void in
-                        print(error)
-                        print(result)
-                        print(connection)
-                }
-                
-                    
-                    var appStoryboard = UIStoryboard(name: "app", bundle: nil)
-                    let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
-                    self.presentViewController(vc, animated: true, completion: nil)
+                    fbk.startWithCompletionHandler{(connection:FBSDKGraphRequestConnection!,JSON:AnyObject?, error:NSError!) -> Void in
+                        if error == nil {
+                            println(JSON)
+                            let result = JSON as! NSDictionary
+                            let firstName = result["first_name"] as! String
+                            let lastName = result["last_name"] as! String
+                            let email = result["email"] as? String
+                            let picture = result["picture"] as! NSDictionary
+                            let data = picture["data"] as! NSDictionary
+                            let profilePicUrl = data["url"] as! String
+                           
+                            user!.setFacebookFields(firstName, lastName: lastName, profilePicUrl: profilePicUrl, email: email)
+                            User.currentUser = user!
+                            
+                            var appStoryboard = UIStoryboard(name: "app", bundle: nil)
+                            let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
+                            self.presentViewController(vc, animated: true, completion: nil)
+                            
+                        } //else?
+                    }//else?
                 } else {
                     let alert = UIAlertView()
                     alert.title = "Login with Facebook failed"

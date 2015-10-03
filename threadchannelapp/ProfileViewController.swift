@@ -28,19 +28,41 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         imageView.image = image
         navigationItem.titleView = imageView
         
+        initProfileFields()
+        
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userThreadsChanged", name: valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
+    }
+
+    func initProfileFields() {
+        
+        let user = User.currentUser!
+        
+        //username or first name last name
+        if let firstName = user.firstName {
+            let lastName = user.lastName!
+            self.userName.text = firstName + " " + [lastName[lastName.startIndex]]
+        } else {
+            self.userName.text = user.username
+        }
+        
+        //thread count
+        self.threadCount.text = user.newThreads!.count.description
+
+        //profile pic
+        if let profilePicUrl  = user.profilePicURL {
+            let url = NSURL(string: profilePicUrl)
+            self.profileImageView.setImageWithURL(url)
+        }
         
         profileImageView.layer.borderWidth = 1.0
         profileImageView.layer.masksToBounds = false
         profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
         profileImageView.layer.cornerRadius = profileImageView.image!.size.width/2
         profileImageView.clipsToBounds = true
-        
-        self.userName.text = User.currentUser!.username
-        self.threadCount.text = User.currentUser!.newThreads!.count.description
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userThreadsChanged", name: valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

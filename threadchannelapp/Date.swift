@@ -25,7 +25,6 @@ class Date {
         var formatter: NSDateFormatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         let stringDate: String = formatter.stringFromDate(date)
-        println(stringDate)
         return stringDate
     }
 }

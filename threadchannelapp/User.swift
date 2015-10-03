@@ -20,7 +20,29 @@ public class User : Printable {
     private(set) var sessionToken : String!
     public var threads : UserThreads?
     public var newThreads : UserThreads?
-    private var dictionary : NSDictionary?
+    private var dictionary : NSMutableDictionary?
+    
+    //facebook fields (not email is optional from fbk)
+    private(set) var firstName : String?
+    private(set) var lastName : String?
+    private(set) var profilePicURL : String?
+    
+    public func setFacebookFields(firstName: String, lastName: String, profilePicUrl: String, email: String?) {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.profilePicURL = profilePicUrl
+        
+        if let e = email {
+            self.email = e
+        } else {
+            self.email = ""
+        }
+        
+        self.dictionary?.setValue(firstName, forKey: "first_name")
+        self.dictionary?.setValue(lastName, forKey: "last_name")
+        self.dictionary?.setValue(profilePicURL, forKey: "profile_pic_url")
+        self.dictionary?.setValue(email, forKey: "email")
+    }
     
     struct SyncData {
         var user: User
@@ -40,7 +62,13 @@ public class User : Printable {
         self.email = dictionary["email"] as? String
         self.sessionToken = dictionary["sessionToken"] as? String
         self.password = ""
-        self.dictionary = dictionary
+        
+        //facebook fields
+        self.firstName = dictionary["first_name"] as? String
+        self.lastName  = dictionary["last_name"] as? String
+        self.profilePicURL = dictionary["profile_pic_url"] as? String
+        
+        self.dictionary = dictionary.mutableCopy() as? NSMutableDictionary
     }
     
     public var description: String { get {return "username: \(username)";} }
