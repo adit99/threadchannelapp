@@ -9,6 +9,7 @@ target 'threadchannelapp' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
+  pod 'Toucan', '~> 0.3.2'
 end
 
 

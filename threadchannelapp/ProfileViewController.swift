@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toucan
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -31,7 +32,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         initProfileFields()
         
         
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userThreadsChanged", name: valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
     }
 
@@ -51,16 +51,25 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         self.threadCount.text = user.newThreads!.count.description
 
         //profile pic
+        //TODO: this is probably not performant
         if let profilePicUrl  = user.profilePicURL {
             let url = NSURL(string: profilePicUrl)
-            self.profileImageView.setImageWithURL(url)
+            let data = NSData(contentsOfURL: url!)
+            var profileImage = UIImage(data: data!)
+            //self.profileImageView.setImageWithURL(url)
+            let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
+
+            self.profileImageView.image  = Toucan(image: profileImage!).resize(CGSize(width: 86, height: 86), fitMode: Toucan.Resize.FitMode.Crop).image
+            
+            self.profileImageView.image = Toucan(image: self.profileImageView.image!).maskWithEllipse(borderWidth: 2, borderColor: UIColor(CIColor: color)).image
+
+            
         }
         
-        profileImageView.layer.borderWidth = 1.0
-        profileImageView.layer.masksToBounds = false
-        profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
-        profileImageView.layer.cornerRadius = profileImageView.image!.size.width/2
-        profileImageView.clipsToBounds = true
+        //TODO: Circular profile image
+        //Toucan(image: myImage).maskWithEllipse(borderWidth: 10, borderColor: UIColor.yellowColor()).image
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -126,8 +135,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     //this is bad, should only reload whats changed, also if adding a thread show it in the begining
     func reloadView() {
-        self.userName.text = User.currentUser!.username
-        self.threadCount.text = User.currentUser!.newThreads!.count.description
+//        self.userName.text = User.currentUser!.username
+//        self.threadCount.text = User.currentUser!.newThreads!.count.description
+        initProfileFields()
+        
         self.collectionView.reloadData()
     }
 

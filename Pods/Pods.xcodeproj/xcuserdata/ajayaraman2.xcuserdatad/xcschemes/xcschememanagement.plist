@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-threadchannelapp-Toucan.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-threadchannelapp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,42 +52,47 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>44AD9808FC5D7B8DC6D7B7BC</key>
+		<key>23605DEB2CC1F831492C511D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>639A73CDE2E562CB2D6E55D2</key>
+		<key>3579E17B3AD38B35C319ACE0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C5B909965025F13E8FA9D26</key>
+		<key>4751CEF2DF2910A68A7F2FD1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B1E6FA78F306E113B7112A8A</key>
+		<key>55573B5038DADFA5C6E54758</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DB66FCDE996D13413B1A51B0</key>
+		<key>671E334500FC30BFB7FF10D5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E7D03364E0B2C4089F7F8E26</key>
+		<key>78D24F85243C911F325B0000</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EEE4258D382885424D988D96</key>
+		<key>CF377F344275B4CE1218F2ED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F7671978627A38AFF1DA6218</key>
+		<key>D1F3A2E3F3E2C4F1B3AC80B4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F9EC4C1639659B38A8462E30</key>
 		<dict>
 			<key>primary</key>
 			<true/>
