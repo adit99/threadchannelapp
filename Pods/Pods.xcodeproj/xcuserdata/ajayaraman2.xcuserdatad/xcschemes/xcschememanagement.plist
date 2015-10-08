@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-threadchannelapp-Spring.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-threadchannelapp-SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,47 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>23605DEB2CC1F831492C511D</key>
+		<key>1C4F085690BFC130FA8DEE29</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3579E17B3AD38B35C319ACE0</key>
+		<key>2F38D6AF588EF7A4D01338D6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4751CEF2DF2910A68A7F2FD1</key>
+		<key>33960F42A1442466A236B1A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>55573B5038DADFA5C6E54758</key>
+		<key>3EF67F7A93B0A26227AE54A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>671E334500FC30BFB7FF10D5</key>
+		<key>54211B4C19952F51B7EE69B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>78D24F85243C911F325B0000</key>
+		<key>78C2567EC79654B97F062F3D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF377F344275B4CE1218F2ED</key>
+		<key>849C5089CC5BA09F0B2409A3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D1F3A2E3F3E2C4F1B3AC80B4</key>
+		<key>96CDF6B76973966B6A3731AA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F9EC4C1639659B38A8462E30</key>
+		<key>CA2274039CA94EB0BA0D86FE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ECF56B765B2C41D10B459651</key>
 		<dict>
 			<key>primary</key>
 			<true/>
