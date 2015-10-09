@@ -260,7 +260,6 @@
 		9D455D186322CD86B9FB1DC3 /* BFAppLinkReturnToRefererController.m in Sources */ = {isa = PBXBuildFile; fileRef = A924FEB06C48A8FE2AD4F9EE /* BFAppLinkReturnToRefererController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		9ED7F0F77B9E210D1E5C98F5 /* FBSDKShareOpenGraphValueContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 878BFAB2E0B3AB2A3C546DB5 /* FBSDKShareOpenGraphValueContainer.m */; };
 		9EDDABBF9A624DE8B3727424 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6AE51D40FFC0862480601 /* AFHTTPRequestOperation.m */; };
-		9F156E08764C610899DC1B28 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71F89D6E9F8A31A1820B5F17 /* Bolts.framework */; };
 		9FE77094BA59B53ADE99BBC0 /* FBSDKAppEventsStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0E361D0212297624AF430E /* FBSDKAppEventsStateManager.m */; };
 		A080730C60425C424E86592B /* Pods-threadchannelapp-Bolts-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F89D61E89CC56CAEFB590E1 /* Pods-threadchannelapp-Bolts-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A12119863EEBD908C034A30F /* FBSDKAudioResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F97FC2BCCCE900DA2A7D5C9 /* FBSDKAudioResourceLoader.m */; };
@@ -285,7 +284,6 @@
 		B0E05875FB0093C146C0191C /* FBSDKShareButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 60BEE1CDE8CA1ED82A23B404 /* FBSDKShareButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B4BB257CF03A251482456A6B /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008995C5C06811EEAEA88D0 /* BFCancellationTokenRegistration.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		B4C7D813322FBFD56E8C5AA7 /* FBSDKProfilePictureView.h in Headers */ = {isa = PBXBuildFile; fileRef = 947F807CEC1B7EC802EA4BE0 /* FBSDKProfilePictureView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B78AD6E879887B778C415743 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71F89D6E9F8A31A1820B5F17 /* Bolts.framework */; };
 		B78F76F7D1A84F54F2C89007 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6458777F1F3BE818F465CD9 /* Foundation.framework */; };
 		B81AA7C25147A9194C3E4240 /* FBSDKKeychainStoreViaBundleID.m in Sources */ = {isa = PBXBuildFile; fileRef = D738EA24E0F3E97D47CEAB80 /* FBSDKKeychainStoreViaBundleID.m */; };
 		B828801896FB1A44ED015991 /* FBSDKTypeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB4A91A1D8C6DBAA0B15D4 /* FBSDKTypeUtility.m */; };
@@ -1023,8 +1021,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				946CB7E03907A054C086AAA0 /* Bolts.framework in Frameworks */,
-				9F156E08764C610899DC1B28 /* Bolts.framework in Frameworks */,
-				B78AD6E879887B778C415743 /* Bolts.framework in Frameworks */,
 				22EB9838A8C6324DE184F230 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2298,7 +2294,7 @@
 		A23B0B79DB96E0515030D1CA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0630;
 			};
 			buildConfigurationList = D43DC4B51E78C8D9CF30DBD5 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";

@@ -81,6 +81,10 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
         threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Selected)
         
     }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 2
+    }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let looks = self.looks {
