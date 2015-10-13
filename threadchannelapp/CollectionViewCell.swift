@@ -17,57 +17,6 @@ class CollectionViewCell: UICollectionViewCell {
     }
 }
 
-class LookViewCell: UICollectionViewCell {
-    @IBOutlet weak var imageView: UIImageView!
-    
-    
-    func initCell(containerView: UIView, look: Look) {
-        let url = NSURL(string: look.imageURL)
-        imageView.setImageWithURL(url)
-    }
-}
-
-class LookPosterViewCell : UICollectionViewCell {
-    
-    //var label = UILabel()
-    
-    //    override func awakeFromNib() {
-    //        super.awakeFromNib()
-    //        label.setTranslatesAutoresizingMaskIntoConstraints(false)
-    //        contentView.addSubview(label)
-    //    }
-    
-    //}
-    
-    func initCell(containerView: UIView, text: String) {
-        var image = UIImageView(frame: CGRectMake(0, 0, 82, 82))
-        let url = NSURL(string: "http://static1.squarespace.com/static/53698760e4b07b6993bcd67d/t/557c7195e4b0a5d8f4b54b5e/1434218904320/Palazzo_Pants.jpg?format=1000w")
-        image.setImageWithURL(url)
-        contentView.addSubview(image)
-    }
-}
-
-class Look2ViewCell: UICollectionViewCell {
-    
-    //var label = UILabel()
-    
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        label.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        contentView.addSubview(label)
-//    }
-    
-    //}
-    
-    func initCell(containerView: UIView, text: String) {
-        var newLabel = UILabel(frame: CGRectMake(10, 20, 50.0, 20.0))
-        newLabel.text = text
-       // label.text = text
-
-        contentView.addSubview(newLabel)
-    }
-}
-
 class ThreadViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
@@ -76,3 +25,49 @@ class ThreadViewCell: UICollectionViewCell {
         imageView.setImageWithURL(url)
     }
 }
+
+class LookViewCell: UICollectionViewCell {
+    @IBOutlet weak var imageView: UIImageView!
+    
+    func initCell(containerView: UIView, look: Look) {
+        let url = NSURL(string: look.imageURL)
+        imageView.setImageWithURL(url)
+    }
+}
+
+
+class Look2ViewCell: UICollectionViewCell {
+    
+    func initCell(containerView: UIView, text: String) {
+        var newLabel = UILabel(frame: CGRectMake(10, 20, 50.0, 20.0))
+        newLabel.text = text
+        contentView.addSubview(newLabel)
+    }
+}
+
+class Look2ViewCellImage : UICollectionViewCell {
+    
+    func initCell(containerView: UIView, imageURL: String) {
+        var image = UIImageView()
+        let url = NSURL(string: imageURL)
+        image.setImageWithURL(url)
+        image.contentMode = .ScaleAspectFit
+        contentView.addSubview(image)
+        image.frame = self.frame
+    }
+}
+
+class Look2ViewCellButton : UICollectionViewCell {
+    
+    func initCell(containerView: UIView, imageSelected: String, imageNormal: String) {
+        var button = UIButton()
+        button.setImage(UIImage(named:imageNormal),forState:UIControlState.Normal)
+        button.setImage(UIImage(named:imageSelected),forState:UIControlState.Selected)
+        button.imageView?.contentMode = .ScaleAspectFit
+        contentView.addSubview(button)
+        button.frame.size.height = self.frame.size.height
+        button.frame.size.width  = self.frame.size.width
+    }
+}
+
+
