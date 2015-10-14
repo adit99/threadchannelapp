@@ -24,8 +24,6 @@ class Look2ViewController: UICollectionViewController, UICollectionViewDelegateF
         self.collectionView!.registerClass(Look2ViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.registerClass(Look2ViewCellImage.self, forCellWithReuseIdentifier: "Look2ViewCellImage")
         self.collectionView!.registerClass(Look2ViewCellButton.self, forCellWithReuseIdentifier: "Look2ViewCellButton")
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,7 +69,8 @@ class Look2ViewController: UICollectionViewController, UICollectionViewDelegateF
             return cell
         } else if (indexPath.section == 1) {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellButton", forIndexPath: indexPath) as! Look2ViewCellButton
-            cell.initCell(self.view, imageSelected: "thread_green.png", imageNormal: "thread_grey.png")
+            //cell.initCell(self, imageSelected: "thread_green.png", imageNormal: "thread_grey.png", selector: "ThreadTapped:")
+            cell.initCell(self.view, imageSelected: "thread_green.png", imageNormal: "thread_grey.png", vc: self, selector: "threadTapped:")
             return cell
         }
         
@@ -82,21 +81,28 @@ class Look2ViewController: UICollectionViewController, UICollectionViewDelegateF
         
     }
     
+    func threadTapped(sender: UIButton) {
+        sender.selected = !sender.selected
+    }
+    
     // MARK: UICollectionViewDelegate
 
-    /*
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        println(indexPath)
+        //var cell = self.collectionView?.cellForItemAtIndexPath(indexPath) as! Look2ViewCellButton
+    }
+    
+    
     // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
+//    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        return true
+//    }
+//    
+//    // Uncomment this method to specify if the specified item should be selected
+//    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        return true
+//    }
+    
 
     /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
@@ -120,7 +126,7 @@ class Look2ViewController: UICollectionViewController, UICollectionViewDelegateF
         case 0:
             return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: UIScreen.mainScreen().bounds.size.height/2)
         case 1:
-            return CGSize(width: 32, height: 32)
+            return CGSize(width: 44, height: 44)
         default:
             return CGSize(width: 84, height: 84)
         }

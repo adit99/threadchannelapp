@@ -58,12 +58,15 @@ class Look2ViewCellImage : UICollectionViewCell {
 }
 
 class Look2ViewCellButton : UICollectionViewCell {
+    var button:UIButton!
     
-    func initCell(containerView: UIView, imageSelected: String, imageNormal: String) {
-        var button = UIButton()
+    func initCell(containerView: UIView, imageSelected: String, imageNormal: String, vc: UIViewController, selector: Selector) {
+        button = UIButton()
         button.setImage(UIImage(named:imageNormal),forState:UIControlState.Normal)
         button.setImage(UIImage(named:imageSelected),forState:UIControlState.Selected)
         button.imageView?.contentMode = .ScaleAspectFit
+        button.addTarget(vc, action: selector, forControlEvents: UIControlEvents.TouchUpInside)
+
         contentView.addSubview(button)
         button.frame.size.height = self.frame.size.height
         button.frame.size.width  = self.frame.size.width
