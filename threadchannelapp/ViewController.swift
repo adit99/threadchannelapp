@@ -106,7 +106,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let storyboard = UIStoryboard(name: "Look", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("LookViewController") as! LookViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LookViewController2") as! LookViewController2
         vc.post = posts[indexPath.row]
         self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
         self.navigationController!.pushViewController(vc, animated: true)

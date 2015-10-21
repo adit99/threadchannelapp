@@ -122,7 +122,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let storyboard = UIStoryboard(name: "Look", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("LookViewController") as! LookViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LookViewController2") as! LookViewController2
          let post = User.currentUser!.newThreads![advance(User.currentUser!.newThreads!.startIndex, indexPath.row)].post
         vc.post = post
         self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
