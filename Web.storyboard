@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Web View Controller-->
+        <scene sceneID="2WU-so-dNJ">
+            <objects>
+                <viewController storyboardIdentifier="WebViewController" id="CRQ-4S-s8y" customClass="WebViewController" customModule="threadchannelapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GMy-1z-JFO"/>
+                        <viewControllerLayoutGuide type="bottom" id="1V9-q7-S6V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O2w-D1-B7Y">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cb-w7-cIO">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1V9-q7-S6V" firstAttribute="top" secondItem="4Cb-w7-cIO" secondAttribute="bottom" id="9TC-nX-16R"/>
+                            <constraint firstAttribute="trailing" secondItem="4Cb-w7-cIO" secondAttribute="trailing" id="JEA-1T-H96"/>
+                            <constraint firstItem="4Cb-w7-cIO" firstAttribute="top" secondItem="O2w-D1-B7Y" secondAttribute="top" id="efJ-iG-QGc">
+                                <variation key="widthClass=compact" constant="64"/>
+                            </constraint>
+                            <constraint firstItem="4Cb-w7-cIO" firstAttribute="leading" secondItem="O2w-D1-B7Y" secondAttribute="leading" id="grz-rZ-rOk"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="4Cb-w7-cIO"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="JEA-1T-H96"/>
+                                <exclude reference="efJ-iG-QGc"/>
+                                <exclude reference="grz-rZ-rOk"/>
+                                <exclude reference="9TC-nX-16R"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="4Cb-w7-cIO"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="JEA-1T-H96"/>
+                                <include reference="efJ-iG-QGc"/>
+                                <include reference="grz-rZ-rOk"/>
+                                <include reference="9TC-nX-16R"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="yoK-eB-AMM"/>
+                    <connections>
+                        <outlet property="webView" destination="4Cb-w7-cIO" id="eRk-5D-r3c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uAv-Kb-psZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1188" y="168"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Di1-er-gPi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RNV-x5-0LK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aOo-MI-zNi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CRQ-4S-s8y" kind="relationship" relationship="rootViewController" id="VDY-gj-OvS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Zi-wi-Raz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="270" y="168"/>
+        </scene>
+    </scenes>
+</document>

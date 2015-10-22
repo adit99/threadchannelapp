@@ -312,4 +312,21 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
     
     override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
     }
+    
+    //selection
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        if let blogURL = looks[indexPath.row].blogURL {
+         
+            let storyboard = UIStoryboard(name: "Web", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+            vc.url = looks[indexPath.row].blogURL
+            
+            self.navigationController!.pushViewController(vc, animated: true)
+        }
+        self.collectionView!.deselectItemAtIndexPath(indexPath, animated: false)
+        
+    }
+    
 }

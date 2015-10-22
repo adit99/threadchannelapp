@@ -24,6 +24,8 @@
 		BE778D471AA58DF100023077 /* threadchannelappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D461AA58DF100023077 /* threadchannelappTests.swift */; };
 		BE778D5F1AA6CD0D00023077 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D5E1AA6CD0D00023077 /* CollectionViewCell.swift */; };
 		BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE778D641AA6E1BD00023077 /* DetailsViewController.swift */; };
+		BE970EAA1BD89BF200DD77CF /* Web.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE970EA91BD89BF200DD77CF /* Web.storyboard */; };
+		BE970EAC1BD89D4600DD77CF /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE970EAB1BD89D4600DD77CF /* WebViewController.swift */; };
 		BEA313211B80FAB700840B2A /* UserThreads.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA313201B80FAB700840B2A /* UserThreads.swift */; };
 		BED285591B460556003889FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BED285581B460556003889FE /* Images.xcassets */; };
 		BED2855B1B4655AC003889FE /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED2855A1B4655AC003889FE /* Login.storyboard */; };
@@ -69,6 +71,8 @@
 		BE778D461AA58DF100023077 /* threadchannelappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = threadchannelappTests.swift; sourceTree = "<group>"; };
 		BE778D5E1AA6CD0D00023077 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		BE778D641AA6E1BD00023077 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		BE970EA91BD89BF200DD77CF /* Web.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Web.storyboard; path = ../Web.storyboard; sourceTree = "<group>"; };
+		BE970EAB1BD89D4600DD77CF /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = ../WebViewController.swift; sourceTree = "<group>"; };
 		BEA313201B80FAB700840B2A /* UserThreads.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserThreads.swift; sourceTree = "<group>"; };
 		BED285581B460556003889FE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = threadchannelapp/Images.xcassets; sourceTree = "<group>"; };
 		BED2855A1B4655AC003889FE /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 				BED2855A1B4655AC003889FE /* Login.storyboard */,
 				BE4B669A1B10CFA50026C1AC /* Profile.storyboard */,
 				BE4B66961B10CAFD0026C1AC /* app.storyboard */,
+				BE970EA91BD89BF200DD77CF /* Web.storyboard */,
 				BE778D391AA58DF100023077 /* LaunchScreen.xib */,
 				BE778D2E1AA58DF100023077 /* Supporting Files */,
 			);
@@ -210,6 +215,7 @@
 				BE4B669C1B10D4970026C1AC /* ProfileViewController.swift */,
 				BED2855C1B4885F1003889FE /* LoginViewController.swift */,
 				BED2855E1B488602003889FE /* SignUpViewController.swift */,
+				BE970EAB1BD89D4600DD77CF /* WebViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -322,6 +328,7 @@
 				BE778D3B1AA58DF100023077 /* LaunchScreen.xib in Resources */,
 				BE42B38C1ACA535D001DFFFE /* threadchannel.plist in Resources */,
 				BE4B66971B10CAFD0026C1AC /* app.storyboard in Resources */,
+				BE970EAA1BD89BF200DD77CF /* Web.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +406,7 @@
 				BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */,
 				BED285611B48886E003889FE /* User.swift in Sources */,
 				BED2855F1B488602003889FE /* SignUpViewController.swift in Sources */,
+				BE970EAC1BD89D4600DD77CF /* WebViewController.swift in Sources */,
 				BE027C001AECB0FB00BBEC26 /* Look.swift in Sources */,
 				BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */,
 				BED2855D1B4885F1003889FE /* LoginViewController.swift in Sources */,
