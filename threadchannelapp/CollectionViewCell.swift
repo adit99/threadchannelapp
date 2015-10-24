@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import iCarousel
 
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
@@ -43,8 +44,8 @@ class Look2ViewCellImage : UICollectionViewCell {
         //image = UIImageView()
         let url = NSURL(string: imageURL)
         image.setImageWithURL(url)
-        //image.contentMode = .ScaleAspectFill
-        image.contentMode = .ScaleToFill
+        image.contentMode = .ScaleAspectFit
+        //image.contentMode = .ScaleToFill
         contentView.addSubview(image)
         image.frame.size.height = self.frame.size.height
         image.frame.size.width  = self.frame.size.width
@@ -64,5 +65,42 @@ class Look2ViewCellButton : UICollectionViewCell {
         contentView.addSubview(button)
         button.frame.size.height = self.frame.size.height
         button.frame.size.width  = self.frame.size.width
+    }
+}
+
+class Look2ViewCellScroll : UICollectionViewCell {
+    var scrollView = UIScrollView()
+    
+    func initCell(containerView: UIView, looks: [Look]) {
+        
+        if looks.count > 0 {
+            let imageView = UIImageView()
+            let url = NSURL(string: looks[0].imageURL)
+            imageView.setImageWithURL(url)
+            imageView.frame.size.height = self.frame.size.height
+            imageView.frame.size.width = self.frame.size.width
+            imageView.contentMode = .ScaleAspectFit
+            scrollView.addSubview(imageView)
+            scrollView.contentSize = imageView.frame.size
+            contentView.addSubview(scrollView)
+        }
+        scrollView.frame.size.height = self.frame.size.height
+        scrollView.frame.size.width  = self.frame.size.width
+    }
+}
+
+class Look2ViewCellCarousel : UICollectionViewCell {
+    var carousel = iCarousel()
+    
+    func initCell(dataSource: iCarouselDataSource, delegate: iCarouselDelegate) {
+       
+        carousel.frame.size.width = self.frame.size.width
+        carousel.frame.size.height = self.frame.size.height
+        
+        carousel.delegate = delegate
+        carousel.dataSource = dataSource
+        carousel.type = .Rotary
+        carousel.center = contentView.center
+        contentView.addSubview(carousel)
     }
 }

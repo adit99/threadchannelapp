@@ -56,6 +56,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'FBSDKShareKit.framework'
   install_framework 'SwiftyJSON.framework'
   install_framework 'Toucan.framework'
+  install_framework 'iCarousel.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'AFNetworking.framework'
@@ -66,4 +67,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'FBSDKShareKit.framework'
   install_framework 'SwiftyJSON.framework'
   install_framework 'Toucan.framework'
+  install_framework 'iCarousel.framework'
 fi

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "69E4E3BC255CF17DED39B536"
-               BuildableName = "Alamofire.framework"
-               BlueprintName = "Pods-threadchannelapp-Alamofire"
+               BlueprintIdentifier = "299B131382847277F5ADC0B8"
+               BuildableName = "iCarousel.framework"
+               BlueprintName = "Pods-threadchannelapp-iCarousel"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

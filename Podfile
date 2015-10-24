@@ -10,6 +10,7 @@ target 'threadchannelapp' do
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
   pod 'Toucan', '~> 0.3.2'
+  pod 'iCarousel'
 end
 
 

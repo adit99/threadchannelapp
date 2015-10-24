@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import iCarousel
+
+
 
 class LookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
@@ -25,7 +28,7 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let post = self.post
         if post == nil {
             navigationItem.title = "Today | \(Date.today())"
-            API.Instance.trendingPostWithCompletion { (trending, error) -> () in
+            API.Instance.trendingPostWithCompletion2 { (trending, error) -> () in
                 if error == nil {
                     self.post = trending.post
                     println(trending)
@@ -35,6 +38,7 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     println("couldnt get trending post")
                 }
             }
+            
         } else {
             //move to app delagate?
             let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -130,7 +134,7 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
 //TODO: Need to debug bizarre bug with sections
 
 
-class LookViewController2: UICollectionViewController, UICollectionViewDelegateFlowLayout  {
+class LookViewController2: UICollectionViewController, UICollectionViewDelegateFlowLayout, iCarouselDataSource, iCarouselDelegate  {
     
     var post:Post!
     var looks:[Look]!
@@ -140,11 +144,13 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         
         self.collectionView!.registerClass(Look2ViewCellImage.self, forCellWithReuseIdentifier: "Look2ViewCellImage")
         self.collectionView!.registerClass(Look2ViewCellButton.self, forCellWithReuseIdentifier: "Look2ViewCellButton")
+        self.collectionView!.registerClass(Look2ViewCellScroll.self, forCellWithReuseIdentifier: "Look2ViewCellScroll")
+         self.collectionView!.registerClass(Look2ViewCellCarousel.self, forCellWithReuseIdentifier: "Look2ViewCellCarousel")
         
         let post = self.post
         if post == nil {
             navigationItem.title = "Today | \(Date.today())"
-            API.Instance.trendingPostWithCompletion2 { (trending, error) -> () in
+            API.Instance.trendingPostWithCompletion { (trending, error) -> () in
                 if error == nil {
                     self.post = trending
                     //println(trending)
@@ -195,11 +201,13 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         case 1:
             return 2
         default:
-            if let looks = self.looks {
-                return looks.count
-            } else {
-                return 0
-            }
+//scroll
+//            if let looks = self.looks {
+//                return looks.count
+//            } else {
+//                return 0
+//            }
+            return 1
         }
     }
     
@@ -212,7 +220,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         case 1:
             return UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
         default:
-            return UIEdgeInsets(top: 0.0, left: 2.0, bottom: 0.0, right: 2.0)
+            return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         }
     }
     
@@ -224,19 +232,23 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         case 1:
             return CGSize(width: 44, height: 44)
         default:
-            if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
-                //iphone 5s
-                return CGSize(width: 156, height: 198)
-            } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
-                //iphone 6
-                //return CGSize(width: 122, height: 166)
-                return CGSize(width: 184, height: 240)
-            } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
-                //iphone 6plus
-                return CGSize(width: 204, height: 260)
-            }
-            //default 5s
-            return CGSize(width: 156, height: 198)
+//scroll
+//            if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
+//                //iphone 5s
+//                return CGSize(width: 156, height: 198)
+//            } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
+//                //iphone 6
+//                //return CGSize(width: 122, height: 166)
+//                return CGSize(width: 184, height: 240)
+//            } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
+//                //iphone 6plus
+//                return CGSize(width: 204, height: 260)
+//            }
+//            //default 5s
+//            return CGSize(width: 156, height: 198)
+             //return CGSize(width: UIScreen.mainScreen().bounds.size.width-125.0, height: UIScreen.mainScreen().bounds.size.height-100.0)
+            return CGSize(width: 284, height: 320)
+
         }
     }
     
@@ -286,11 +298,17 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
                 return cell
             }
         }
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
-        cell.initCell(self.view, imageURL: self.looks![indexPath.row].imageURL)
-        //cell.initCell(self.view, imageURL: post.imageURL)
+        //default
+//scroll
+//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
+//        cell.initCell(self.view, imageURL: self.looks![indexPath.row].imageURL)
+//        //cell.initCell(self.view, imageURL: post.imageURL)
+//        return cell
+    
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellCarousel", forIndexPath: indexPath) as! Look2ViewCellCarousel
+        cell.initCell(self, delegate: self)
         return cell
+        
     }
     
     func threadTapped(sender: UIButton) {
@@ -312,21 +330,71 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
     
     override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
     }
+
+    //icarousel
     
-    //selection
+    func numberOfItemsInCarousel(carousel: iCarousel) -> Int {
+        return looks.count
+    }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func carousel(carousel: iCarousel, viewForItemAtIndex index: Int, reusingView view: UIView?) -> UIView {
+        var itemView: UIImageView
         
-        if let blogURL = looks[indexPath.row].blogURL {
-         
+        //create new view if no view is available for recycling
+        if (view == nil)
+        {
+            itemView = UIImageView()
+            itemView.frame = carousel.frame
+            let url = NSURL(string: looks[index].imageURL)
+            itemView.setImageWithURL(url)
+            itemView.contentMode = .ScaleAspectFit
+            carousel.addSubview(itemView)
+        }
+        else
+        {
+            itemView = view as! UIImageView;
+            let url = NSURL(string: looks[index].imageURL)
+            itemView.setImageWithURL(url)
+            itemView.contentMode = .ScaleAspectFit
+            carousel.addSubview(itemView)
+        }
+        
+        return itemView
+    }
+    
+    func carousel(carousel: iCarousel, valueForOption option: iCarouselOption, withDefault value: CGFloat) -> CGFloat
+    {
+        if (option == .Spacing) {
+            return value * 1.6
+        }
+        
+        if (option == .FadeMin) {
+            return -0.1;
+        }
+        if (option == .FadeMax) {
+            return 0.1;
+        }
+        if (option == .FadeMinAlpha) {
+            return 0.1;
+        }
+        return value
+    }
+
+    func carousel(carousel: iCarousel, didSelectItemAtIndex index: Int) {
+        
+        if let blogURL = looks[index].blogURL {
+            
             let storyboard = UIStoryboard(name: "Web", bundle: nil)
             let vc = storyboard.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
-            vc.url = looks[indexPath.row].blogURL
+            vc.url = looks[index].blogURL
             
             self.navigationController!.pushViewController(vc, animated: true)
         }
-        self.collectionView!.deselectItemAtIndexPath(indexPath, animated: false)
-        
     }
     
+    
+    
 }
+
+
+

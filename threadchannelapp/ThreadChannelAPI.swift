@@ -396,28 +396,8 @@ class API {
         }
 
     }
-
     
-    func trendingPostWithCompletion(completion: (trending: Trending, error: NSError?) -> ()) {
-        let manager = self.Manager()
-        
-        var param = [String: AnyObject]()
-        param["include"] = "post"
-        
-        manager.request(API.Router.Trending(param))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
-                    let trending = Trending(dictionary: results[0])
-                    completion(trending: trending, error: nil)
-                } else {
-                    println(error)
-                    completion(trending: nil, error: error)
-                }
-        }
-    }
-    
-    func trendingPostWithCompletion2(completion: (trending: Post, error: NSError?) -> ()) {
+    func trendingPostWithCompletion(completion: (trending: Post, error: NSError?) -> ()) {
         let manager = self.Manager()
         
         var params = [String: AnyObject]()
@@ -447,7 +427,6 @@ class API {
             .responseJSON { (request, response, JSON, error) in
                 if error == nil {
                     let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
-                    println(results)
                     let posts = Post.postsFromArray(results)
                     completion(trending: posts[0], error: nil)
                 } else {
@@ -457,8 +436,29 @@ class API {
         }
     }
     
+    //UNUSED FROM HERE
+    
+    func trendingPostWithCompletion2(completion: (trending: Trending, error: NSError?) -> ()) {
+        let manager = self.Manager()
+        
+        var param = [String: AnyObject]()
+        param["include"] = "post"
+        
+        manager.request(API.Router.Trending(param))
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    let trending = Trending(dictionary: results[0])
+                    completion(trending: trending, error: nil)
+                } else {
+                    println(error)
+                    completion(trending: nil, error: error)
+                }
+        }
+    }
+    
     //tester function
-    func tempWithCompletion(completion: (error: NSError?) -> ()) {
+    func tempWithCompletion2(completion: (error: NSError?) -> ()) {
         let manager = self.Manager()
         
         
@@ -475,7 +475,6 @@ class API {
         }
     }
     
-    //unused
     
     func userThreadsWithCompletion2(user: User, completion: (threads: [Post], error: NSError?) -> ()) {
         let manager = self.Manager()
