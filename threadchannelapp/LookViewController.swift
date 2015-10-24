@@ -144,10 +144,10 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         let post = self.post
         if post == nil {
             navigationItem.title = "Today | \(Date.today())"
-            API.Instance.trendingPostWithCompletion { (trending, error) -> () in
+            API.Instance.trendingPostWithCompletion2 { (trending, error) -> () in
                 if error == nil {
-                    self.post = trending.post
-                    println(trending)
+                    self.post = trending
+                    //println(trending)
                     self.load()
                 } else {
                     //need some error

@@ -22,6 +22,10 @@ public class Post : Printable, NilLiteralConvertible {
         if let image = dictionary["image"] as? NSDictionary {
             self.imageURL = image["url"] as! String
         }
+        if let postDate = dictionary["postDate"] as? NSDictionary {
+            let date = postDate["iso"] as! String
+        }
+            
         self.objectId = dictionary["objectId"] as? String
     }
     

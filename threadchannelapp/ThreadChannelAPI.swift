@@ -42,7 +42,7 @@ class API {
         private static let usersURL = "https://api.parse.com/1/users"
         private static let threadsURL = "/1/classes/user_threads"
         
-        case Posts()
+        case Posts([String: AnyObject])
         case Looks([String: AnyObject])
         case Login([String: AnyObject])
         case LoginWithFacebook([String: AnyObject])
@@ -55,7 +55,7 @@ class API {
     
         var path: String {
             switch self {
-                case .Posts():
+                case .Posts(_):
                     return "classes/post"
                 case .Looks(_):
                     return "classes/look"
@@ -113,8 +113,8 @@ class API {
             userMutableURLRequest.HTTPMethod = method.rawValue
             
             switch self {
-                case .Posts():
-                    return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
+                case .Posts(let params):
+                    return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
     
                 case .Looks(let params):
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
@@ -152,7 +152,19 @@ class API {
     func postsWithCompletion(completion: (posts: [Post], error: NSError?) -> ()) {
         let manager = self.Manager()
         
-        manager.request(API.Router.Posts())
+        var p1 = [String: AnyObject]()
+        var p2 = [String: AnyObject]()
+        var p3 = [String: AnyObject]()
+        var params = [String: AnyObject]()
+        
+        p3["__type"] = "Date"
+        p3["iso"] = Date.formatter(NSDate())
+        p2["$lte"] = p3
+        p1["postDate"] = p2
+        params["where"] = p1
+        params["order"] = "-postDate"
+                
+        manager.request(API.Router.Posts(params))
             .responseJSON { (request, response, JSON, error) in
                 if error == nil {
                     let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
@@ -405,11 +417,50 @@ class API {
         }
     }
     
+    func trendingPostWithCompletion2(completion: (trending: Post, error: NSError?) -> ()) {
+        let manager = self.Manager()
+        
+        var params = [String: AnyObject]()
+        var p1 = [String: AnyObject]()
+        var p2 = [String: AnyObject]()
+        var p3 = [String: AnyObject]()
+        var p4 = [String: AnyObject]()
+        var p5 = [String: AnyObject]()
+        
+        p3["__type"] = "Date"
+        p3["iso"] = Date.formatter(NSDate().dateByAddingTimeInterval(-72 * 60 * 60))
+        
+        p4["__type"] = "Date"
+        p4["iso"] = Date.formatter(NSDate())
+        
+        p2["$gte"] = p3
+        p2["$lte"] = p4
+        
+        p1["postDate"] = p2
+        
+        params["where"] = p1
+        params["order"] = "-postDate"
+    
+        println(params)
+        
+        manager.request(API.Router.Posts(params))
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    println(results)
+                    let posts = Post.postsFromArray(results)
+                    completion(trending: posts[0], error: nil)
+                } else {
+                    println(error)
+                    completion(trending: nil, error: error)
+                }
+        }
+    }
+    
     //tester function
     func tempWithCompletion(completion: (error: NSError?) -> ()) {
         let manager = self.Manager()
         
-      
         
         manager.request(API.Router.Temp())
             .responseJSON { (request, response, JSON, error) in
