@@ -8,8 +8,7 @@
 
 import UIKit
 import iCarousel
-
-
+import Toucan
 
 class LookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
@@ -146,6 +145,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         self.collectionView!.registerClass(Look2ViewCellButton.self, forCellWithReuseIdentifier: "Look2ViewCellButton")
         self.collectionView!.registerClass(Look2ViewCellScroll.self, forCellWithReuseIdentifier: "Look2ViewCellScroll")
          self.collectionView!.registerClass(Look2ViewCellCarousel.self, forCellWithReuseIdentifier: "Look2ViewCellCarousel")
+        self.collectionView!.registerClass(Look2ViewCellPage.self, forCellWithReuseIdentifier: "Look2ViewCellPage")
         
         let post = self.post
         if post == nil {
@@ -188,7 +188,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         if let looks = self.looks {
-            return 3
+            return 4
         } else {
             return 0
         }
@@ -200,6 +200,8 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             return 1
         case 1:
             return 2
+        case 3:
+            return 1
         default:
 //scroll
 //            if let looks = self.looks {
@@ -219,6 +221,8 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         case 1:
             return UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
+        case 3:
+            return UIEdgeInsets(top: 5.0, left: 0.0, bottom: 5.0, right: 0.0)
         default:
             return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         }
@@ -231,6 +235,8 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: UIScreen.mainScreen().bounds.size.height/2)
         case 1:
             return CGSize(width: 44, height: 44)
+        case 3:
+            return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: 10)
         default:
 //scroll
 //            if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
@@ -297,6 +303,10 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
                 cell.initCell(self.view, imageSelected: "share_green.png", imageNormal: "share_grey.png", vc: self, selector: "shareTapped:")
                 return cell
             }
+        } else  if (indexPath.section == 3) {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellPage", forIndexPath: indexPath) as! Look2ViewCellPage
+            cell.initCell(looks.count)
+            return cell
         }
         //default
 //scroll
@@ -343,20 +353,54 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         //create new view if no view is available for recycling
         if (view == nil)
         {
+            
             itemView = UIImageView()
             itemView.frame = carousel.frame
+            //let url = NSURL(string: looks[index].imageURL)
+            //itemView.setImageWithURL(url)
             let url = NSURL(string: looks[index].imageURL)
-            itemView.setImageWithURL(url)
+
+            if let blogURL = looks[index].blogURL {
+                
+                let data = NSData(contentsOfURL: url!)
+                var lookImage = UIImage(data: data!)
+                itemView.image = lookImage
+                let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
+                itemView.image = Toucan(image: itemView.image!).maskWithRoundedRect(cornerRadius: 8, borderWidth: 8, borderColor: UIColor(CIColor: color)).image
+                itemView.highlighted = true
+            }
+            else {
+                itemView.highlighted = false
+                itemView.setImageWithURL(url)
+
+            }
             itemView.contentMode = .ScaleAspectFit
             carousel.addSubview(itemView)
+           
+           
         }
         else
         {
             itemView = view as! UIImageView;
             let url = NSURL(string: looks[index].imageURL)
-            itemView.setImageWithURL(url)
+           
+            if let blogURL = looks[index].blogURL{
+                let data = NSData(contentsOfURL: url!)
+                var lookImage = UIImage(data: data!)
+                itemView.image = lookImage
+                let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
+                itemView.image = Toucan(image: itemView.image!).maskWithRoundedRect(cornerRadius: 8, borderWidth: 8, borderColor: UIColor(CIColor: color)).image
+                itemView.highlighted = true
+
+            }
+            else {
+                itemView.highlighted = false
+                itemView.setImageWithURL(url)
+            }
+            
             itemView.contentMode = .ScaleAspectFit
             carousel.addSubview(itemView)
+            
         }
         
         return itemView
@@ -392,6 +436,15 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         }
     }
     
+    func carouselDidScroll(carousel: iCarousel) {
+        let index = carousel.currentItemIndex
+        var pageIndexPath = NSIndexPath(forRow: 0, inSection: 3)
+        if let cell = self.collectionView?.cellForItemAtIndexPath(pageIndexPath) as? Look2ViewCellPage {
+            UIView.animateWithDuration(0.5) {
+                cell.setPage(index)
+            }
+        }
+    }
     
     
 }

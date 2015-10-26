@@ -104,3 +104,23 @@ class Look2ViewCellCarousel : UICollectionViewCell {
         contentView.addSubview(carousel)
     }
 }
+
+class Look2ViewCellPage : UICollectionViewCell {
+    var pageControl = UIPageControl()
+    
+    func initCell(numPages: Int) {
+        let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
+
+        pageControl.numberOfPages = numPages
+        pageControl.currentPage = 0
+        pageControl.currentPageIndicatorTintColor = UIColor(CIColor: color)
+        pageControl.pageIndicatorTintColor  = UIColor.grayColor()
+        pageControl.tintColor = UIColor(CIColor: color)
+        pageControl.center = contentView.center
+        contentView.addSubview(pageControl)
+    }
+    
+    func setPage(pageIndex: Int) {
+        pageControl.currentPage = pageIndex
+    }
+}

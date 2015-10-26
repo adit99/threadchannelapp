@@ -65,6 +65,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
 
             
         }
+    
         
         //TODO: Circular profile image
         //Toucan(image: myImage).maskWithEllipse(borderWidth: 10, borderColor: UIColor.yellowColor()).image
