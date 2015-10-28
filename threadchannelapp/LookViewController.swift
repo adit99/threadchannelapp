@@ -137,6 +137,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
     
     var post:Post!
     var looks:[Look]!
+    var retail:[Retail]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,15 +181,25 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
                 if self.looks.count > 0 {
                     let url = NSURL(string: looks[0].imageURL)
                     self.collectionView?.reloadData()
+
+                    API.Instance.retailWithCompletion(self.post.objectId) { (retail, error) -> () in
+                        if error == nil {
+                            self.retail = retail
+                            let indexSet = NSMutableIndexSet()
+                            indexSet.addIndex(4)
+                            self.collectionView?.reloadSections(indexSet)
+                        }
+                       
+                    }
                 }
+                
             }
         }
-        
     }
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         if let looks = self.looks {
-            return 4
+            return 5
         } else {
             return 0
         }
@@ -202,6 +213,12 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             return 2
         case 3:
             return 1
+        case 4:
+            if let retail = self.retail {
+                return 3
+            } else {
+                return 0
+            }
         default:
 //scroll
 //            if let looks = self.looks {
@@ -237,6 +254,8 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             return CGSize(width: 44, height: 44)
         case 3:
             return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: 10)
+        case 4:
+            return CGSize(width: UIScreen.mainScreen().bounds.size.width/3, height: 10)
         default:
 //scroll
 //            if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
@@ -307,6 +326,10 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellPage", forIndexPath: indexPath) as! Look2ViewCellPage
             cell.initCell(looks.count)
             return cell
+        } else if (indexPath.section == 4) {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
+            cell.initCell(self.view, imageURL: post.imageURL)
+            return cell
         }
         //default
 //scroll
@@ -376,8 +399,6 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             }
             itemView.contentMode = .ScaleAspectFit
             carousel.addSubview(itemView)
-           
-           
         }
         else
         {

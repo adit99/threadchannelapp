@@ -51,6 +51,7 @@ class API {
         case UserThreads([String: AnyObject])
         case Batch([String: AnyObject])
         case Trending([String: AnyObject])
+        case Retail([String: AnyObject])
         case Temp()
     
         var path: String {
@@ -73,6 +74,8 @@ class API {
                     return "batch"
                 case .Trending(_):
                     return "classes/trending"
+                case .Retail(_):
+                    return "classes/retail"
                 case .Temp():
                     return "user_threads"
             }
@@ -97,6 +100,8 @@ class API {
                 case .Batch:
                     return .POST
                 case .Trending:
+                    return .GET
+                case .Retail:
                     return .GET
                 case .Temp():
                     return .GET
@@ -138,6 +143,9 @@ class API {
                     return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
                 
                 case .Trending(let params):
+                    return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+                
+                case .Retail(let params):
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
                 
                 case .Temp():
@@ -432,6 +440,37 @@ class API {
                 } else {
                     println(error)
                     completion(trending: nil, error: error)
+                }
+        }
+    }
+    
+    func retailWithCompletion(postObjectId: String, completion: (retail: [Retail], error: NSError?) -> ()) {
+        let manager = self.Manager()
+        
+        var p1 = [String: AnyObject]()
+        p1["__type"] = "Pointer"
+        p1["className"] = "post"
+        p1["objectId"] = postObjectId
+        
+        var p2 = [String: AnyObject]()
+        p2["post"] = p1
+        
+        var p3 = [String: AnyObject]()
+        p3["where"] = p2
+        
+        manager.request(API.Router.Retail(p3))
+            .responseJSON { (request, response, JSON, error) in
+                if error == nil {
+                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+                    if results.count > 0 {
+                        let retail = Retail.retailFromDictionary(results[0])
+                        completion(retail: retail, error: nil)
+                    } else {
+                        completion(retail: [Retail](), error: NSError(domain: "No Retail", code: -1, userInfo: nil))
+                    }
+                } else {
+                    println(error)
+                    completion(retail: [Retail](), error: error)
                 }
         }
     }

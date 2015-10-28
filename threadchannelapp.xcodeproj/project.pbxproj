@@ -27,6 +27,7 @@
 		BE970EAA1BD89BF200DD77CF /* Web.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE970EA91BD89BF200DD77CF /* Web.storyboard */; };
 		BE970EAC1BD89D4600DD77CF /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE970EAB1BD89D4600DD77CF /* WebViewController.swift */; };
 		BEA313211B80FAB700840B2A /* UserThreads.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA313201B80FAB700840B2A /* UserThreads.swift */; };
+		BECCB52A1BE07B010094EB64 /* Retail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECCB5291BE07B010094EB64 /* Retail.swift */; };
 		BED285591B460556003889FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BED285581B460556003889FE /* Images.xcassets */; };
 		BED2855B1B4655AC003889FE /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED2855A1B4655AC003889FE /* Login.storyboard */; };
 		BED2855D1B4885F1003889FE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED2855C1B4885F1003889FE /* LoginViewController.swift */; };
@@ -74,6 +75,7 @@
 		BE970EA91BD89BF200DD77CF /* Web.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Web.storyboard; path = ../Web.storyboard; sourceTree = "<group>"; };
 		BE970EAB1BD89D4600DD77CF /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = ../WebViewController.swift; sourceTree = "<group>"; };
 		BEA313201B80FAB700840B2A /* UserThreads.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserThreads.swift; sourceTree = "<group>"; };
+		BECCB5291BE07B010094EB64 /* Retail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retail.swift; sourceTree = "<group>"; };
 		BED285581B460556003889FE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = threadchannelapp/Images.xcassets; sourceTree = "<group>"; };
 		BED2855A1B4655AC003889FE /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		BED2855C1B4885F1003889FE /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				BE027BFF1AECB0FB00BBEC26 /* Look.swift */,
 				BED285601B48886E003889FE /* User.swift */,
 				BEA313201B80FAB700840B2A /* UserThreads.swift */,
+				BECCB5291BE07B010094EB64 /* Retail.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				BEF5D8CE1B86DB0F006F6770 /* Trending.swift in Sources */,
 				BE778D5F1AA6CD0D00023077 /* CollectionViewCell.swift in Sources */,
 				BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */,
+				BECCB52A1BE07B010094EB64 /* Retail.swift in Sources */,
 				BEA313211B80FAB700840B2A /* UserThreads.swift in Sources */,
 				BE4B669D1B10D4970026C1AC /* ProfileViewController.swift in Sources */,
 				BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */,
