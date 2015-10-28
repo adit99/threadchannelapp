@@ -183,7 +183,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
                     self.collectionView?.reloadData()
 
                     API.Instance.retailWithCompletion(self.post.objectId) { (retail, error) -> () in
-                        if error == nil {
+                        if error == nil && retail.count > 0 {
                             self.retail = retail
                             let indexSet = NSMutableIndexSet()
                             indexSet.addIndex(4)
@@ -240,6 +240,8 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             return UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
         case 3:
             return UIEdgeInsets(top: 5.0, left: 0.0, bottom: 5.0, right: 0.0)
+        case 4:
+            return UIEdgeInsets(top: 5.0, left: 0.0, bottom: 5.0, right: 0.0)
         default:
             return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         }
@@ -255,7 +257,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         case 3:
             return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: 10)
         case 4:
-            return CGSize(width: UIScreen.mainScreen().bounds.size.width/3, height: 10)
+            return CGSize(width: UIScreen.mainScreen().bounds.size.width/3, height: 20)
         default:
 //scroll
 //            if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
@@ -328,7 +330,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             return cell
         } else if (indexPath.section == 4) {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
-            cell.initCell(self.view, imageURL: post.imageURL)
+            cell.initCell(self.view, imageURL: self.retail[indexPath.row].logoURL)
             return cell
         }
         //default
@@ -457,6 +459,23 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         }
     }
     
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        if indexPath.section == 4 {
+            
+            if let retail = self.retail {
+                let storyboard = UIStoryboard(name: "Web", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+                vc.url = retail[indexPath.row].linkURL
+                self.navigationController!.pushViewController(vc, animated: true)
+            }
+
+            
+        }
+   
+        
+    }
+    
     func carouselDidScroll(carousel: iCarousel) {
         let index = carousel.currentItemIndex
         var pageIndexPath = NSIndexPath(forRow: 0, inSection: 3)
@@ -466,6 +485,8 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             }
         }
     }
+    
+    
     
     
 }

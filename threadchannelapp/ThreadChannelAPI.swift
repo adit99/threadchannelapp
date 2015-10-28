@@ -464,10 +464,14 @@ class API {
                     let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
                     if results.count > 0 {
                         let retail = Retail.retailFromDictionary(results[0])
-                        completion(retail: retail, error: nil)
+                        if retail.count > 0 {
+                            completion(retail: retail, error: nil)
+                        } else {
+                            completion(retail: [Retail](), error: NSError(domain: "No Retail", code: -1, userInfo: nil))
+                        }
                     } else {
-                        completion(retail: [Retail](), error: NSError(domain: "No Retail", code: -1, userInfo: nil))
-                    }
+                           completion(retail: [Retail](), error: NSError(domain: "No Results", code: -1, userInfo: nil))
+                        }
                 } else {
                     println(error)
                     completion(retail: [Retail](), error: error)
