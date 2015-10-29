@@ -359,6 +359,24 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
     }
     
     func shareTapped(sender: UIButton) {
+     
+        let textToShare = "Check out the \(self.post.name) look @threadchannel"
+        
+        let url = NSURL(string: self.post.imageURL)
+        let data = NSData(contentsOfURL: url!)
+        if let  shareImage = UIImage(data: data!)
+        //if let myWebsite = NSURL(string: "http://www.google.com/")
+        {
+            let objectsToShare = [textToShare, shareImage]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            
+            //New Excluded Activities Code
+            activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeCopyToPasteboard]
+            //
+            
+            self.presentViewController(activityVC, animated: true, completion: nil)
+        }
+        
         sender.selected = !sender.selected
     }
     
