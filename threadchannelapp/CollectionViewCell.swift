@@ -8,6 +8,7 @@
 
 import UIKit
 import iCarousel
+import Toucan
 
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
@@ -41,11 +42,9 @@ class Look2ViewCellImage : UICollectionViewCell {
     var image = UIImageView()
     
     func initCell(containerView: UIView, imageURL: String) {
-        //image = UIImageView()
         let url = NSURL(string: imageURL)
         image.setImageWithURL(url)
         image.contentMode = .ScaleAspectFit
-        //image.contentMode = .ScaleToFill
         contentView.addSubview(image)
         image.frame.size.height = self.frame.size.height
         image.frame.size.width  = self.frame.size.width
@@ -124,3 +123,31 @@ class Look2ViewCellPage : UICollectionViewCell {
         pageControl.currentPage = pageIndex
     }
 }
+
+//Profile View
+
+class ProfileViewCell : UICollectionViewCell {
+    var image = UIImageView()
+    
+    func initCell(containerView: UIView, profilePicURL: String?) {
+
+        if let profileURL = profilePicURL {
+        
+            let url = NSURL(string: profileURL)
+            let data = NSData(contentsOfURL: url!)
+            var profileImage = UIImage(data: data!)
+            let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
+        
+            self.image.image  = Toucan(image: profileImage!).resize(CGSize(width: 86, height: 86), fitMode: Toucan.Resize.FitMode.Crop).image
+        
+            self.image.image = Toucan(image: self.image.image!).maskWithEllipse(borderWidth: 2, borderColor: UIColor(CIColor: color)).image
+
+            image.contentMode = .ScaleAspectFit
+            contentView.addSubview(image)
+            image.frame.size.height = self.frame.size.height
+            image.frame.size.width  = self.frame.size.width
+        }
+        
+    }
+}
+

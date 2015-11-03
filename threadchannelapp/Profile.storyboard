@@ -341,6 +341,42 @@
             </objects>
             <point key="canvasLocation" x="1338" y="209"/>
         </scene>
+        <!--Profile View Controller2-->
+        <scene sceneID="hfB-FK-tUg">
+            <objects>
+                <collectionViewController id="Z3N-Wd-zet" customClass="ProfileViewController2" customModule="threadchannelapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LN8-Rs-Wjn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HDF-FV-1bF">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ead-Qf-oRb">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Z3N-Wd-zet" id="evU-7o-Tax"/>
+                            <outlet property="delegate" destination="Z3N-Wd-zet" id="Hbl-1p-76v"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="CTX-hk-gFZ"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5e-ka-hK9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1338" y="879"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="t20-0M-p3O">
             <objects>
@@ -352,7 +388,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="HXy-tL-ggf" kind="relationship" relationship="rootViewController" id="s9d-hW-KMO"/>
+                        <segue destination="Z3N-Wd-zet" kind="relationship" relationship="rootViewController" id="y7R-zb-gBd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jhq-dk-7aR" userLabel="First Responder" sceneMemberID="firstResponder"/>

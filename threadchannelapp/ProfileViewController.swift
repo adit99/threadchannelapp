@@ -62,8 +62,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
             self.profileImageView.image  = Toucan(image: profileImage!).resize(CGSize(width: 86, height: 86), fitMode: Toucan.Resize.FitMode.Crop).image
             
             self.profileImageView.image = Toucan(image: self.profileImageView.image!).maskWithEllipse(borderWidth: 2, borderColor: UIColor(CIColor: color)).image
-
-            
         }
     
         
@@ -142,6 +140,92 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         self.collectionView.reloadData()
     }
-
-
 }
+
+
+//Profile2
+
+class ProfileViewController2: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+
+     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.collectionView!.registerClass(Look2ViewCellImage.self, forCellWithReuseIdentifier: "Look2ViewCellImage")
+        self.collectionView!.registerClass(ProfileViewCell.self, forCellWithReuseIdentifier: "ProfileViewCell")
+
+        
+        //move to app delagate?
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "logo")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userThreadsChanged", name: valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
+        
+    }
+    
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let threads = User.currentUser!.newThreads {
+            return (threads.count + 4)
+        } else {
+            return 0
+        }
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        println(indexPath.row)
+        let user = User.currentUser!
+        
+        switch (indexPath.row) {
+            case 0:
+                let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProfileViewCell", forIndexPath: indexPath) as! ProfileViewCell
+                cell.initCell(self.view, profilePicURL: user.profilePicURL)
+                return cell
+//            case 1:
+//            case 2:
+//            case 3:
+            default:
+                let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
+                if (indexPath.row < User.currentUser!.newThreads?.count) {
+
+                    let post = User.currentUser!.newThreads![advance(User.currentUser!.newThreads!.startIndex, indexPath.row)].post
+                    cell.initCell(self.view, imageURL: post.imageURL)
+                }
+                return cell
+        }
+    }
+    
+    func userThreadsChanged() {
+        self.reloadView()
+    }
+    
+    //this is bad, should only reload whats changed, also if adding a thread show it in the begining
+    func reloadView() {
+        self.collectionView?.reloadData()
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        switch (indexPath.row) {
+            case 0:
+                return CGSize(width: 84, height: 84)
+            default:
+                return CGSize(width: 44, height: 44)
+        }
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        switch (section) {
+            default:
+                return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        }
+    }
+    
+}
+
