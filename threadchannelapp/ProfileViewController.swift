@@ -167,29 +167,31 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     }
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let threads = User.currentUser!.newThreads {
-            return (threads.count + 4)
+            return 2
         } else {
             return 0
         }
     }
     
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch (section) {
+            case 0:
+                return 2
+            default:
+                return User.currentUser!.newThreads!.count
+        }
+    }
+    
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        println(indexPath.row)
+        println(indexPath.section)
         let user = User.currentUser!
         
-        switch (indexPath.row) {
+        switch (indexPath.section) {
             case 0:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProfileViewCell", forIndexPath: indexPath) as! ProfileViewCell
                 cell.initCell(self.view, profilePicURL: user.profilePicURL)
                 return cell
-//            case 1:
-//            case 2:
-//            case 3:
             default:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
                 if (indexPath.row < User.currentUser!.newThreads?.count) {
@@ -211,17 +213,19 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        switch (indexPath.row) {
+        switch (indexPath.section) {
             case 0:
-                return CGSize(width: 84, height: 84)
+                return CGSize(width: UIScreen.mainScreen().bounds.size.width/2 - 20.0, height: UIScreen.mainScreen().bounds.size.height/6)
             default:
-                return CGSize(width: 44, height: 44)
+                return CGSize(width: 118, height: 118)
         }
         
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         switch (section) {
+            case 0:
+                return UIEdgeInsets(top: 20.0, left: 10.0, bottom: 20.0, right: 10.0)
             default:
                 return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         }
