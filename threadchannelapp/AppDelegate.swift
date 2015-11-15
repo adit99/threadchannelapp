@@ -24,6 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(CIColor: CIColor(red: 169/255, green: 202/255, blue: 62/255))]
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
+        
+        if User.currentUser != nil {
+            let appStoryboard = UIStoryboard(name: "app", bundle: nil)
+            let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
+            window?.rootViewController = vc
+        }
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

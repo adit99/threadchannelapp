@@ -24,14 +24,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         facebookLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
         facebookLoginButton.delegate = self
-        
-        //hack, this need to move to app delegate
-        if User.currentUser != nil {
-            
-            let appStoryboard = UIStoryboard(name: "app", bundle: nil)
-            let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
-            self.presentViewController(vc, animated: true, completion: nil)
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +51,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 let appStoryboard = UIStoryboard(name: "app", bundle: nil)
                 let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
-                self.presentViewController(vc, animated: true, completion: nil)
+                self.parentViewController!.presentViewController(vc, animated: true, completion: nil)
                 
             } else {
                 let alert = UIAlertView()
