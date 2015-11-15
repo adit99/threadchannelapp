@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class Trending : Printable, NilLiteralConvertible {
+public class Trending : CustomStringConvertible, NilLiteralConvertible {
     private(set) var post: Post!
     private(set) var date: NSDate!
     

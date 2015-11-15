@@ -14,15 +14,15 @@ class Date {
     class func today() -> NSString {
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+        let components = calendar.components([.Year, .Month, .Day], fromDate: date)
         let month = components.month
         let day = components.day
-        
+                
         return "\(months[month-1]) \(day)"
     }
 
     class func formatter(date: NSDate) -> NSString {
-        var formatter: NSDateFormatter = NSDateFormatter()
+        let formatter: NSDateFormatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         let stringDate: String = formatter.stringFromDate(date)
         return stringDate

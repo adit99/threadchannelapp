@@ -34,7 +34,7 @@ class SignUpViewController: UIViewController {
         
         //alert.message = "username:\(self.username.text) email:\(self.email.text) password:\(self.password.text)"
 
-        var user = User(username: self.username.text, email: self.email.text, password: self.password.text)
+        let user = User(username: self.username.text!, email: self.email.text!, password: self.password.text!)
         
         activity.hidden = false
         activity.hidesWhenStopped = true
@@ -46,7 +46,7 @@ class SignUpViewController: UIViewController {
             self.view.alpha = 1
             if error == nil {
                 User.currentUser = user
-                var appStoryboard = UIStoryboard(name: "app", bundle: nil)
+                let appStoryboard = UIStoryboard(name: "app", bundle: nil)
                 let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
                 self.presentViewController(vc, animated: true, completion: nil)
                 

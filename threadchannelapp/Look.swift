@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class Look : Printable {
+public class Look : CustomStringConvertible {
     private(set) var blogURL : String!
     private(set) var imageURL : String!
     private(set) var name : String!

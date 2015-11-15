@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import FBSDKCoreKit
 
-func valueForAPIKey(#keyname:String) -> String {
+func valueForAPIKey(keyname keyname:String) -> String {
     let filePath = NSBundle.mainBundle().pathForResource("threadchannel", ofType:"plist")
     let plist = NSDictionary(contentsOfFile:filePath!)
     let value:String = plist?.objectForKey(keyname) as! String
@@ -18,6 +18,16 @@ func valueForAPIKey(#keyname:String) -> String {
 }
 
 class API {
+    var manager : Alamofire.Manager?
+    
+    init() {
+        var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
+        defaultHeaders["X-Parse-Application-Id"] = valueForAPIKey(keyname: "ParseAppID")
+        defaultHeaders["X-Parse-REST-API-Key"] = valueForAPIKey(keyname: "ParseAPIKey")
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.HTTPAdditionalHeaders = defaultHeaders
+        self.manager = Alamofire.Manager(configuration: configuration)
+    }
     
     class var Instance : API {
         struct Static {
@@ -26,16 +36,15 @@ class API {
         return Static.instance
     }
   
-    private func Manager() -> Alamofire.Manager {
+    
+    /*private func Manager() -> Alamofire.Manager {
         var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
         defaultHeaders["X-Parse-Application-Id"] = valueForAPIKey(keyname: "ParseAppID")
         defaultHeaders["X-Parse-REST-API-Key"] = valueForAPIKey(keyname: "ParseAPIKey")
-        
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = defaultHeaders
-        
         return Alamofire.Manager(configuration: configuration)
-    }
+    }*/
   
     enum Router: URLRequestConvertible {
         private static let baseURL = valueForAPIKey(keyname: "baseURL")
@@ -108,7 +117,7 @@ class API {
             }
         }
     
-        var URLRequest: NSURLRequest {
+        var URLRequest: NSMutableURLRequest {
             let URL = NSURL(string: Router.baseURL)!
             let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
             mutableURLRequest.HTTPMethod = method.rawValue
@@ -158,7 +167,7 @@ class API {
     }
     
     func postsWithCompletion(completion: (posts: [Post], error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
         
         var p1 = [String: AnyObject]()
         var p2 = [String: AnyObject]()
@@ -171,22 +180,22 @@ class API {
         p1["postDate"] = p2
         params["where"] = p1
         params["order"] = "-postDate"
-                
+        
         manager.request(API.Router.Posts(params))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
                     let posts = Post.postsFromArray(results)
                     completion(posts: posts, error: nil)
                 } else {
-                    println(error)
-                    completion(posts: [Post](), error: error)
+                    print(response.result.error)
+                    completion(posts: [Post](), error: response.result.error)
                 }
         }
     }
     
     func looksWithCompletion(postObjectId: String, completion: (looks: [Look], error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
         
         var p1 = [String: AnyObject]()
         p1["__type"] = "Pointer"
@@ -201,21 +210,21 @@ class API {
         p3["include"] = "post"
 
         manager.request(API.Router.Looks(p3))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
-                    //println(results)
+            //.responseJSON { (request, response, JSON, error) in
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
                     let looks = Look.looksFromArray(results)
                     completion(looks: looks, error: nil)
                 } else {
-                    println(error)
-                    completion(looks: [Look](), error: error)
+                    print(response.result.error)
+                    completion(looks: [Look](), error: response.result.error)
                 }
         }
     }
     
     func signUpWithCompletion(user: User, completion: (user: User, error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
 
         var params = [String: AnyObject]()
         params["username"] = user.username
@@ -223,90 +232,91 @@ class API {
         params["email"] = user.email
         
         manager.request(API.Router.Signup(params))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = JSON  as! NSDictionary
-                    println(results)
+            //.responseJSON { (request, response, JSON, error) in
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = response.result.value as! NSDictionary
+                    //print(results)
                     if let session = (results["sessionToken"] as? String) {
                         params["sessionToken"] = results["sessionToken"] as! String
                         params["objectId"] = results["objectId"] as! String
                         params["createdAt"] = results["createdAt"] as! String
                         completion(user: User(dictionary: params), error: nil)
                     } else {
-                        var error = NSError(domain:
+                        let error = NSError(domain:
                             results["error"] as! String, code: results["code"] as! Int, userInfo: nil)
                         completion(user: user, error: error)
                     }
                 } else {
-                    println(error)
+                    print(response.result.error)
                 }
         }
     }
     
     func loginWithCompletion(user: User, completion: (user: User, error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
         
         var params = [String: AnyObject]()
         params["username"] = user.username
         params["password"] = user.password
         
         manager.request(API.Router.Login(params))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = JSON  as! NSDictionary
+            //.responseJSON { (request, response, JSON, error) in
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = response.result.value  as! NSDictionary
                     //println(results)
                     if let session = (results["sessionToken"] as? String) {
-                        var user = User(dictionary: results)
+                        let user = User(dictionary: results)
                         completion(user: user, error: nil)
                     } else {
-                        var error = NSError(domain:
+                        let error = NSError(domain:
                             results["error"] as! String, code: results["code"] as! Int, userInfo: nil)
                         completion(user: user, error: error)
                     }
                 } else {
-                    println(error)
-                    completion(user: user, error: error)
+                    print(response.result.error)
+                    completion(user: user, error: response.result.error)
                 }
         }
     }
     
     func loginWithFacebookWithCompletion(fbAccessToken: FBSDKAccessToken, completion: (user: User?, error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
+        //let manager = Alamofire.Manager.sharedInstance
         
         var params = [String: AnyObject]()
         var authdata = [String: AnyObject]()
         var facebook = [String: AnyObject]()
         facebook["id"] = fbAccessToken.userID
         facebook["access_token"] = fbAccessToken.tokenString
-        var date = Date.formatter(fbAccessToken.expirationDate)
+        let date = Date.formatter(fbAccessToken.expirationDate)
         facebook["expiration_date"] = date
-        
         authdata["facebook"] = facebook
         params["authData"] = authdata
         
         manager.request(API.Router.LoginWithFacebook(params))
-            .responseJSON { (request, response, JSON, error) in
-   
-                if error == nil {
-                    let results = JSON  as! NSDictionary
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = response.result.value  as! NSDictionary
                     if let session = (results["sessionToken"] as? String) {
-                        var user = User(dictionary: results)
+                        let user = User(dictionary: results)
                         completion(user: user, error: nil)
                     } else {
-                        var error = NSError(domain:
+                        let error = NSError(domain:
                             results["error"] as! String, code: results["code"] as! Int, userInfo: nil)
                         completion(user: nil, error: error)
                     }
                 } else {
-                    println(error)
-                    completion(user: nil, error: error)
+                    print(response.result.error)
+                    completion(user: nil, error: response.result.error)
                 }
         }
     }
     
     
     func userThreadsWithCompletion(user: User, completion: (threads: UserThreads, error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
         
         var p1 = [String: AnyObject]()
         p1["__type"] = "Pointer"
@@ -323,22 +333,22 @@ class API {
         p3["limit"] = 100
         
         manager.request(API.Router.UserThreads(p3))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
                     //println(results)
                     let threads = UserThread.threadsFromArray(results)
                     completion(threads: threads, error: nil)
                 } else {
-                    println(error)
-                    completion(threads: UserThreads(), error: error)
+                    print(response.result.error)
+                    completion(threads: UserThreads(), error: response.result.error)
                 }
         }
     }
 
     func synchronizeUser(data: User.SyncData) {
 
-        let manager = self.Manager()
+        let manager = self.manager!
     
         var d = [String: AnyObject]()
         var requests = [NSDictionary]()
@@ -363,7 +373,6 @@ class API {
             user["objectId"] = data.user.objectId
             
             body["user"] = user
-            
             at["body"] = body
             
             requests.append(at)
@@ -376,37 +385,35 @@ class API {
             rt["path"] = path
             requests.append(rt)
         }
-        
         d["requests"] = requests
 
         manager.request(API.Router.Batch(d))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = (JSON) as! [NSDictionary]
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = response.result.value as! [NSDictionary]
                     for result in results {
                         //println(result)
                         if let success = result["success"] as? NSDictionary {
-                            println(success)
+                            print(success)
                         } else if let err = result["error"] as? NSDictionary {
-                            println(err)
+                            print(err)
                         }
                     }
                     API.Instance.userThreadsWithCompletion(User.currentUser!) { (threads, error) -> () in
                         if error == nil {
-                            println("updating threads")
+                            print("updating threads")
                             User.currentUser!.threads = threads
                             User.currentUser!.newThreads = threads
                         }
                     }
                 } else {
-                    println(error)
+                    print(response.result.error)
                 }
         }
-
     }
     
     func trendingPostWithCompletion(completion: (trending: Post, error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
         
         var params = [String: AnyObject]()
         var p1 = [String: AnyObject]()
@@ -425,27 +432,26 @@ class API {
         p2["$lte"] = p4
         
         p1["postDate"] = p2
-        
         params["where"] = p1
         params["order"] = "-postDate"
     
-        println(params)
+        print(params)
         
         manager.request(API.Router.Posts(params))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
                     let posts = Post.postsFromArray(results)
                     completion(trending: posts[0], error: nil)
                 } else {
-                    println(error)
-                    completion(trending: nil, error: error)
+                    print(response.result.error)
+                    completion(trending: nil, error: response.result.error)
                 }
         }
     }
     
     func retailWithCompletion(postObjectId: String, completion: (retail: [Retail], error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
         
         var p1 = [String: AnyObject]()
         p1["__type"] = "Pointer"
@@ -459,9 +465,9 @@ class API {
         p3["where"] = p2
         
         manager.request(API.Router.Retail(p3))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
                     if results.count > 0 {
                         let retail = Retail.retailFromDictionary(results[0])
                         if retail.count > 0 {
@@ -473,8 +479,8 @@ class API {
                            completion(retail: [Retail](), error: NSError(domain: "No Results", code: -1, userInfo: nil))
                         }
                 } else {
-                    println(error)
-                    completion(retail: [Retail](), error: error)
+                    print(response.result.error)
+                    completion(retail: [Retail](), error: response.result.error)
                 }
         }
     }
@@ -482,45 +488,46 @@ class API {
     //UNUSED FROM HERE
     
     func trendingPostWithCompletion2(completion: (trending: Trending, error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
         
         var param = [String: AnyObject]()
         param["include"] = "post"
         
         manager.request(API.Router.Trending(param))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
                     let trending = Trending(dictionary: results[0])
                     completion(trending: trending, error: nil)
                 } else {
-                    println(error)
-                    completion(trending: nil, error: error)
+                    print(response.result.error)
+                    completion(trending: nil, error: response.result.error)
                 }
         }
     }
     
     //tester function
     func tempWithCompletion2(completion: (error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
         
         
         manager.request(API.Router.Temp())
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
-                    println(results)
+            //.responseJSON { (request, response, JSON, error) in
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
+                    print(results)
                     completion(error: nil)
                 } else {
-                    println(error)
-                    completion(error: error)
+                    print(response.result.error)
+                    completion(error: response.result.error)
                 }
         }
     }
     
     
     func userThreadsWithCompletion2(user: User, completion: (threads: [Post], error: NSError?) -> ()) {
-        let manager = self.Manager()
+        let manager = self.manager!
         
         var p1 = [String: AnyObject]()
         p1["objectId"] = user.objectId
@@ -530,16 +537,17 @@ class API {
         p3["include"] = "post"
         
         manager.request(API.Router.UserThreads(p3))
-            .responseJSON { (request, response, JSON, error) in
-                if error == nil {
-                    let results = (JSON as! NSDictionary)["results"] as! [NSDictionary]
+            //.responseJSON { (request, response, JSON, error) in
+            .responseJSON { response in
+                if response.result.error == nil {
+                    let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
                     //println(results)
                     let tdict = (results[0] as NSDictionary)["threads"] as! [NSDictionary]
                     let threads = Post.postsFromArray(tdict)
                     completion(threads: threads, error: nil)
                 } else {
-                    println(error)
-                    completion(threads: [Post](), error: error)
+                    print(response.result.error)
+                    completion(threads: [Post](), error: response.result.error)
                 }
         }
     }
@@ -570,10 +578,10 @@ class API {
         
         manager.request(request)
         //manager.request(.GET, url, parameters: parameters)
-            .responseJSON { (request, response, JSON, error) in
-                println(request)
-                println(error)
-                println(JSON)
+            .responseJSON { response in
+                print(request)
+                print(response.result.error)
+                print(response.result.value)
         }
     }
 }

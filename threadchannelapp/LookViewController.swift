@@ -30,11 +30,11 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
             API.Instance.trendingPostWithCompletion2 { (trending, error) -> () in
                 if error == nil {
                     self.post = trending.post
-                    println(trending)
+                    print(trending)
                     self.load()
                 } else {
                     //need some error
-                    println("couldnt get trending post")
+                    print("couldnt get trending post")
                 }
             }
             
@@ -158,7 +158,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
                     self.load()
                 } else {
                     //need some error
-                    println("couldnt get trending post")
+                    print("couldnt get trending post")
                 }
             }
         } else {
@@ -405,7 +405,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             if let blogURL = looks[index].blogURL {
                 
                 let data = NSData(contentsOfURL: url!)
-                var lookImage = UIImage(data: data!)
+                let lookImage = UIImage(data: data!)
                 itemView.image = lookImage
                 let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
                 itemView.image = Toucan(image: itemView.image!).maskWithRoundedRect(cornerRadius: 8, borderWidth: 8, borderColor: UIColor(CIColor: color)).image
@@ -426,7 +426,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
            
             if let blogURL = looks[index].blogURL{
                 let data = NSData(contentsOfURL: url!)
-                var lookImage = UIImage(data: data!)
+                let lookImage = UIImage(data: data!)
                 itemView.image = lookImage
                 let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
                 itemView.image = Toucan(image: itemView.image!).maskWithRoundedRect(cornerRadius: 8, borderWidth: 8, borderColor: UIColor(CIColor: color)).image
@@ -495,7 +495,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
     
     func carouselDidScroll(carousel: iCarousel) {
         let index = carousel.currentItemIndex
-        var pageIndexPath = NSIndexPath(forRow: 0, inSection: 3)
+        let pageIndexPath = NSIndexPath(forRow: 0, inSection: 3)
         if let cell = self.collectionView?.cellForItemAtIndexPath(pageIndexPath) as? Look2ViewCellPage {
             UIView.animateWithDuration(0.5) {
                 cell.setPage(index)

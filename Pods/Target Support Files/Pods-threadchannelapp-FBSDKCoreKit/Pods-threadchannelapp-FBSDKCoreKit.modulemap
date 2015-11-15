@@ -1,6 +1,0 @@
-framework module FBSDKCoreKit {
-  umbrella header "Pods-threadchannelapp-FBSDKCoreKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

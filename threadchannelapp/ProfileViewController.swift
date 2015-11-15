@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         //username or first name last name
         if let firstName = user.firstName {
             let lastName = user.lastName!
-            self.userName.text = firstName + " " + [lastName[lastName.startIndex]]
+            self.userName.text = firstName + " " + String([lastName[lastName.startIndex]])
         } else {
             self.userName.text = user.username
         }
@@ -55,7 +55,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         if let profilePicUrl  = user.profilePicURL {
             let url = NSURL(string: profilePicUrl)
             let data = NSData(contentsOfURL: url!)
-            var profileImage = UIImage(data: data!)
+            let profileImage = UIImage(data: data!)
             //self.profileImageView.setImageWithURL(url)
             let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
 
@@ -86,7 +86,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ThreadViewCell", forIndexPath: indexPath) as! ThreadViewCell
-        let post = User.currentUser!.newThreads![advance(User.currentUser!.newThreads!.startIndex, indexPath.row)].post
+        let post = User.currentUser!.newThreads![User.currentUser!.newThreads!.startIndex.advancedBy(indexPath.row)].post
         cell.initCell(self.view, post: post)
         return cell
     }
@@ -122,7 +122,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let storyboard = UIStoryboard(name: "Look", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("LookViewController2") as! LookViewController2
-         let post = User.currentUser!.newThreads![advance(User.currentUser!.newThreads!.startIndex, indexPath.row)].post
+        let post = User.currentUser!.newThreads![User.currentUser!.newThreads!.startIndex.advancedBy(indexPath.row)].post
         vc.post = post
         self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
         self.navigationController!.pushViewController(vc, animated: true)
@@ -184,7 +184,7 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        println(indexPath.section)
+        print(indexPath.section)
         let user = User.currentUser!
         
         switch (indexPath.section) {
@@ -196,7 +196,8 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
                 if (indexPath.row < User.currentUser!.newThreads?.count) {
 
-                    let post = User.currentUser!.newThreads![advance(User.currentUser!.newThreads!.startIndex, indexPath.row)].post
+                    //let post = User.currentUser!.newThreads![advance(User.currentUser!.newThreads!.startIndex, indexPath.row)].post
+                    let post = User.currentUser!.newThreads![User.currentUser!.newThreads!.startIndex.advancedBy(indexPath.row)].post
                     cell.initCell(self.view, imageURL: post.imageURL)
                 }
                 return cell

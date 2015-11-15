@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class UserThread : Printable, Hashable {
+public class UserThread : CustomStringConvertible, Hashable {
     
     private(set) var objectId : String!
     public var post : Post!

@@ -135,7 +135,7 @@ class ProfileViewCell : UICollectionViewCell {
         
             let url = NSURL(string: profileURL)
             let data = NSData(contentsOfURL: url!)
-            var profileImage = UIImage(data: data!)
+            let profileImage = UIImage(data: data!)
             let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
         
             self.image.image  = Toucan(image: profileImage!).resize(CGSize(width: 86, height: 86), fitMode: Toucan.Resize.FitMode.Crop).image

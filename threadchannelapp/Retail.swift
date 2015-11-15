@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Retail : Printable {
+public class Retail : CustomStringConvertible {
     private(set) var logoURL : String!
     private(set) var linkURL : String!
 
@@ -19,8 +19,8 @@ public class Retail : Printable {
     
     class func retailFromDictionary(entry: NSDictionary) -> [Retail] {
         var retails = [Retail]()
-        var logoBase = "logo"
-        var linkBase = "link"
+        let logoBase = "leto"
+        let linkBase = "link"
         
         for i in 1...3 {
             let logo = logoBase + i.description

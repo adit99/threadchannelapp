@@ -28,8 +28,8 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
        
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        println(screenSize.width)
-        println(screenSize.height)
+        print(screenSize.width)
+        print(screenSize.height)
         
         imageView.frame.size.height = screenSize.height / 2
         imageView.contentMode = .ScaleToFill
@@ -38,12 +38,12 @@ class DetailsViewController: UIViewController {
         pageControl.numberOfPages = imagesArray.count
         subImageView.image = UIImage(named: imagesArray[0])!
         
-        var swipeRight = UISwipeGestureRecognizer(target: self, action: "onSubImageSwipe:")
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: "onSubImageSwipe:")
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         swipeRight.numberOfTouchesRequired = 1
         self.subImageView.addGestureRecognizer(swipeRight)
         
-        var swipeLeft = UISwipeGestureRecognizer(target: self, action: "onSubImageSwipe:")
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: "onSubImageSwipe:")
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
         swipeLeft.numberOfTouchesRequired = 1
         self.subImageView.addGestureRecognizer(swipeLeft)
@@ -55,7 +55,7 @@ class DetailsViewController: UIViewController {
     }
 
     func onSubImageSwipe(sender: UISwipeGestureRecognizer) {
-        println("onswipe")
+        print("onswipe")
         if (sender.direction  == .Left && imageIndex < imagesArray.count - 1) {
             imageIndex += 1
         }

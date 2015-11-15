@@ -20,10 +20,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        API.Instance.tempWithCompletion { (error) -> () in
-//            if error == nil {
-//            }
-//        }
 
         API.Instance.postsWithCompletion { (posts, error) -> () in
             if error == nil {
@@ -45,7 +41,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
         }
         
-        let backItem = UIBarButtonItem(title: "", style: .Bordered, target: nil, action: nil)
+        let backItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
  
         //move to app delagate?

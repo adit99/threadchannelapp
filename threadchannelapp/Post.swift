@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class Post : Printable, NilLiteralConvertible {
+public class Post : CustomStringConvertible, NilLiteralConvertible {
     private(set) var objectId : String!
     private(set) var name : String!
     private(set) var imageURL : String!

@@ -11,7 +11,7 @@ import UIKit
 var _currentUser: User?
 let _currentUserKey = "currentUser"
 
-public class User : Printable {
+public class User : CustomStringConvertible {
 
     private(set) var objectId : String!
     private(set) var username : String!
@@ -76,10 +76,16 @@ public class User : Printable {
     class var currentUser : User? {
         get {
         if _currentUser == nil {
-        var data = NSUserDefaults.standardUserDefaults().objectForKey(_currentUserKey) as? NSData
+        let data = NSUserDefaults.standardUserDefaults().objectForKey(_currentUserKey) as? NSData
         if (data != nil) {
-        var dictionary = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as! NSDictionary
-        _currentUser = User(dictionary: dictionary)
+        //var dictionary = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as! NSDictionary
+        do {
+            let dictionary = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+            _currentUser = User(dictionary: dictionary as! NSDictionary)
+        } catch  {
+            print("error")
+            assert(true)
+        }
         }
         }
         return _currentUser
@@ -88,8 +94,14 @@ public class User : Printable {
         set(user) {
             _currentUser = user
             if _currentUser != nil {
-                var data = NSJSONSerialization.dataWithJSONObject(user!.dictionary!, options: nil, error: nil)
-                NSUserDefaults.standardUserDefaults().setObject(data, forKey: _currentUserKey)
+                //var data = NSJSONSerialization.dataWithJSONObject(user!.dictionary!, options: nil, error: nil)
+                do {
+                    let data = try NSJSONSerialization.dataWithJSONObject(user!.dictionary!, options: NSJSONWritingOptions.PrettyPrinted)
+                    NSUserDefaults.standardUserDefaults().setObject(data, forKey: _currentUserKey)
+                } catch {
+                    print("error")
+                    assert(true)
+                }
             } else {
                 NSUserDefaults.standardUserDefaults().setObject(nil, forKey: _currentUserKey)
             }
@@ -101,13 +113,13 @@ public class User : Printable {
         
         //synchronize the threads
         //added threads
-        var addedThreads = newThreads!.subtract(threads!)
-        println("added Threads: \(addedThreads)")
+        let addedThreads = newThreads!.subtract(threads!)
+        print("added Threads: \(addedThreads)")
         //deleted theads
-        var deletedThreads = threads!.subtract(newThreads!)
-        println("deleted threads: \(deletedThreads)")
+        let deletedThreads = threads!.subtract(newThreads!)
+        print("deleted threads: \(deletedThreads)")
     
-        var data = User.SyncData(user:self, addedThreads: addedThreads, deletedThreads: deletedThreads)
+        let data = User.SyncData(user:self, addedThreads: addedThreads, deletedThreads: deletedThreads)
         API.Instance.synchronizeUser(data)
     }
 }

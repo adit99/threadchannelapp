@@ -28,7 +28,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         //hack, this need to move to app delegate
         if User.currentUser != nil {
             
-            var appStoryboard = UIStoryboard(name: "app", bundle: nil)
+            let appStoryboard = UIStoryboard(name: "app", bundle: nil)
             let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
             self.presentViewController(vc, animated: true, completion: nil)
         }
@@ -46,7 +46,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBAction func onLogin(sender: UIButton) {
         
-        var user = User(username: username.text, email: "", password: self.password.text)
+        let user = User(username: username.text!, email: "", password: self.password.text!)
         activity.hidden = false
         activity.hidesWhenStopped = true
         activity.startAnimating()
@@ -57,7 +57,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             if error == nil {
                 User.currentUser = user
                 
-                var appStoryboard = UIStoryboard(name: "app", bundle: nil)
+                let appStoryboard = UIStoryboard(name: "app", bundle: nil)
                 let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
                 self.presentViewController(vc, animated: true, completion: nil)
                 
@@ -87,10 +87,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     //before we move VC's get some user info (name and pic) from FBK API
                     var params = [String: AnyObject]()
                     params["fields"] = "first_name, last_name, picture.type(large), email"
-                    var fbk = FBSDKGraphRequest(graphPath: "me", parameters: params)
+                    let fbk = FBSDKGraphRequest(graphPath: "me", parameters: params)
                     fbk.startWithCompletionHandler{(connection:FBSDKGraphRequestConnection!,JSON:AnyObject?, error:NSError!) -> Void in
                         if error == nil {
-                            println(JSON)
+                            print(JSON)
                             let result = JSON as! NSDictionary
                             let firstName = result["first_name"] as! String
                             let lastName = result["last_name"] as! String
@@ -102,7 +102,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                             user!.setFacebookFields(firstName, lastName: lastName, profilePicUrl: profilePicUrl, email: email)
                             User.currentUser = user!
                             
-                            var appStoryboard = UIStoryboard(name: "app", bundle: nil)
+                            let appStoryboard = UIStoryboard(name: "app", bundle: nil)
                             let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
                             self.presentViewController(vc, animated: true, completion: nil)
                             
@@ -110,7 +110,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     }//else?
                 } else {
                     let alert = UIAlertView()
-                    alert.title = "Login with Facebook failed"
+                    alert.title = "Login with Facebook failed1"
                     alert.message = "\(error!.domain)"
                     alert.addButtonWithTitle("Ok")
                     alert.show()
@@ -119,7 +119,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         else {
             let alert = UIAlertView()
-            alert.title = "Login with Facebook failed"
+            alert.title = "Login with Facebook failed2"
             alert.message = "\(error!.domain)"
             alert.addButtonWithTitle("Ok")
             alert.show()
@@ -127,7 +127,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        println("facebook logout")
+        print("facebook logout")
     }
     
 }
