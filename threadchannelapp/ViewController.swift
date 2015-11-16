@@ -84,17 +84,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
             //iphone 5s
-            return CGSize(width: 104, height: 104)
+            return CGSize(width: 158, height: 158)
         } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
             //iphone 6
-            return CGSize(width: 122, height: 122)
+            return CGSize(width: 184, height: 184)
 //            return CGSize(width: 122, height: 166)
 
         } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
             //iphone 6plus
-            return CGSize(width: 136, height: 136)
-           // return CGSize(width: 136, height: 166)
-
+            return CGSize(width: 204, height: 204)
         }
         //default 5s
         return CGSize(width: 104, height: 104)

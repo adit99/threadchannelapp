@@ -152,15 +152,15 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
         
         self.collectionView!.registerClass(Look2ViewCellImage.self, forCellWithReuseIdentifier: "Look2ViewCellImage")
         self.collectionView!.registerClass(ProfileViewCell.self, forCellWithReuseIdentifier: "ProfileViewCell")
+        self.collectionView!.registerClass(ProfileInfoViewCell.self, forCellWithReuseIdentifier: "ProfileInfoViewCell")
+        self.collectionView!.registerClass(LabelViewCell.self, forCellWithReuseIdentifier: "LabelViewCell")
 
-        
         //move to app delagate?
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .ScaleAspectFit
         let image = UIImage(named: "logo")
         imageView.image = image
         navigationItem.titleView = imageView
-        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userThreadsChanged", name: valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
         
@@ -177,7 +177,11 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch (section) {
             case 0:
-                return 2
+                return 1
+//            case 1:
+//                return 1
+            //case 2:
+              //  return 2
             default:
                 return User.currentUser!.newThreads!.count
         }
@@ -192,6 +196,11 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProfileViewCell", forIndexPath: indexPath) as! ProfileViewCell
                 cell.initCell(self.view, profilePicURL: user.profilePicURL)
                 return cell
+//            case 1:
+//                let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LabelViewCell", forIndexPath: indexPath) as! LabelViewCell
+//                cell.initCell(self.view)
+//                return cell
+            //case 2:
             default:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
                 if (indexPath.row < User.currentUser!.newThreads?.count) {
@@ -216,21 +225,51 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         switch (indexPath.section) {
             case 0:
-                return CGSize(width: UIScreen.mainScreen().bounds.size.width/2 - 20.0, height: UIScreen.mainScreen().bounds.size.height/6)
+                return CGSize(width: UIScreen.mainScreen().bounds.size.width/3 , height: UIScreen.mainScreen().bounds.size.height/6)
+//            case 1:
+//                return CGSize(width: UIScreen.mainScreen().bounds.size.width/4 , height: UIScreen.mainScreen().bounds.size.height/16)
             default:
-                return CGSize(width: 118, height: 118)
+                if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
+                    //iphone 5s
+                    return CGSize(width: 154, height: 154)
+                } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
+                    //iphone 6
+                    return CGSize(width: 182, height: 182)
+                    //            return CGSize(width: 122, height: 166)
+                    
+                } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
+                    //iphone 6plus
+                    return CGSize(width: 202, height: 202)
+                }
+                //default 5s
+                return CGSize(width: 154, height: 154)
         }
-        
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         switch (section) {
             case 0:
-                return UIEdgeInsets(top: 20.0, left: 10.0, bottom: 20.0, right: 10.0)
+                return UIEdgeInsets(top: 20.0, left: 100.0, bottom: 20.0, right: 100.0)
+//            case 1:
+//                return UIEdgeInsets(top: 1.0, left: 120.0, bottom: 1.0, right: 120.0)
             default:
                 return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         }
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0.0
+    }
+
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+//        switch(section) {
+//        case 0:
+//            return 50.0
+//        default:
+//            return 0.0
+//        }
+//    }
+    
     
 }
 

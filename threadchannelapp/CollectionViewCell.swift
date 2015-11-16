@@ -143,11 +143,54 @@ class ProfileViewCell : UICollectionViewCell {
             self.image.image = Toucan(image: self.image.image!).maskWithEllipse(borderWidth: 2, borderColor: UIColor(CIColor: color)).image
 
             image.contentMode = .ScaleAspectFit
-            contentView.addSubview(image)
             image.frame.size.height = self.frame.size.height
             image.frame.size.width  = self.frame.size.width
+            contentView.addSubview(image)
         }
-        
     }
 }
+
+class LabelViewCell : UICollectionViewCell {
+    var nameLabel = UILabel()
+    
+    func initCell(containerView: UIView) {
+        let user = User.currentUser!
+        nameLabel.text = user.firstName! + " " + String([user.lastName![user.lastName!.startIndex]])
+        nameLabel.textColor = UIColor.blackColor()
+        nameLabel.textAlignment = NSTextAlignment.Center
+        print(nameLabel.text!)
+        nameLabel.frame.size.height = self.frame.size.height
+        nameLabel.frame.size.width  = self.frame.size.width
+        nameLabel.center = self.center
+        //HACK ALERT
+        nameLabel.frame.origin.y = self.frame.origin.y + 50
+        containerView.addSubview(nameLabel)
+    }
+}
+
+class ProfileInfoViewCell : UICollectionViewCell {
+    var nameLabel = UILabel()
+    var threadImage = UIImageView()
+    var threadCount = UILabel()
+    
+    func initCell(containerView: UIView) {
+        let user = User.currentUser!
+        nameLabel.text = user.firstName! + " " + String([user.lastName![user.lastName!.startIndex]])
+        nameLabel.textColor = UIColor.blackColor()
+        nameLabel.textAlignment = NSTextAlignment.Center
+        nameLabel.backgroundColor = UIColor.greenColor()
+        print(nameLabel.text!)
+        threadImage.image = UIImage(named: "thread_green")
+        threadCount.text = user.newThreads!.count.description
+        threadCount.textColor = UIColor.blackColor()
+        containerView.addSubview(nameLabel)
+        nameLabel.frame.size.height = self.frame.size.height
+        nameLabel.frame.size.width  = self.frame.size.width
+        self.backgroundColor = UIColor.blueColor()
+
+    }
+}
+
+
+
 
