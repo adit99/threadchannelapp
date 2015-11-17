@@ -19,7 +19,7 @@ public class Retail : CustomStringConvertible {
     
     class func retailFromDictionary(entry: NSDictionary) -> [Retail] {
         var retails = [Retail]()
-        let logoBase = "leto"
+        let logoBase = "logo"
         let linkBase = "link"
         
         for i in 1...3 {

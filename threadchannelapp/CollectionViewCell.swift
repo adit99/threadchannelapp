@@ -49,6 +49,15 @@ class Look2ViewCellImage : UICollectionViewCell {
         image.frame.size.height = self.frame.size.height
         image.frame.size.width  = self.frame.size.width
     }
+    
+    func initCell(containerView: UIView, namedImage: String) {
+        image.image = UIImage(named: namedImage)
+        image.contentMode = .ScaleAspectFit
+        contentView.addSubview(image)
+        image.frame.size.height = self.frame.size.height
+        image.frame.size.width  = self.frame.size.width
+    }
+    
 }
 
 class Look2ViewCellButton : UICollectionViewCell {
@@ -65,6 +74,8 @@ class Look2ViewCellButton : UICollectionViewCell {
         button.frame.size.height = self.frame.size.height
         button.frame.size.width  = self.frame.size.width
     }
+
+    
 }
 
 class Look2ViewCellScroll : UICollectionViewCell {
@@ -151,21 +162,31 @@ class ProfileViewCell : UICollectionViewCell {
 }
 
 class LabelViewCell : UICollectionViewCell {
-    var nameLabel = UILabel()
     
-    func initCell(containerView: UIView) {
-        let user = User.currentUser!
-        nameLabel.text = user.firstName! + " " + String([user.lastName![user.lastName!.startIndex]])
-        nameLabel.textColor = UIColor.blackColor()
-        nameLabel.textAlignment = NSTextAlignment.Center
-        print(nameLabel.text!)
-        nameLabel.frame.size.height = self.frame.size.height
-        nameLabel.frame.size.width  = self.frame.size.width
-        nameLabel.center = self.center
-        //HACK ALERT
-        nameLabel.frame.origin.y = self.frame.origin.y + 50
-        containerView.addSubview(nameLabel)
-    }
+//    func initCell(containerView: UIView) {
+//        let user = User.currentUser!
+//        nameLabel.text = user.firstName! + " " + String([user.lastName![user.lastName!.startIndex]])
+//        nameLabel.textColor = UIColor.whiteColor()
+//        nameLabel.backgroundColor = UIColor.blackColor()
+//        self.backgroundColor = UIColor.blueColor()
+//        nameLabel.textAlignment = NSTextAlignment.Center
+//        nameLabel.bounds = self.frame
+//        nameLabel.frame = self.frame
+//
+//        print(nameLabel.text!)
+////        nameLabel.frame.size.height = self.frame.size.height
+////        nameLabel.frame.size.width  = self.frame.size.width
+////        nameLabel.center = self.center
+//        print(nameLabel.frame)
+//        print(nameLabel.bounds)
+//    
+//        print(self.frame)
+//        print(self.bounds)
+//        //HACK ALERT
+//        //nameLabel.frame.origin.y = self.frame.origin.y + 50
+//        containerView.addSubview(nameLabel)
+//
+//    }
 }
 
 class ProfileInfoViewCell : UICollectionViewCell {

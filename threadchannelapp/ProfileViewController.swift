@@ -152,7 +152,6 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
         
         self.collectionView!.registerClass(Look2ViewCellImage.self, forCellWithReuseIdentifier: "Look2ViewCellImage")
         self.collectionView!.registerClass(ProfileViewCell.self, forCellWithReuseIdentifier: "ProfileViewCell")
-        self.collectionView!.registerClass(ProfileInfoViewCell.self, forCellWithReuseIdentifier: "ProfileInfoViewCell")
         self.collectionView!.registerClass(LabelViewCell.self, forCellWithReuseIdentifier: "LabelViewCell")
 
         //move to app delagate?
@@ -168,7 +167,7 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         if let threads = User.currentUser!.newThreads {
-            return 2
+            return 4
         } else {
             return 0
         }
@@ -178,10 +177,10 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
         switch (section) {
             case 0:
                 return 1
-//            case 1:
-//                return 1
-            //case 2:
-              //  return 2
+            case 1:
+                return 1
+            case 2:
+                return 2
             default:
                 return User.currentUser!.newThreads!.count
         }
@@ -196,16 +195,37 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProfileViewCell", forIndexPath: indexPath) as! ProfileViewCell
                 cell.initCell(self.view, profilePicURL: user.profilePicURL)
                 return cell
-//            case 1:
-//                let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LabelViewCell", forIndexPath: indexPath) as! LabelViewCell
-//                cell.initCell(self.view)
-//                return cell
-            //case 2:
+            case 1:
+                let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LabelViewCell", forIndexPath: indexPath) as! LabelViewCell
+                let nameLabel = UILabel()
+                nameLabel.text = user.firstName! + " " + String([user.lastName![user.lastName!.startIndex]]) 
+                nameLabel.textAlignment = NSTextAlignment.Center
+                nameLabel.textColor = UIColor.blackColor()
+                nameLabel.frame = cell.frame
+                nameLabel.center = cell.center
+                self.collectionView!.addSubview(nameLabel)
+                return cell
+            case 2:
+                if (indexPath.row == 0) {
+                    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
+                    cell.initCell(self.view, namedImage: "thread_green")
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LabelViewCell", forIndexPath: indexPath) as! LabelViewCell
+                    
+                    let nameLabel = UILabel()
+                    nameLabel.text = user.newThreads!.count.description
+                    nameLabel.textAlignment = NSTextAlignment.Center
+                    nameLabel.textColor = UIColor.blackColor()
+                    nameLabel.frame = cell.frame
+                    nameLabel.center = cell.center
+                    self.collectionView!.addSubview(nameLabel)
+                    return cell
+                }
             default:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
                 if (indexPath.row < User.currentUser!.newThreads?.count) {
 
-                    //let post = User.currentUser!.newThreads![advance(User.currentUser!.newThreads!.startIndex, indexPath.row)].post
                     let post = User.currentUser!.newThreads![User.currentUser!.newThreads!.startIndex.advancedBy(indexPath.row)].post
                     cell.initCell(self.view, imageURL: post.imageURL)
                 }
@@ -226,8 +246,10 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
         switch (indexPath.section) {
             case 0:
                 return CGSize(width: UIScreen.mainScreen().bounds.size.width/3 , height: UIScreen.mainScreen().bounds.size.height/6)
-//            case 1:
-//                return CGSize(width: UIScreen.mainScreen().bounds.size.width/4 , height: UIScreen.mainScreen().bounds.size.height/16)
+            case 1:
+                return CGSize(width: UIScreen.mainScreen().bounds.size.width , height: UIScreen.mainScreen().bounds.size.height/18)
+            case 2:
+                return CGSize(width: 32, height: 32)
             default:
                 if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
                     //iphone 5s
@@ -235,8 +257,6 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
                     //iphone 6
                     return CGSize(width: 182, height: 182)
-                    //            return CGSize(width: 122, height: 166)
-                    
                 } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
                     //iphone 6plus
                     return CGSize(width: 202, height: 202)
@@ -249,11 +269,13 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         switch (section) {
             case 0:
-                return UIEdgeInsets(top: 20.0, left: 100.0, bottom: 20.0, right: 100.0)
-//            case 1:
-//                return UIEdgeInsets(top: 1.0, left: 120.0, bottom: 1.0, right: 120.0)
+                return UIEdgeInsets(top: 20.0, left: 100.0, bottom: 1.0, right: 100.0)
+            case 1:
+                return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
+            case 2:
+                return UIEdgeInsets(top: 0.0, left: 155.0, bottom: 2.0, right: 50.0)
             default:
-                return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+                return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
         }
     }
     
@@ -261,14 +283,14 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
         return 0.0
     }
 
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-//        switch(section) {
-//        case 0:
-//            return 50.0
-//        default:
-//            return 0.0
-//        }
-//    }
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        switch(section) {
+        case 2:
+            return 2.0
+        default:
+            return 0.0
+        }
+    }
     
     
 }

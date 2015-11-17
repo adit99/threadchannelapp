@@ -139,8 +139,13 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
     var looks:[Look]!
     var retail:[Retail]!
     
+    @IBOutlet weak var activity: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.activity.hidden = false
+        activity.startAnimating()
         
         self.collectionView!.registerClass(Look2ViewCellImage.self, forCellWithReuseIdentifier: "Look2ViewCellImage")
         self.collectionView!.registerClass(Look2ViewCellButton.self, forCellWithReuseIdentifier: "Look2ViewCellButton")
@@ -180,6 +185,8 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
                 self.looks = looks
                 if self.looks.count > 0 {
                     let url = NSURL(string: looks[0].imageURL)
+                    self.activity.stopAnimating()
+                    self.activity.hidden = true
                     self.collectionView?.reloadData()
 
                     API.Instance.retailWithCompletion(self.post.objectId) { (retail, error) -> () in
