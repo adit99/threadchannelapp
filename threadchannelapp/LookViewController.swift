@@ -30,7 +30,7 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
             API.Instance.trendingPostWithCompletion2 { (trending, error) -> () in
                 if error == nil {
                     self.post = trending.post
-                    print(trending)
+                    //print(trending)
                     self.load()
                 } else {
                     //need some error
@@ -59,7 +59,6 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
             if error == nil {
                 self.looks = looks
                 if self.looks.count > 0 {
-                    let url = NSURL(string: looks[0].imageURL)
                     self.collectionView.reloadData()
                 }
             }
@@ -104,7 +103,6 @@ class LookViewController: UIViewController, UICollectionViewDelegate, UICollecti
             return CGSize(width: 156, height: 198)
         } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
             //iphone 6
-            //return CGSize(width: 122, height: 166)
             return CGSize(width: 184, height: 240)
         } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
             //iphone 6plus
@@ -159,7 +157,6 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             API.Instance.trendingPostWithCompletion { (trending, error) -> () in
                 if error == nil {
                     self.post = trending
-                    //println(trending)
                     self.load()
                 } else {
                     //need some error
@@ -184,7 +181,6 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             if error == nil {
                 self.looks = looks
                 if self.looks.count > 0 {
-                    let url = NSURL(string: looks[0].imageURL)
                     self.activity.stopAnimating()
                     self.activity.hidden = true
                     self.collectionView?.reloadData()
@@ -196,16 +192,14 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
                             indexSet.addIndex(4)
                             self.collectionView?.reloadSections(indexSet)
                         }
-                       
                     }
                 }
-                
             }
         }
     }
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        if let looks = self.looks {
+        if let _ = self.looks {
             return 5
         } else {
             return 0
@@ -221,18 +215,12 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         case 3:
             return 1
         case 4:
-            if let retail = self.retail {
+            if let _ = self.retail {
                 return 3
             } else {
                 return 0
             }
         default:
-//scroll
-//            if let looks = self.looks {
-//                return looks.count
-//            } else {
-//                return 0
-//            }
             return 1
         }
     }
@@ -246,9 +234,9 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         case 1:
             return UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
         case 3:
-            return UIEdgeInsets(top: 5.0, left: 0.0, bottom: 5.0, right: 0.0)
+            return UIEdgeInsets(top: 5.0, left: 0.0, bottom: 6.0, right: 0.0)
         case 4:
-            return UIEdgeInsets(top: 5.0, left: 0.0, bottom: 5.0, right: 0.0)
+            return UIEdgeInsets(top: 5.0, left: 0.0, bottom: 6.0, right: 0.0)
         default:
             return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         }
@@ -264,23 +252,8 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         case 3:
             return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: 10)
         case 4:
-            return CGSize(width: UIScreen.mainScreen().bounds.size.width/3, height: 20)
+            return CGSize(width: UIScreen.mainScreen().bounds.size.width/3, height: 32)
         default:
-//scroll
-//            if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
-//                //iphone 5s
-//                return CGSize(width: 156, height: 198)
-//            } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
-//                //iphone 6
-//                //return CGSize(width: 122, height: 166)
-//                return CGSize(width: 184, height: 240)
-//            } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
-//                //iphone 6plus
-//                return CGSize(width: 204, height: 260)
-//            }
-//            //default 5s
-//            return CGSize(width: 156, height: 198)
-             //return CGSize(width: UIScreen.mainScreen().bounds.size.width-125.0, height: UIScreen.mainScreen().bounds.size.height-100.0)
             return CGSize(width: 284, height: 320)
 
         }
@@ -340,12 +313,6 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             cell.initCell(self.view, imageURL: self.retail[indexPath.row].logoURL)
             return cell
         }
-        //default
-//scroll
-//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
-//        cell.initCell(self.view, imageURL: self.looks![indexPath.row].imageURL)
-//        //cell.initCell(self.view, imageURL: post.imageURL)
-//        return cell
     
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellCarousel", forIndexPath: indexPath) as! Look2ViewCellCarousel
         cell.initCell(self, delegate: self)
@@ -378,12 +345,10 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             
             //New Excluded Activities Code
             activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypePrint]
-            //
             
             self.presentViewController(activityVC, animated: true, completion: nil)
         }
         
-        //sender.selected = !sender.selected
     }
     
     
@@ -405,8 +370,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             
             itemView = UIImageView()
             itemView.frame = carousel.frame
-            //let url = NSURL(string: looks[index].imageURL)
-            //itemView.setImageWithURL(url)
+
             let url = NSURL(string: looks[index].imageURL)
 
             if let blogURL = looks[index].blogURL {
@@ -493,11 +457,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
                 vc.url = retail[indexPath.row].linkURL
                 self.navigationController!.pushViewController(vc, animated: true)
             }
-
-            
         }
-   
-        
     }
     
     func carouselDidScroll(carousel: iCarousel) {

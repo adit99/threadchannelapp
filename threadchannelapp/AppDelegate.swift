@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: "userDidLogout", object: nil)
+        
         if User.currentUser != nil {
             let appStoryboard = UIStoryboard(name: "app", bundle: nil)
             let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
@@ -68,6 +70,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
 
+    func userDidLogout() {
+        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = loginStoryboard.instantiateInitialViewController()! as UIViewController
+        self.window?.rootViewController = vc
+    }
+    
 
 }
 

@@ -8,6 +8,8 @@
 
 import UIKit
 import Toucan
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -146,9 +148,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
 //Profile2
 
 class ProfileViewController2: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+    
      override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //print(User.currentUser!.username)
+        
         
         self.collectionView!.registerClass(Look2ViewCellImage.self, forCellWithReuseIdentifier: "Look2ViewCellImage")
         self.collectionView!.registerClass(ProfileViewCell.self, forCellWithReuseIdentifier: "ProfileViewCell")
@@ -167,7 +172,7 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         if let threads = User.currentUser!.newThreads {
-            return 4
+            return 3
         } else {
             return 0
         }
@@ -179,15 +184,14 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 return 1
             case 1:
                 return 1
-            case 2:
-                return 2
+//            case 2:
+//                return 2
             default:
                 return User.currentUser!.newThreads!.count
         }
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        print(indexPath.section)
         let user = User.currentUser!
         
         switch (indexPath.section) {
@@ -205,23 +209,23 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 nameLabel.center = cell.center
                 self.collectionView!.addSubview(nameLabel)
                 return cell
-            case 2:
-                if (indexPath.row == 0) {
-                    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
-                    cell.initCell(self.view, namedImage: "thread_green")
-                    return cell
-                } else {
-                    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LabelViewCell", forIndexPath: indexPath) as! LabelViewCell
-                    
-                    let nameLabel = UILabel()
-                    nameLabel.text = user.newThreads!.count.description
-                    nameLabel.textAlignment = NSTextAlignment.Center
-                    nameLabel.textColor = UIColor.blackColor()
-                    nameLabel.frame = cell.frame
-                    nameLabel.center = cell.center
-                    self.collectionView!.addSubview(nameLabel)
-                    return cell
-                }
+//            case 2:
+//                if (indexPath.row == 0) {
+//                    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
+//                    cell.center = self.view.center
+//                    cell.initCell(self.view, namedImage: "thread_green")
+//                    return cell
+//                } else {
+//                    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LabelViewCell", forIndexPath: indexPath) as! LabelViewCell
+//                    let nameLabel = UILabel()
+//                    nameLabel.text = user.newThreads!.count.description
+//                    nameLabel.textAlignment = NSTextAlignment.Center
+//                    nameLabel.textColor = UIColor.blackColor()
+//                    nameLabel.frame = cell.frame
+//                    nameLabel.center = cell.center
+//                    self.collectionView!.addSubview(nameLabel)
+//                    return cell
+//                }
             default:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
                 if (indexPath.row < User.currentUser!.newThreads?.count) {
@@ -248,8 +252,8 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 return CGSize(width: UIScreen.mainScreen().bounds.size.width/3 , height: UIScreen.mainScreen().bounds.size.height/6)
             case 1:
                 return CGSize(width: UIScreen.mainScreen().bounds.size.width , height: UIScreen.mainScreen().bounds.size.height/18)
-            case 2:
-                return CGSize(width: 32, height: 32)
+//            case 2:
+//                return CGSize(width: UIScreen.mainScreen().bounds.size.width/2, height: 32)
             default:
                 if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
                     //iphone 5s
@@ -272,8 +276,8 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 return UIEdgeInsets(top: 20.0, left: 100.0, bottom: 1.0, right: 100.0)
             case 1:
                 return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
-            case 2:
-                return UIEdgeInsets(top: 0.0, left: 155.0, bottom: 2.0, right: 50.0)
+//            case 2:
+//                return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
             default:
                 return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
         }
@@ -285,13 +289,33 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         switch(section) {
-        case 2:
-            return 2.0
         default:
             return 0.0
         }
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSizeMake(0, 0)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSizeMake(0, 0)
+    }
+    
+    
+     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let storyboard = UIStoryboard(name: "Look", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LookViewController2") as! LookViewController2
+        let post = User.currentUser!.newThreads![User.currentUser!.newThreads!.startIndex.advancedBy(indexPath.row)].post
+        vc.post = post
+        self.collectionView!.deselectItemAtIndexPath(indexPath, animated: false)
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+  
+    
+    @IBAction func onLogout(sender: UIButton) {
+        User.currentUser!.logout()
+    }
     
 }
 

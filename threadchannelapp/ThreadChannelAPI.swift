@@ -435,7 +435,7 @@ class API {
         params["where"] = p1
         params["order"] = "-postDate"
     
-        print(params)
+        //print(params)
         
         manager.request(API.Router.Posts(params))
             .responseJSON { response in

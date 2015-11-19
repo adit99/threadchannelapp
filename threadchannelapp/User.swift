@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 var _currentUser: User?
 let _currentUserKey = "currentUser"
@@ -114,14 +115,21 @@ public class User : CustomStringConvertible {
         //synchronize the threads
         //added threads
         let addedThreads = newThreads!.subtract(threads!)
-        print("added Threads: \(addedThreads)")
+        //print("added Threads: \(addedThreads)")
         //deleted theads
         let deletedThreads = threads!.subtract(newThreads!)
-        print("deleted threads: \(deletedThreads)")
+        //print("deleted threads: \(deletedThreads)")
     
         let data = User.SyncData(user:self, addedThreads: addedThreads, deletedThreads: deletedThreads)
         API.Instance.synchronizeUser(data)
     }
+
+    func logout() {
+        User.currentUser = nil
+        FBSDKLoginManager().logOut()
+        NSNotificationCenter.defaultCenter().postNotificationName("userDidLogout", object: nil)
+    }
+    
 }
 
 
