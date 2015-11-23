@@ -46,16 +46,19 @@ class Look2ViewCellImage : UICollectionViewCell {
         image.setImageWithURL(url)
         image.contentMode = .ScaleAspectFit
         contentView.addSubview(image)
-        image.frame.size.height = self.frame.size.height
-        image.frame.size.width  = self.frame.size.width
+        setNeedsLayout()
     }
     
     func initCell(containerView: UIView, namedImage: String) {
         image.image = UIImage(named: namedImage)
         image.contentMode = .ScaleAspectFit
         contentView.addSubview(image)
-        image.frame.size.height = self.frame.size.height
-        image.frame.size.width  = self.frame.size.width
+        setNeedsLayout()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        image.frame = self.contentView.frame
     }
     
 }
@@ -74,8 +77,6 @@ class Look2ViewCellButton : UICollectionViewCell {
         button.frame.size.height = self.frame.size.height
         button.frame.size.width  = self.frame.size.width
     }
-
-    
 }
 
 class Look2ViewCellScroll : UICollectionViewCell {
@@ -161,54 +162,84 @@ class ProfileViewCell : UICollectionViewCell {
     }
 }
 
+//TODO: fix all the other cells to match these semantics
+//Align frame of subviews to content View
 class LabelViewCell : UICollectionViewCell {
-    
-//    func initCell(containerView: UIView) {
-//        let user = User.currentUser!
-//        nameLabel.text = user.firstName! + " " + String([user.lastName![user.lastName!.startIndex]])
-//        nameLabel.textColor = UIColor.whiteColor()
-//        nameLabel.backgroundColor = UIColor.blackColor()
-//        self.backgroundColor = UIColor.blueColor()
-//        nameLabel.textAlignment = NSTextAlignment.Center
-//        nameLabel.bounds = self.frame
-//        nameLabel.frame = self.frame
-//
-//        print(nameLabel.text!)
-////        nameLabel.frame.size.height = self.frame.size.height
-////        nameLabel.frame.size.width  = self.frame.size.width
-////        nameLabel.center = self.center
-//        print(nameLabel.frame)
-//        print(nameLabel.bounds)
-//    
-//        print(self.frame)
-//        print(self.bounds)
-//        //HACK ALERT
-//        //nameLabel.frame.origin.y = self.frame.origin.y + 50
-//        containerView.addSubview(nameLabel)
-//
-//    }
-}
-
-class ProfileInfoViewCell : UICollectionViewCell {
     var nameLabel = UILabel()
-    var threadImage = UIImageView()
-    var threadCount = UILabel()
     
     func initCell(containerView: UIView) {
         let user = User.currentUser!
-        nameLabel.text = user.firstName! + " " + String([user.lastName![user.lastName!.startIndex]])
-        nameLabel.textColor = UIColor.blackColor()
+        let text = user.firstName! + " " + String([user.lastName![user.lastName!.startIndex]])
+        
+        let attributedText = NSMutableAttributedString(
+            string: text,
+            attributes: [NSFontAttributeName:UIFont(
+                name: "AmericanTypewriter",
+                size: 16.0)!])
+        
+        nameLabel.attributedText = attributedText
+        //nameLabel.textColor = UIColor.blackColor()
         nameLabel.textAlignment = NSTextAlignment.Center
-        nameLabel.backgroundColor = UIColor.greenColor()
-        print(nameLabel.text!)
-        threadImage.image = UIImage(named: "thread_green")
-        threadCount.text = user.newThreads!.count.description
-        threadCount.textColor = UIColor.blackColor()
-        containerView.addSubview(nameLabel)
-        nameLabel.frame.size.height = self.frame.size.height
-        nameLabel.frame.size.width  = self.frame.size.width
-        self.backgroundColor = UIColor.blueColor()
+        contentView.addSubview(nameLabel)
+        setNeedsLayout()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        nameLabel.frame = self.contentView.frame
+    }
+}
 
+class ThreadInfoViewCell : UICollectionViewCell {
+    var threadCount = UILabel()
+    var threadImage = UIImageView()
+    
+    func initCell(containerView: UIView) {
+       
+        //thread image
+        threadImage.image = UIImage(named: "thread_green")
+        threadImage.contentMode = .ScaleAspectFit
+        contentView.addSubview(threadImage)
+        
+        //thread count
+        let user = User.currentUser!
+        let text = user.newThreads!.count.description
+        let attributedText = NSMutableAttributedString(
+            string: text,
+            attributes: [NSFontAttributeName:UIFont(
+                name: "AmericanTypewriter",
+                size: 16.0)!])
+        
+        threadCount.attributedText = attributedText
+        threadCount.textAlignment = NSTextAlignment.Center
+        contentView.addSubview(threadCount)
+        
+        setNeedsLayout()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        threadImage.frame = contentView.frame
+        threadCount.frame = contentView.frame
+        
+        threadImage.frame.origin.x = self.contentView.frame.origin.x - 15
+        threadCount.frame.origin.x = self.contentView.frame.origin.x + 15
+    }    
+}
+
+class EditButtonViewCell : UICollectionViewCell {
+    var button  = UIButton()
+    
+    func initCell(containerView: UIView, vc: UIViewController, selector: Selector) {
+        button.setTitle("Edit", forState:UIControlState.Normal)
+        button.setTitleColor(UIColor.greenColor(), forState:UIControlState.Normal)
+        button.addTarget(vc, action: selector, forControlEvents: UIControlEvents.TouchUpInside)
+        contentView.addSubview(button)
+        setNeedsLayout()
+    }
+    
+    override func layoutSubviews() {
+        button.frame = self.contentView.frame
     }
 }
 

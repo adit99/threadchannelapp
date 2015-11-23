@@ -372,24 +372,7 @@
                             <outlet property="delegate" destination="Z3N-Wd-zet" id="Hbl-1p-76v"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="CTX-hk-gFZ">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Hkn-od-0M5">
-                            <button key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6nU-C6-G7n">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="0.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="4"/>
-                                <size key="titleShadowOffset" width="6" height="6"/>
-                                <state key="normal" image="signout"/>
-                                <variation key="widthClass=compact">
-                                    <fontDescription key="fontDescription" type="system" pointSize="6"/>
-                                </variation>
-                                <connections>
-                                    <action selector="onLogout:" destination="Z3N-Wd-zet" eventType="touchUpInside" id="Ugh-D0-CTg"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="CTX-hk-gFZ"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5e-ka-hK9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -415,7 +398,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="signout" width="32" height="32"/>
         <image name="thread_green" width="32" height="29"/>
     </resources>
 </document>

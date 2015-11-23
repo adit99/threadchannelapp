@@ -158,6 +158,9 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
         self.collectionView!.registerClass(Look2ViewCellImage.self, forCellWithReuseIdentifier: "Look2ViewCellImage")
         self.collectionView!.registerClass(ProfileViewCell.self, forCellWithReuseIdentifier: "ProfileViewCell")
         self.collectionView!.registerClass(LabelViewCell.self, forCellWithReuseIdentifier: "LabelViewCell")
+        self.collectionView!.registerClass(ThreadInfoViewCell.self, forCellWithReuseIdentifier: "ThreadInfoViewCell")
+        self.collectionView!.registerClass(EditButtonViewCell.self, forCellWithReuseIdentifier: "EditButtonViewCell")
+
 
         //move to app delagate?
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -168,11 +171,12 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userThreadsChanged", name: valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "logoutTapped")
     }
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        if let threads = User.currentUser!.newThreads {
-            return 3
+        if let _ = User.currentUser!.newThreads {
+            return 4
         } else {
             return 0
         }
@@ -184,8 +188,8 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 return 1
             case 1:
                 return 1
-//            case 2:
-//                return 2
+            case 2:
+                return 1
             default:
                 return User.currentUser!.newThreads!.count
         }
@@ -201,31 +205,12 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 return cell
             case 1:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LabelViewCell", forIndexPath: indexPath) as! LabelViewCell
-                let nameLabel = UILabel()
-                nameLabel.text = user.firstName! + " " + String([user.lastName![user.lastName!.startIndex]]) 
-                nameLabel.textAlignment = NSTextAlignment.Center
-                nameLabel.textColor = UIColor.blackColor()
-                nameLabel.frame = cell.frame
-                nameLabel.center = cell.center
-                self.collectionView!.addSubview(nameLabel)
+                cell.initCell(self.view)
                 return cell
-//            case 2:
-//                if (indexPath.row == 0) {
-//                    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
-//                    cell.center = self.view.center
-//                    cell.initCell(self.view, namedImage: "thread_green")
-//                    return cell
-//                } else {
-//                    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LabelViewCell", forIndexPath: indexPath) as! LabelViewCell
-//                    let nameLabel = UILabel()
-//                    nameLabel.text = user.newThreads!.count.description
-//                    nameLabel.textAlignment = NSTextAlignment.Center
-//                    nameLabel.textColor = UIColor.blackColor()
-//                    nameLabel.frame = cell.frame
-//                    nameLabel.center = cell.center
-//                    self.collectionView!.addSubview(nameLabel)
-//                    return cell
-//                }
+            case 2:
+                    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ThreadInfoViewCell", forIndexPath: indexPath) as! ThreadInfoViewCell
+                    cell.initCell(self.view)
+                    return cell
             default:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Look2ViewCellImage", forIndexPath: indexPath) as! Look2ViewCellImage
                 if (indexPath.row < User.currentUser!.newThreads?.count) {
@@ -252,8 +237,8 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 return CGSize(width: UIScreen.mainScreen().bounds.size.width/3 , height: UIScreen.mainScreen().bounds.size.height/6)
             case 1:
                 return CGSize(width: UIScreen.mainScreen().bounds.size.width , height: UIScreen.mainScreen().bounds.size.height/18)
-//            case 2:
-//                return CGSize(width: UIScreen.mainScreen().bounds.size.width/2, height: 32)
+            case 2:
+                return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: 32)
             default:
                 if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
                     //iphone 5s
@@ -276,8 +261,8 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
                 return UIEdgeInsets(top: 20.0, left: 100.0, bottom: 1.0, right: 100.0)
             case 1:
                 return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
-//            case 2:
-//                return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
+            case 2:
+                return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
             default:
                 return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
         }
@@ -313,9 +298,9 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     }
   
     
-    @IBAction func onLogout(sender: UIButton) {
+    func logoutTapped() {
         User.currentUser!.logout()
     }
-    
+
 }
 
