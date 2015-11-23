@@ -63,14 +63,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
     
-    @IBAction func onLoginWithFacebook(sender: FBSDKLoginButton) {
-        
-    }
-    
     //Facebook Login
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
-        if error == nil {            
+        
+        if error == nil {
+            
+            activity.hidden = false
+            activity.startAnimating()
+            self.view.alpha = 0.6
+            
             //link the user
             API.Instance.loginWithFacebookWithCompletion(FBSDKAccessToken.currentAccessToken()) { (user, error) -> () in
             
@@ -93,6 +95,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                            
                             user!.setFacebookFields(firstName, lastName: lastName, profilePicUrl: profilePicUrl, email: email)
                             User.currentUser = user!
+                            
+                            self.activity.stopAnimating()
+                            self.view.alpha = 1
                             
                             let appStoryboard = UIStoryboard(name: "app", bundle: nil)
                             let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController

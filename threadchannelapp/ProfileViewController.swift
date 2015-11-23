@@ -299,7 +299,22 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
   
     
     func logoutTapped() {
-        User.currentUser!.logout()
+        
+        let actionSheetController: UIAlertController = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .ActionSheet)
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            
+        }
+        actionSheetController.addAction(cancelAction)
+        
+        //Create and add first option action
+        let logoutAction: UIAlertAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+                User.currentUser!.logout()
+        }
+        actionSheetController.addAction(logoutAction)
+        
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
+   
     }
 
 }
