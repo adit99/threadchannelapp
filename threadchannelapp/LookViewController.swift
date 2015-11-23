@@ -10,127 +10,8 @@ import UIKit
 import iCarousel
 import Toucan
 
-class LookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
-    @IBOutlet weak var threadButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
-    
-    var post:Post!
-    var looks:[Look]!
-    
-    @IBOutlet weak var postImageView: UIImageView!
-    @IBOutlet weak var collectionView: UICollectionView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let post = self.post
-        if post == nil {
-            navigationItem.title = "Today | \(Date.today())"
-            API.Instance.trendingPostWithCompletion2 { (trending, error) -> () in
-                if error == nil {
-                    self.post = trending.post
-                    //print(trending)
-                    self.load()
-                } else {
-                    //need some error
-                    print("couldnt get trending post")
-                }
-            }
-            
-        } else {
-            //move to app delagate?
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-            imageView.contentMode = .ScaleAspectFit
-            let image = UIImage(named: "logo")
-            imageView.image = image
-            navigationItem.titleView = imageView
-            load()
-        }
-    }
-    
-    func load() {
-        //load the image
-        let url = NSURL(string: post.imageURL)
-        postImageView.setImageWithURL(url)
-
-        //load the looks
-        API.Instance.looksWithCompletion(post.objectId) { (looks, error) -> () in
-            if error == nil {
-                self.looks = looks
-                if self.looks.count > 0 {
-                    self.collectionView.reloadData()
-                }
-            }
-        }
-        
-        if User.currentUser!.newThreads!.contains(UserThread(post: post)) {
-            threadButton.selected = true
-        }
-        
-        threadButton.setImage(UIImage(named:"thread_grey.png"),forState:UIControlState.Normal)
-        threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Selected)
-        
-    }
-
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let looks = self.looks {
-            return looks.count
-        } else {
-            return 0
-        }
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LookViewCell", forIndexPath: indexPath) as! LookViewCell
-        cell.initCell(self.view, look: self.looks![indexPath.row])
-        return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        let sectionInsets = UIEdgeInsets(top: 0.0, left: 2.0, bottom: 0.0, right: 2.0)
-        return sectionInsets
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 2.0
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
-        if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
-            //iphone 5s
-            return CGSize(width: 156, height: 198)
-        } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
-            //iphone 6
-            return CGSize(width: 184, height: 240)
-        } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
-            //iphone 6plus
-            return CGSize(width: 204, height: 260)
-        }
-        //default 5s
-        return CGSize(width: 156, height: 198)
-    }
-    
-    @IBAction func threadTapped(sender: UIButton) {
-        sender.selected = !sender.selected
-        if (sender.selected) {
-            User.currentUser!.newThreads!.insert(UserThread(post: post))
-        } else {
-            User.currentUser!.newThreads!.remove(UserThread(post: post))
-        }
-        
-         NSNotificationCenter.defaultCenter().postNotificationName(valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
-    }
-
-    @IBAction func shareTapped(sender: UIButton) {
-    }
-}
-
-//Redux
 //TODO: Need to debug bizarre bug with sections
-
-
 class LookViewController2: UICollectionViewController, UICollectionViewDelegateFlowLayout, iCarouselDataSource, iCarouselDelegate  {
     
     var post:Post!
@@ -183,16 +64,22 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
                 if self.looks.count > 0 {
                     self.activity.stopAnimating()
                     self.activity.hidden = true
-                    self.collectionView?.reloadData()
 
-                    API.Instance.retailWithCompletion(self.post.objectId) { (retail, error) -> () in
-                        if error == nil && retail.count > 0 {
-                            self.retail = retail
-                            let indexSet = NSMutableIndexSet()
-                            indexSet.addIndex(4)
-                            self.collectionView?.reloadSections(indexSet)
+                    let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                    dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                        
+                        API.Instance.retailWithCompletion(self.post.objectId) { (retail, error) -> () in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if error == nil && retail.count > 0 {
+                                    self.retail = retail
+                                    let indexSet = NSMutableIndexSet()
+                                    indexSet.addIndex(4)
+                                    self.collectionView?.reloadSections(indexSet)
+                                }
+                            }
                         }
                     }
+                    self.collectionView?.reloadData()
                 }
             }
         }
@@ -225,8 +112,6 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         }
     }
     
-    //flow layout
-    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         switch(section) {
         case 0:
@@ -255,7 +140,6 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             return CGSize(width: UIScreen.mainScreen().bounds.size.width/3, height: 32)
         default:
             return CGSize(width: 284, height: 320)
-
         }
     }
     
@@ -329,7 +213,6 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName(valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
-        
     }
     
     func shareTapped(sender: UIButton) {
@@ -344,7 +227,7 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             
             //New Excluded Activities Code
-            activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypePrint]
+            activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypePrint]
             
             self.presentViewController(activityVC, animated: true, completion: nil)
         }
@@ -373,14 +256,21 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
 
             let url = NSURL(string: looks[index].imageURL)
 
-            if let blogURL = looks[index].blogURL {
+            if let _ = looks[index].blogURL {
                 
-                let data = NSData(contentsOfURL: url!)
-                let lookImage = UIImage(data: data!)
-                itemView.image = lookImage
-                let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
-                itemView.image = Toucan(image: itemView.image!).maskWithRoundedRect(cornerRadius: 8, borderWidth: 8, borderColor: UIColor(CIColor: color)).image
-                itemView.highlighted = true
+                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                
+                    let data = NSData(contentsOfURL: url!)
+                    let lookImage = UIImage(data: data!)
+                 
+                    dispatch_async(dispatch_get_main_queue()) {
+                        itemView.image = lookImage
+                        let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
+                        itemView.image = Toucan(image: itemView.image!).maskWithRoundedRect(cornerRadius: 8, borderWidth: 8, borderColor: UIColor(CIColor: color)).image
+                        itemView.highlighted = true
+                    }
+                }
             }
             else {
                 itemView.highlighted = false
@@ -395,14 +285,22 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             itemView = view as! UIImageView;
             let url = NSURL(string: looks[index].imageURL)
            
-            if let blogURL = looks[index].blogURL{
-                let data = NSData(contentsOfURL: url!)
-                let lookImage = UIImage(data: data!)
-                itemView.image = lookImage
-                let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
-                itemView.image = Toucan(image: itemView.image!).maskWithRoundedRect(cornerRadius: 8, borderWidth: 8, borderColor: UIColor(CIColor: color)).image
-                itemView.highlighted = true
+            if let _ = looks[index].blogURL{
+                
+                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                
+                    let data = NSData(contentsOfURL: url!)
+                    let lookImage = UIImage(data: data!)
+                
+                    dispatch_async(dispatch_get_main_queue()) {
 
+                        itemView.image = lookImage
+                        let color = CIColor(red: 169/255, green: 202/255, blue: 62/255)
+                        itemView.image = Toucan(image: itemView.image!).maskWithRoundedRect(cornerRadius: 8, borderWidth: 8, borderColor: UIColor(CIColor: color)).image
+                        itemView.highlighted = true
+                    }
+                }
             }
             else {
                 itemView.highlighted = false
@@ -411,7 +309,6 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             
             itemView.contentMode = .ScaleAspectFit
             carousel.addSubview(itemView)
-            
         }
         
         return itemView
@@ -469,10 +366,125 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             }
         }
     }
+}
+
+
+//unused
+class LookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
+    @IBOutlet weak var threadButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     
+    var post:Post!
+    var looks:[Look]!
     
+    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let post = self.post
+        if post == nil {
+            navigationItem.title = "Today | \(Date.today())"
+            API.Instance.trendingPostWithCompletion2 { (trending, error) -> () in
+                if error == nil {
+                    self.post = trending.post
+                    //print(trending)
+                    self.load()
+                } else {
+                    //need some error
+                    print("couldnt get trending post")
+                }
+            }
+            
+        } else {
+            //move to app delagate?
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+            imageView.contentMode = .ScaleAspectFit
+            let image = UIImage(named: "logo")
+            imageView.image = image
+            navigationItem.titleView = imageView
+            load()
+        }
+    }
+    
+    func load() {
+        //load the image
+        let url = NSURL(string: post.imageURL)
+        postImageView.setImageWithURL(url)
+        
+        //load the looks
+        API.Instance.looksWithCompletion(post.objectId) { (looks, error) -> () in
+            if error == nil {
+                self.looks = looks
+                if self.looks.count > 0 {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+        
+        if User.currentUser!.newThreads!.contains(UserThread(post: post)) {
+            threadButton.selected = true
+        }
+        
+        threadButton.setImage(UIImage(named:"thread_grey.png"),forState:UIControlState.Normal)
+        threadButton.setImage(UIImage(named:"thread_green.png"),forState:UIControlState.Selected)
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let looks = self.looks {
+            return looks.count
+        } else {
+            return 0
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LookViewCell", forIndexPath: indexPath) as! LookViewCell
+        cell.initCell(self.view, look: self.looks![indexPath.row])
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        let sectionInsets = UIEdgeInsets(top: 0.0, left: 2.0, bottom: 0.0, right: 2.0)
+        return sectionInsets
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 2.0
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        if self.view.frame.height == 568.0 && self.view.frame.width == 320.0 {
+            //iphone 5s
+            return CGSize(width: 156, height: 198)
+        } else if (self.view.frame.height == 667.0 && self.view.frame.width == 375 ) {
+            //iphone 6
+            return CGSize(width: 184, height: 240)
+        } else if (self.view.frame.height == 736.0 && self.view.frame.width == 414.0 ) {
+            //iphone 6plus
+            return CGSize(width: 204, height: 260)
+        }
+        //default 5s
+        return CGSize(width: 156, height: 198)
+    }
+    
+    @IBAction func threadTapped(sender: UIButton) {
+        sender.selected = !sender.selected
+        if (sender.selected) {
+            User.currentUser!.newThreads!.insert(UserThread(post: post))
+        } else {
+            User.currentUser!.newThreads!.remove(UserThread(post: post))
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
+    }
+    
+    @IBAction func shareTapped(sender: UIButton) {
+    }
 }
 
 
