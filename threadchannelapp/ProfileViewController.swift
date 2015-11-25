@@ -149,11 +149,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
 
 class ProfileViewController2: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    var imageArray = [UIImage]()
+    var backgroundImage = UIImageView()
+    
+    
      override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //print(User.currentUser!.username)
-        
         
         self.collectionView!.registerClass(Look2ViewCellImage.self, forCellWithReuseIdentifier: "Look2ViewCellImage")
         self.collectionView!.registerClass(ProfileViewCell.self, forCellWithReuseIdentifier: "ProfileViewCell")
@@ -172,6 +173,7 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userThreadsChanged", name: valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "logoutTapped")
+        
     }
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -201,7 +203,18 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
         switch (indexPath.section) {
             case 0:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProfileViewCell", forIndexPath: indexPath) as! ProfileViewCell
+                
                 cell.initCell(self.view, profilePicURL: user.profilePicURL)
+                let imageView = UIImageView()
+                imageView.setImageWithURL(NSURL(string: user.profilePicURL!))
+                
+                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+                let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                blurEffectView.frame = view.bounds
+                blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+                imageView.addSubview(blurEffectView)
+                cell.backgroundView = imageView
+                
                 return cell
             case 1:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LabelViewCell", forIndexPath: indexPath) as! LabelViewCell
@@ -234,7 +247,7 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         switch (indexPath.section) {
             case 0:
-                return CGSize(width: UIScreen.mainScreen().bounds.size.width/3 , height: UIScreen.mainScreen().bounds.size.height/6)
+                return CGSize(width: UIScreen.mainScreen().bounds.size.width , height: UIScreen.mainScreen().bounds.size.height/6)
             case 1:
                 return CGSize(width: UIScreen.mainScreen().bounds.size.width , height: UIScreen.mainScreen().bounds.size.height/18)
             case 2:
@@ -258,7 +271,7 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         switch (section) {
             case 0:
-                return UIEdgeInsets(top: 20.0, left: 100.0, bottom: 1.0, right: 100.0)
+                return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 1.0, right: 10.0)
             case 1:
                 return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
             case 2:
@@ -316,6 +329,5 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
         self.presentViewController(actionSheetController, animated: true, completion: nil)
    
     }
-
 }
 

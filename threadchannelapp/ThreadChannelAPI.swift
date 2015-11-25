@@ -61,6 +61,7 @@ class API {
         case Batch([String: AnyObject])
         case Trending([String: AnyObject])
         case Retail([String: AnyObject])
+        case Install([String: AnyObject])
         case Temp()
     
         var path: String {
@@ -85,6 +86,8 @@ class API {
                     return "classes/trending"
                 case .Retail(_):
                     return "classes/retail"
+                case .Install(_):
+                    return "installations"
                 case .Temp():
                     return "user_threads"
             }
@@ -112,6 +115,8 @@ class API {
                     return .GET
                 case .Retail:
                     return .GET
+                case .Install:
+                    return .POST
                 case .Temp():
                     return .GET
             }
@@ -156,6 +161,9 @@ class API {
                 
                 case .Retail(let params):
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+                
+                case .Install(let params):
+                    return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
                 
                 case .Temp():
                     return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0
@@ -237,7 +245,7 @@ class API {
                 if response.result.error == nil {
                     let results = response.result.value as! NSDictionary
                     //print(results)
-                    if let session = (results["sessionToken"] as? String) {
+                    if let _ = (results["sessionToken"] as? String) {
                         params["sessionToken"] = results["sessionToken"] as! String
                         params["objectId"] = results["objectId"] as! String
                         params["createdAt"] = results["createdAt"] as! String
@@ -299,7 +307,7 @@ class API {
             .responseJSON { response in
                 if response.result.error == nil {
                     let results = response.result.value  as! NSDictionary
-                    if let session = (results["sessionToken"] as? String) {
+                    if let _ = (results["sessionToken"] as? String) {
                         let user = User(dictionary: results)
                         completion(user: user, error: nil)
                     } else {
@@ -483,6 +491,32 @@ class API {
                     completion(retail: [Retail](), error: response.result.error)
                 }
         }
+    }
+    
+    //error handling is broken
+    func installDevicetokenWithCompletion(data: NSData, completion: (error: NSError?) -> ()) {
+
+        let manager = self.manager!
+        
+        var param = [String: AnyObject]()
+    
+        param["deviceType"] = "ios"
+        param["deviceToken"] = data.hexadecimalString
+        
+//        var channels = [String]()
+//        channels.append("global")
+//        param["channels"] = channels
+        
+        manager.request(API.Router.Install(param))
+            .responseJSON { response in
+                print(response)
+                if response.result.error == nil {
+                    completion(error: nil)
+                } else {
+                    completion(error: NSError(domain: "Failed to register device", code: -1, userInfo: nil))
+                }
+        }
+    
     }
     
     //UNUSED FROM HERE

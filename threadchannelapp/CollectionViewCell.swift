@@ -165,6 +165,7 @@ class ProfileViewCell : UICollectionViewCell {
             image.contentMode = .ScaleAspectFit
             image.frame.size.height = self.frame.size.height
             image.frame.size.width  = self.frame.size.width
+            image.center = contentView.center
             contentView.addSubview(image)
         }
     }

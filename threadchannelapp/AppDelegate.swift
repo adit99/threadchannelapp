@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+     
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.tintColor = UIColor(CIColor: CIColor(red: 169/255, green: 202/255, blue: 62/255))  // Back buttons and such
         navigationBarAppearace.barTintColor = UIColor.whiteColor()
@@ -77,5 +81,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 
+    // somewhere when your app starts up
+    // implemented in your application delegate
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        print("Got token data! \(deviceToken.hexadecimalString)")
+        
+        API.Instance.installDevicetokenWithCompletion(deviceToken) { (error) -> () in
+            if error == nil {
+                print("device is registered")
+            }
+        }
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Couldn't register: \(error)")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]){
+        print("you've been notified")
+        let notifiAlert = UIAlertView()
+        let NotificationMessage : AnyObject? =  userInfo["alert"]
+        notifiAlert.title = "You've been notified"
+        notifiAlert.message = NotificationMessage as? String
+        notifiAlert.addButtonWithTitle("OK")
+        notifiAlert.show()
+    }
+    
+
+    
 }
 

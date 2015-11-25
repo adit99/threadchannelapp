@@ -13,6 +13,7 @@
 		BE07409E1AC8DB5100596A95 /* ThreadChannelAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE07409D1AC8DB5100596A95 /* ThreadChannelAPI.swift */; };
 		BE42B38C1ACA535D001DFFFE /* threadchannel.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE42B38B1ACA535D001DFFFE /* threadchannel.plist */; };
 		BE42B38F1ACA63D7001DFFFE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42B38E1ACA63D7001DFFFE /* Post.swift */; };
+		BE447D171C0557C10098B761 /* misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE447D161C0557C10098B761 /* misc.swift */; };
 		BE4B66971B10CAFD0026C1AC /* app.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE4B66961B10CAFD0026C1AC /* app.storyboard */; };
 		BE4B66991B10CB850026C1AC /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4B66981B10CB850026C1AC /* AppViewController.swift */; };
 		BE4B669B1B10CFA50026C1AC /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE4B669A1B10CFA50026C1AC /* Profile.storyboard */; };
@@ -55,6 +56,7 @@
 		BE42B38B1ACA535D001DFFFE /* threadchannel.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = threadchannel.plist; sourceTree = "<group>"; };
 		BE42B38E1ACA63D7001DFFFE /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		BE42B3901ACA68EE001DFFFE /* threadchannelapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "threadchannelapp-Bridging-Header.h"; sourceTree = "<group>"; };
+		BE447D161C0557C10098B761 /* misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = misc.swift; sourceTree = "<group>"; };
 		BE4B66961B10CAFD0026C1AC /* app.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = app.storyboard; sourceTree = "<group>"; };
 		BE4B66981B10CB850026C1AC /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
 		BE4B669A1B10CFA50026C1AC /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				BE778D2F1AA58DF100023077 /* Info.plist */,
 				BE42B38B1ACA535D001DFFFE /* threadchannel.plist */,
 				BE42B3901ACA68EE001DFFFE /* threadchannelapp-Bridging-Header.h */,
+				BE447D161C0557C10098B761 /* misc.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -293,7 +296,7 @@
 				TargetAttributes = {
 					BE778D2A1AA58DF100023077 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = Q7MXADFN9E;
+						DevelopmentTeam = N9242WQ9C4;
 					};
 					BE778D3F1AA58DF100023077 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -410,6 +413,7 @@
 				BEA313211B80FAB700840B2A /* UserThreads.swift in Sources */,
 				BE4B669D1B10D4970026C1AC /* ProfileViewController.swift in Sources */,
 				BE778D651AA6E1BD00023077 /* DetailsViewController.swift in Sources */,
+				BE447D171C0557C10098B761 /* misc.swift in Sources */,
 				BED285611B48886E003889FE /* User.swift in Sources */,
 				BED2855F1B488602003889FE /* SignUpViewController.swift in Sources */,
 				BE970EAC1BD89D4600DD77CF /* WebViewController.swift in Sources */,
@@ -555,7 +559,7 @@
 				INFOPLIST_FILE = threadchannelapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "threadchannel.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.threadchannel.threadchannelapp;
 				PRODUCT_NAME = threadchannelapp;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "threadchannelapp/threadchannelapp-Bridging-Header.h";
@@ -575,7 +579,7 @@
 				INFOPLIST_FILE = threadchannelapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "threadchannel.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.threadchannel.threadchannelapp;
 				PRODUCT_NAME = threadchannelapp;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "threadchannelapp/threadchannelapp-Bridging-Header.h";

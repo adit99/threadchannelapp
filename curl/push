@@ -1,0 +1,13 @@
+curl -X POST \
+  -H "X-Parse-Application-Id: tTMrjreYSpOUgIkMslJHJc1slcbY5g4yZvl9DRyw" \
+  -H "X-Parse-REST-API-Key: Ece7hzKGE9UNLLgqLQ122dVxTxqFdZ0fLYtQ7CZ1" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "where": {
+          "deviceType": "ios"
+        },
+        "data": {
+          "alert": "Hellooo from thread channel"
+        }
+      }' \
+  https://api.parse.com/1/push
