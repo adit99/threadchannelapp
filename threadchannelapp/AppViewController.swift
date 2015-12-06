@@ -10,6 +10,8 @@ import UIKit
 
 class AppViewController: UITabBarController {
 
+    var index = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +31,6 @@ class AppViewController: UITabBarController {
         let controllers = [mainVC, trendingVC, profileVC]
         viewControllers = controllers
         
-       // tabBar.barTintColor = UIColor(CIColor: CIColor(red: 96/255, green: 96/255, blue: 96/255))
         tabBar.barTintColor = UIColor.whiteColor()
         tabBar.tintColor = UIColor.greenColor()
         
@@ -41,10 +42,7 @@ class AppViewController: UITabBarController {
         
         profileVC.tabBarItem = UITabBarItem(title: "", image: profileTabImage, tag: 1)
         profileVC.tabBarItem.selectedImage = UIImage(named: "profile_green")?.imageWithRenderingMode(.AlwaysOriginal)
-//        profileVC.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: .Normal)
-//        profileVC.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.greenColor()], forState: .Selected)
-        
-        selectedIndex = 0
+        selectedIndex = index
     }
 
     override func didReceiveMemoryWarning() {

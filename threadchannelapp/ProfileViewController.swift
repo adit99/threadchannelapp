@@ -271,7 +271,7 @@ class ProfileViewController2: UICollectionViewController, UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         switch (section) {
             case 0:
-                return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 1.0, right: 10.0)
+                return UIEdgeInsets(top: 2.0, left: 0.0, bottom: 1.0, right: 0.0)
             case 1:
                 return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
             case 2:

@@ -98,13 +98,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]){
-        print("you've been notified")
-        let notifiAlert = UIAlertView()
-        let NotificationMessage : AnyObject? =  userInfo["alert"]
-        notifiAlert.title = "You've been notified"
-        notifiAlert.message = NotificationMessage as? String
-        notifiAlert.addButtonWithTitle("OK")
-        notifiAlert.show()
+        
+        if  (application.applicationState == UIApplicationState.Inactive) {
+            print("notified when app in background")
+            if User.currentUser != nil {
+                let appStoryboard = UIStoryboard(name: "app", bundle: nil)
+                let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
+                vc.index = 1
+                window?.rootViewController = vc
+            }
+        } else {
+            print("notified when app in foreground")
+        }
     }
     
 
