@@ -8,6 +8,14 @@
 
 import UIKit
 import FBSDKCoreKit
+import Mixpanel
+
+func valueForAPIKey(keyname keyname:String) -> String {
+    let filePath = NSBundle.mainBundle().pathForResource("threadchannel", ofType:"plist")
+    let plist = NSDictionary(contentsOfFile:filePath!)
+    let value:String = plist?.objectForKey(keyname) as! String
+    return value
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
+        //mixpanel - app open
+        let mixpanelToken = valueForAPIKey(keyname: "mixpanelToken")
+        Mixpanel.sharedInstanceWithToken(mixpanelToken)
+        let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+        mixpanel.track("app launched")
+        mixpanel.identify(mixpanel.distinctId)
+        
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
@@ -24,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.tintColor = UIColor(CIColor: CIColor(red: 169/255, green: 202/255, blue: 62/255))  // Back buttons and such
         navigationBarAppearace.barTintColor = UIColor.whiteColor()
-        //navigationBarAppearace.barTintColor = UIColor(CIColor: CIColor(red: 169/255, green: 202/255, blue: 62/255))
+       
         navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor(CIColor: CIColor(red: 169/255, green: 202/255, blue: 62/255))]
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
@@ -102,6 +117,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if  (application.applicationState == UIApplicationState.Inactive) {
             print("notified when app in background")
             if User.currentUser != nil {
+                
+                //mixpanel - notification
+                let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+                mixpanel.track("notification tapped")
+                
                 let appStoryboard = UIStoryboard(name: "app", bundle: nil)
                 let vc = appStoryboard.instantiateViewControllerWithIdentifier("AppViewController") as! AppViewController
                 vc.index = 1

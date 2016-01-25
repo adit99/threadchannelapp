@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Mixpanel
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
@@ -78,6 +79,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
                 if error == nil {
                     
+                    
+                    
                     //before we move VC's get some user info (name and pic) from FBK API
                     var params = [String: AnyObject]()
                     params["fields"] = "first_name, last_name, picture.type(large), email"
@@ -93,8 +96,21 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                             let data = picture["data"] as! NSDictionary
                             let profilePicUrl = data["url"] as! String
                            
+                            
                             user!.setFacebookFields(firstName, lastName: lastName, profilePicUrl: profilePicUrl, email: email)
                             User.currentUser = user!
+                           
+                            //mixpanel - signup and user info
+                            let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+                            mixpanel.track("user signup")
+                            mixpanel.createAlias(firstName+lastName, forDistinctID: mixpanel.distinctId)
+                            
+                            var userProps = [String: AnyObject]()
+                            userProps["email"] = email
+                            userProps["first_name"] = firstName
+                            userProps["last_name"]  = lastName
+                            userProps["signup_date"] = Date.today()
+                            mixpanel.people.set(userProps)
                             
                             self.activity.stopAnimating()
                             self.view.alpha = 1

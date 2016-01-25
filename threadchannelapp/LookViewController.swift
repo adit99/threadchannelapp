@@ -9,7 +9,7 @@
 import UIKit
 import iCarousel
 import Toucan
-
+import Mixpanel
 
 //TODO: Need to debug bizarre bug with sections
 class LookViewController2: UICollectionViewController, UICollectionViewDelegateFlowLayout, iCarouselDataSource, iCarouselDelegate  {
@@ -206,11 +206,21 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
     
     func threadTapped(sender: UIButton) {
         sender.selected = !sender.selected
+        var increment = 0
         if (sender.selected) {
             User.currentUser!.newThreads!.insert(UserThread(post: post))
+            increment = 1
         } else {
             User.currentUser!.newThreads!.remove(UserThread(post: post))
+            increment = -1
         }
+        
+        //mixpanel - threads
+        let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+        mixpanel.track("thread tapped")
+        var userProps = [String: AnyObject]()
+        userProps["number_of_threads"] = increment
+        mixpanel.people.increment(userProps)
         
         NSNotificationCenter.defaultCenter().postNotificationName(valueForAPIKey(keyname: "userThreadsChanged"), object: nil)
     }
@@ -228,6 +238,10 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             
             //New Excluded Activities Code
             activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypePrint]
+            
+            //mixpanel - share
+            let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+            mixpanel.track("share tapped")
             
             self.presentViewController(activityVC, animated: true, completion: nil)
         }
@@ -340,6 +354,10 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
             let vc = storyboard.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
             vc.url = looks[index].blogURL
             
+            //mixpanel - blog
+            let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+            mixpanel.track("blog tapped")
+            
             self.navigationController!.pushViewController(vc, animated: true)
         }
     }
@@ -352,6 +370,11 @@ class LookViewController2: UICollectionViewController, UICollectionViewDelegateF
                 let storyboard = UIStoryboard(name: "Web", bundle: nil)
                 let vc = storyboard.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
                 vc.url = retail[indexPath.row].linkURL
+             
+                //mixpanel - retail
+                let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+                mixpanel.track("retail tapped")
+                
                 self.navigationController!.pushViewController(vc, animated: true)
             }
         }

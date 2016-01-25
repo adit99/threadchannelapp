@@ -41,6 +41,9 @@ PODS:
   - FBSDKShareKit (4.6.0):
     - FBSDKCoreKit
   - iCarousel (1.8.2)
+  - Mixpanel (2.9.1):
+    - Mixpanel/Mixpanel (= 2.9.1)
+  - Mixpanel/Mixpanel (2.9.1)
   - SwiftyJSON (2.3.1)
   - Toucan (0.4.3)
 
@@ -51,6 +54,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - iCarousel
+  - Mixpanel
   - SwiftyJSON (from `git@github.com:SwiftyJSON/SwiftyJSON.git`)
   - Toucan (~> 0.4.3)
 
@@ -71,6 +75,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 3d07febbfa884b9878cacba54f705bb41f07d4b6
   FBSDKShareKit: f474f1123791e215d0299b98b3ee92ddd9187d86
   iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
+  Mixpanel: 5ca24b2a05f4c77fe9bcfe7671d681d0f3f8d76f
   SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
   Toucan: 3e2319c8fb9c7a2fb9c30f6d4ecdc6b8a2f1c92b
 

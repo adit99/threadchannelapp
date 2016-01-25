@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Mixpanel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-threadchannelapp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,6 +62,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>17C13437DCECE16A9E0836ABC96EE7D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3634ABA74A6F41DB3C7516A583373EE8</key>
 		<dict>
 			<key>primary</key>
@@ -82,12 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A91E6E2D48445CF2567269FED40AAD7C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C19D0038F0DEE222479FE00C5BD596BB</key>
+		<key>AAD77DCAE37B6C81A22877C009FF7D0A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,7 +102,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D4B216B2B476195BBD54DC466F4FE23C</key>
+		<key>D306E1A19F57F62CC2320ED0D34FE3F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E25A07FBF79345BD6EAE2BE637131678</key>
 		<dict>
 			<key>primary</key>
 			<true/>

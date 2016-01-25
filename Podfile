@@ -12,6 +12,7 @@ target 'threadchannelapp' do
   pod 'FBSDKShareKit'
   pod 'Toucan', '~> 0.4.3'
   pod 'iCarousel'
+  pod 'Mixpanel'
 end
 
 

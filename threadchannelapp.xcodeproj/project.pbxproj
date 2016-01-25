@@ -296,7 +296,7 @@
 				TargetAttributes = {
 					BE778D2A1AA58DF100023077 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = Q7MXADFN9E;
+						DevelopmentTeam = N9242WQ9C4;
 					};
 					BE778D3F1AA58DF100023077 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -557,11 +557,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Aditya jayaraman (78BKDYAUFW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aditya jayaraman (78BKDYAUFW)";
 				INFOPLIST_FILE = threadchannelapp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.threadchannel.threadchannelapp;
 				PRODUCT_NAME = threadchannelapp;
-				PROVISIONING_PROFILE = "e46a276c-2f53-4422-8d0d-6f1f98cd7f6a";
+				PROVISIONING_PROFILE = "d866f678-f04d-4ed1-b945-81cc3e1efd5e";
 				SWIFT_OBJC_BRIDGING_HEADER = "threadchannelapp/threadchannelapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -577,11 +577,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Aditya jayaraman (78BKDYAUFW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aditya jayaraman (78BKDYAUFW)";
 				INFOPLIST_FILE = threadchannelapp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.threadchannel.threadchannelapp;
 				PRODUCT_NAME = threadchannelapp;
-				PROVISIONING_PROFILE = "e46a276c-2f53-4422-8d0d-6f1f98cd7f6a";
+				PROVISIONING_PROFILE = "d866f678-f04d-4ed1-b945-81cc3e1efd5e";
 				SWIFT_OBJC_BRIDGING_HEADER = "threadchannelapp/threadchannelapp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

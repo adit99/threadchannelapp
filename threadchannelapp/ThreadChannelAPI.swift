@@ -10,13 +10,6 @@ import Foundation
 import Alamofire
 import FBSDKCoreKit
 
-func valueForAPIKey(keyname keyname:String) -> String {
-    let filePath = NSBundle.mainBundle().pathForResource("threadchannel", ofType:"plist")
-    let plist = NSDictionary(contentsOfFile:filePath!)
-    let value:String = plist?.objectForKey(keyname) as! String
-    return value
-}
-
 class API {
     var manager : Alamofire.Manager?
     
@@ -450,6 +443,7 @@ class API {
                 if response.result.error == nil {
                     let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
                     let posts = Post.postsFromArray(results)
+                    print(posts)
                     completion(trending: posts[0], error: nil)
                 } else {
                     print(response.result.error)

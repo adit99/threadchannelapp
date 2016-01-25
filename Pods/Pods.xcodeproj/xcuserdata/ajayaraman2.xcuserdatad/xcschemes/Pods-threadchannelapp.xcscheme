@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '00CC11C352849CD85B2BEF21'
+               BlueprintIdentifier = 'FA84DC121D924203A7C36702'
                BlueprintName = 'Pods-threadchannelapp'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_threadchannelapp.framework'>
