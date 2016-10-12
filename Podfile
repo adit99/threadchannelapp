@@ -1,18 +1,23 @@
-#platform :ios, '9.1'
+#platform :ios, '10.0'
 
 use_frameworks!
 
 target 'threadchannelapp' do
   pod 'AFNetworking'
-  pod 'Alamofire', '~> 3.0'
-  #pod 'SwiftyJSON', :git => 'git@github.com:SwiftyJSON/SwiftyJSON.git', :branch => 'xcode6.3'
-  pod 'SwiftyJSON', :git => 'git@github.com:SwiftyJSON/SwiftyJSON.git'
+  pod 'Alamofire'
+  pod 'SwiftyJSON', '3.0.0'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
-  pod 'Toucan', '~> 0.4.3'
+  pod 'Toucan'
   pod 'iCarousel'
   pod 'Mixpanel'
 end
 
-
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0'
+        end
+    end
+  end
