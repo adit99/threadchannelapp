@@ -41,8 +41,9 @@ class API {
   
     enum Router: URLRequestConvertible {
         private static let baseURL = valueForAPIKey(keyname: "baseURL")
-        private static let usersURL = "https://api.parse.com/1/users"
-        private static let threadsURL = "/1/classes/user_threads"
+        //private static let usersURL = "https://api.parse.com/1/users"
+        private static let usersURL = "https://parseapi.back4app.com/users"
+        private static let threadsURL = "/classes/user_threads"
         
         case Posts([String: AnyObject])
         case Looks([String: AnyObject])
@@ -337,7 +338,7 @@ class API {
             .responseJSON { response in
                 if response.result.error == nil {
                     let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
-                    //println(results)
+                    print(results)
                     let threads = UserThread.threadsFromArray(results)
                     completion(threads: threads, error: nil)
                 } else {
@@ -423,19 +424,26 @@ class API {
         var p4 = [String: AnyObject]()
         var p5 = [String: AnyObject]()
         
+        //p3["__type"] = "Date"
+        //p3["iso"] = Date.formatter(NSDate().dateByAddingTimeInterval(-72 * 60 * 60))
+        //p4["__type"] = "Date"
+        //p4["iso"] = Date.formatter(NSDate())
+        //p2["$gte"] = p3
+        //p2["$lte"] = p4
+        //p1["postDate"] = p2
+        //params["where"] = p1
+        //params["limit"] = 1
+        //params["order"] = "-postDate"
+    
+        //Jan 15/2017 - This query is the same as fetching all the posts but we limit the returned result to 1
         p3["__type"] = "Date"
-        p3["iso"] = Date.formatter(NSDate().dateByAddingTimeInterval(-72 * 60 * 60))
-        
-        p4["__type"] = "Date"
-        p4["iso"] = Date.formatter(NSDate())
-        
-        p2["$gte"] = p3
-        p2["$lte"] = p4
-        
+        p3["iso"] = Date.formatter(NSDate())
+        p2["$lte"] = p3
         p1["postDate"] = p2
         params["where"] = p1
         params["order"] = "-postDate"
-    
+        params["limit"] = 1
+        
         //print(params)
         
         manager.request(API.Router.Posts(params))
@@ -443,7 +451,7 @@ class API {
                 if response.result.error == nil {
                     let results = (response.result.value as! NSDictionary)["results"] as! [NSDictionary]
                     let posts = Post.postsFromArray(results)
-                    print(posts)
+                    //print(posts)
                     completion(trending: posts[0], error: nil)
                 } else {
                     print(response.result.error)
